@@ -3,8 +3,11 @@ package com.group1.library.product;
 import java.io.Serializable;
 import java.util.Date;
 
+// Classe qui définit les produits
 public class Product implements Serializable {
 
+    //Attributs
+    
     private Long id;
     private String title;
     private String author;
