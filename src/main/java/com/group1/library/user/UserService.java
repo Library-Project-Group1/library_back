@@ -20,7 +20,7 @@ public class UserService implements com.group1.library.user.Service {
         if (newUser==null) {
             repository.save(user);
         }else{
-            System.out.println("USER ALREADY EXIST !!!");
+            throw new UserAlreadyExistsException();
         }
     }
 

@@ -3,7 +3,7 @@ package com.group1.library.user;
 public interface Service {
     //
 
-    public void addUser(User user);
+    public void addUser(User user) throws UserAlreadyExistsException;
 
     public void removeUserByEmail(String email);
 
