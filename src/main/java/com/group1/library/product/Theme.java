@@ -17,6 +17,10 @@ public class Theme implements Serializable {
     public Theme() {
     }
 
+    public Theme(String name) {
+        this.name=name;
+    }
+
     public Long getId() {
         return id;
     }
