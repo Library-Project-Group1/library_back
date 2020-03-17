@@ -21,22 +21,11 @@ public class LibraryApplication {
 
 
     }
-/*
-    @Bean()
-    public CommandLineRunner demo(CategoryServiceImpl catServImpl) throws CategoryAlreadyExistsException {
-        Category category=new Category("Bookghjg");
-        catServImpl.add(category);
 
-        return args -> {
-
-        };
-    }
-
-*/
    @Bean
-   public CommandLineRunner demoUser(UserService userService){
-        User user=new User("bastienAa@email.com","password");
-       userService.addUser(user);
+   public CommandLineRunner demoUser(ThemeServiceImpl themeService) throws ThemeAlreadyExistsException, ThemeNotFoundException {
+        Theme theme=new Theme("SF");
+        System.out.println(themeService.getById(1l));
         return args -> {
 
        };
