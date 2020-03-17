@@ -45,9 +45,9 @@ public class CategoryServiceImpl implements AttributeProductService<Category,Lon
 
     //Method to remove a category using his name in our database
     @Override
-    public void remove(Category category) {
-        Category catToRemove= this.catRepo.getCategoryByName(category.getName());
-        catRepo.delete(catToRemove);
+    public void remove(Long id) {
+        Optional<Category> catToRemove= this.catRepo.findById(id);
+        catRepo.delete(catToRemove.get());
     }
 
     //Method to get the categories list in our database
