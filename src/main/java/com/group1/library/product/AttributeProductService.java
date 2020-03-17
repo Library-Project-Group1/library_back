@@ -4,13 +4,13 @@ import java.util.List;
 
 public interface AttributeProductService<T,Long> {
 
-        public T add(T t);
+        public T add(T t) throws CategoryAlreadyExistsException;
 
         public T getById(Long id);
 
-        void edit(T t);
+        void edit(T t, String name);
 
         void remove(T t);
 
-        List<T> getAll();
+        Iterable<T> getAll();
 }
