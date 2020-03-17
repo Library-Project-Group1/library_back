@@ -42,8 +42,8 @@ public class ThemeRestController {
     }
 
     @DeleteMapping("/themes/{id}")
-    public void deleteTheme(@PathVariable Theme theme){
-        themeService.remove(theme);
+    public void deleteTheme(@PathVariable Long id){
+        themeService.remove(id);
     }
 
 

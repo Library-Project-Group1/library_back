@@ -44,10 +44,9 @@ public class ThemeServiceImpl implements AttributeProductService<Theme,Long> {
     }
 
     @Override
-    public void remove(Theme theme) {
+    public void remove(Long id) {
         //Method to remove a theme by name
-        Theme themeToRemove = this.themeRepository.getThemeByThemeName(theme.getName());
-        themeRepository.delete(themeToRemove);
+        themeRepository.findById(id);
 
     }
 
