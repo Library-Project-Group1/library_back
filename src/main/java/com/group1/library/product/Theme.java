@@ -1,16 +1,15 @@
 package com.group1.library.product;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "themes")
 public class Theme implements Serializable {
 
 
-
-    private @Id @GeneratedValue
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     private String name;
 

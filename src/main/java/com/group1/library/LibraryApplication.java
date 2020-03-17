@@ -10,9 +10,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
+import java.util.List;
+
 @SpringBootApplication
 @ComponentScan(basePackages = "com.group1.library.product")
-//@ComponentScan(basePackages = "com.group1.library.user")
+@ComponentScan(basePackages = "com.group1.library.user")
 public class LibraryApplication {
 
     public static void main(String[] args) {
@@ -22,29 +24,21 @@ public class LibraryApplication {
 
     }
 
-    @Bean()
-    public CommandLineRunner demo(CategoryServiceImpl catServImpl){
-        Category category=new Category("Book");
-        try {
-            catServImpl.add(category);
-        } catch (CategoryAlreadyExistsException e) {
-            e.printStackTrace();
-        }
+    @Bean
+    public CommandLineRunner demoCat(CategoryServiceImpl catServImpl){
+        catServImpl.edit(1L, "coucou");
         return args -> {
-
         };
     }
 
-    @Bean()
-    public CommandLineRunner demo(ThemeServiceImpl themeService){
-        Theme theme=new Theme("Science Fiction");
+    @Bean
+    public CommandLineRunner demoTheme(ThemeServiceImpl themeService){
         try {
-            themeService.add(theme);
-        } catch (ThemeAlreadyExistsException e) {
+            themeService.getById(2L);
+        } catch (ThemeNotFoundException e) {
             e.printStackTrace();
         }
         return args -> {
-
         };
     }
 

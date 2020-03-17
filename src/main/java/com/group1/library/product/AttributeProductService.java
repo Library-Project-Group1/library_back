@@ -5,9 +5,9 @@ public interface AttributeProductService<T,Long> {
 
         public T add(T t) throws CategoryAlreadyExistsException, ThemeAlreadyExistsException;
 
-        public T getById(Long id) throws ThemeNotFoundException;
+        public T getById(Long id) throws ThemeNotFoundException, CategoryNotFoundException;
 
-        void edit(T t, String name);
+        void edit(Long id, String name);
 
         void remove(Long id);
 

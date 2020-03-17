@@ -17,7 +17,7 @@ public class ThemeServiceImpl implements AttributeProductService<Theme,Long> {
     @Override
     public Theme add(Theme theme) throws ThemeAlreadyExistsException {
         //Method to add a theme in database
-        if(themeRepository.getThemeByThemeName(theme.getName())==null){
+        if(themeRepository.getThemeByName(theme.getName())==null){
             this.themeRepository.save(theme);
         }else{
             throw new ThemeAlreadyExistsException();
@@ -37,24 +37,20 @@ public class ThemeServiceImpl implements AttributeProductService<Theme,Long> {
             throw new ThemeNotFoundException();
         }
 
-
     }
 
     @Override
-    public void edit(Theme theme, String name) {
+    public void edit(Long id, String newName) {
         //Method to change the theme name
-        Long idToFind= theme.getId();
-        Optional<Theme>optionalTheme = this.themeRepository.findById(idToFind);
-        Theme themeToEdit = optionalTheme.get();
-        themeToEdit.setName(name);
-        this.themeRepository.save(themeToEdit);
+        Optional<Theme> themeToFind=themeRepository.findById(id);
+        themeToFind.get().setName(newName);
+        themeRepository.save(themeToFind.get());
     }
 
     @Override
     public void remove(Long id) {
         //Method to remove a theme by name
         themeRepository.findById(id);
-
     }
 
     @Override

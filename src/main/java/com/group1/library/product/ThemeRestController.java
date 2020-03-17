@@ -63,7 +63,7 @@ public class ThemeRestController {
         try {
             Theme themeToEdit = themeService.getById(id);
 
-            themeService.edit(themeToEdit,newName);
+            themeService.edit(themeToEdit.getId(),newName);
         } catch (ThemeNotFoundException e) {
             e.printStackTrace();
         }
