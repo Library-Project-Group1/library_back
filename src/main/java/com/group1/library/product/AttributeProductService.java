@@ -8,9 +8,9 @@ public interface AttributeProductService<T,Long> {
 
         public T getById(Long id);
 
-        void edit(T t);
+        void edit(T t, String name);
 
         void remove(T t);
 
-        List<T> getAll();
+        Iterable<T> getAll();
 }
