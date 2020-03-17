@@ -11,13 +11,14 @@ import javax.validation.Valid;
 import java.awt.*;
 import java.util.Optional;
 
-
+//Theme RestController
 @RestController
 public class ThemeRestController {
 
-
+    //Attributes themeServices
     @Autowired
     private ThemeServiceImpl themeService;
+
 
     @RequestMapping("/themes")
     public Iterable<Theme> themes(){
@@ -38,8 +39,11 @@ public class ThemeRestController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
+    }
 
-
+    @DeleteMapping("/themes/{id}")
+    public void deleteTheme(@PathVariable Theme theme){
+        themeService.remove(theme);
     }
 
 

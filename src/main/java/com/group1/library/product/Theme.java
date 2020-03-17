@@ -1,10 +1,17 @@
 package com.group1.library.product;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
 
+@Entity
 public class Theme implements Serializable {
 
-    private Long id;
+
+
+    private @Id @GeneratedValue
+    Long id;
     private String name;
 
     public Theme() {
