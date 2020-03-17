@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface AttributeProductService<T,Long> {
 
-        public T addProduct(T t);
+        public T add(T t);
 
         public T getById(Long id);
 
