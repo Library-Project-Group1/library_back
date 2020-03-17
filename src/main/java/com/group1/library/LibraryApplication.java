@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.group1.library.product")
-//@ComponentScan(basePackages = "com.group1.library.user")
+@ComponentScan(basePackages = "com.group1.library.user")
 public class LibraryApplication {
 
     public static void main(String[] args) {
@@ -21,39 +21,26 @@ public class LibraryApplication {
 
 
     }
-
+/*
     @Bean()
-    public CommandLineRunner demo(CategoryServiceImpl catServImpl){
-        Category category=new Category("Book");
-        try {
-            catServImpl.add(category);
-        } catch (CategoryAlreadyExistsException e) {
-            e.printStackTrace();
-        }
+    public CommandLineRunner demo(CategoryServiceImpl catServImpl) throws CategoryAlreadyExistsException {
+        Category category=new Category("Bookghjg");
+        catServImpl.add(category);
+
         return args -> {
 
         };
     }
 
-    @Bean()
-    public CommandLineRunner demo(ThemeServiceImpl themeService){
-        Theme theme=new Theme("Science Fiction");
-        try {
-            themeService.add(theme);
-        } catch (ThemeAlreadyExistsException e) {
-            e.printStackTrace();
-        }
+*/
+   @Bean
+   public CommandLineRunner demoUser(UserService userService){
+        User user=new User("bastienAa@email.com","password");
+       userService.addUser(user);
         return args -> {
 
-        };
-    }
+       };
+   }
 
-//    @Bean
-//    public CommandLineRunner demoUser(UserService userService){
-//        User user=new User("bastien@email.com","password");
-//        userService.addUser(user);
-//        return args -> {
-//
-//        };
-//    }
+
 }

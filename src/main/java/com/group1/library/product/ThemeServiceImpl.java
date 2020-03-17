@@ -17,7 +17,7 @@ public class ThemeServiceImpl implements AttributeProductService<Theme,Long> {
     @Override
     public Theme add(Theme theme) throws ThemeAlreadyExistsException {
         //Method to add a theme in database
-        if(themeRepository.getThemeByThemeName(theme.getName())==null){
+        if(themeRepository.getThemeByName(theme.getName())==null){
             this.themeRepository.save(theme);
         }else{
             throw new ThemeAlreadyExistsException();
