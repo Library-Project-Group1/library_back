@@ -7,12 +7,11 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class UserService{
+public class UserService implements com.group1.library.user.Service {
 
     //ATTRIBUTES
     @Autowired
     private UserRepository repository;
-
 
     //METHODS
     public void addUser(User user){
