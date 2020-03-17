@@ -14,7 +14,7 @@ public class UserService implements com.group1.library.user.Service {
     private UserRepository repository;
 
     //METHODS
-    public void addUser(User user){
+    public void addUser(User user) throws UserAlreadyExistsException {
         //Method to add a user in our database
         User newUser=repository.getUserByEmail(user.getEmail());
         if (newUser==null) {
