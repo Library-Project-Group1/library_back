@@ -16,7 +16,7 @@ public class UserService{
 
     //METHODS
     public void addUser(User user){
-        //METHOD TO ADD A NEW USER IN OUR DATABSE
+        //Method to add a user in our database
         User newUser=repository.getUserByEmail(user.getEmail());
         if (newUser==null) {
             repository.save(user);
@@ -26,31 +26,31 @@ public class UserService{
     }
 
     public void removeUserByEmail(String email){
-        //METHOD TO REMOVE A USER BY HIS EMAIL
+        //Method to remove a user by his email
         User userToRemove=repository.getUserByEmail(email);
         repository.deleteById(userToRemove.getId());
     }
 
     public void removeUserById(Long id){
-        //METHOD TO REMOVE A USER BY HIS ID
+        //Method to remove a user by his id
         repository.deleteById(id);
     }
 
     public User findUserById(Long id){
-        //METHOD TO FIND A USER THANKS TO HIS ID
+        //Method to find a user thanks to his id
         Optional<User> optionalUser= repository.findById(id);
         User userToFind= optionalUser.get();
         return userToFind;
     }
 
     public User findUserByEmail(String email){
-        //METHOD TO FIND A USER THANKS TO HIS EMAIL
+        //Method to find a user thanks to his email
         User userToFind=repository.getUserByEmail(email);
         return userToFind;
     }
 
     public void updateUserById(Long id,String newPassword){
-        //METHOD TO UPDATE THE PASSWORD OF A USER THANKS TO HIS ID
+        //Method to update the password of a user thanks to his id
         Optional<User> optionalUser=repository.findById(id);
         User userToUpdate=optionalUser.get();
         userToUpdate.setPassword(newPassword);
@@ -58,14 +58,14 @@ public class UserService{
     }
 
     public void updateUserByEmail(String email,String newPassword){
-        //METHOD TO UPDATE THE PASSWORD OF A USER THANKS TO HIS EMAIL
+        //Method to update the password of a user thanks to his email
         User userToUpdate=repository.getUserByEmail(email);
         userToUpdate.setPassword(newPassword);
         repository.save(userToUpdate);
     }
 
     public Iterable<User> getAllUsers(){
-        //METHOD TO GET ALL USERS IN OUR DATABASE
+        //Method to get all users in our databse
         return repository.findAll();
     }
 }

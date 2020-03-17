@@ -13,45 +13,45 @@ public class UserRestController {
 
     //METHODS
     public void createUser(User user){
-        //METHOD TO ADD A USER IN OUR DATABASE
+        //Method to create a new user
         userService.addUser(user);
     }
 
     public void deleteUserById(Long id){
-        //METHOD TO REMOVE A USER BY HIS ID
+        //Method to delete a user by his id
         userService.removeUserById(id);
     }
 
     public void deleteUserByEmail(String email){
-        //METHOD TO REMOVE A USER BY HIS EMAIL
+        //Method to delete a user by his email
         User userToRemove=userService.findUserByEmail(email);
         userService.removeUserByEmail(email);
     }
 
     public User findUserById(Long id){
-        //METHOD TO FIND A USER THANKS TO HIS ID
+        //Method to find a user by his id
         User userToFind= userService.findUserById(id);
         return userToFind;
     }
 
     public User findUserByEmail(String email){
-        //METHOD TO FIND A USER THANKS TO HIS EMAIL
+        //Method to find a user by his email
         User userToFind=userService.findUserByEmail(email);
         return userToFind;
     }
 
     public void updateUserById(Long id,String newPassword){
-        //METHOD TO UPDATE THE PASSWORD OF A USER THANKS TO HIS ID
+        //Method to update the password of a user thanks to his id
         userService.updateUserById(id,newPassword);
     }
 
     public void updateUserByEmail(String email,String newPassword){
-        //METHOD TO UPDATE THE PASSWORD OF A USER THANKS TO HIS EMAIL
+        //Method to update the password of a user thanks to his email
         userService.updateUserByEmail(email,newPassword);
     }
 
     public Iterable<User> findAllUsers(){
-        //METHOD TO GET ALL USERS IN OUR DATABASE
+        //Method to get all users
         return userService.getAllUsers();
     }
 }
