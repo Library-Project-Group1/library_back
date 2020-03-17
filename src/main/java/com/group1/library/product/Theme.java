@@ -15,8 +15,6 @@ import java.io.Serializable;
 @Table(name = "themes")
 public class Theme implements Serializable {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
