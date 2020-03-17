@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface AttributeProductService<T,Long> {
 
-        public T add(T t) throws CategoryAlreadyExistsException;
+        public T add(T t) throws CategoryAlreadyExistsException, ThemeAlreadyExistsException;
 
         public T getById(Long id);
 

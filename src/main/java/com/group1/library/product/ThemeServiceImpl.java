@@ -1,10 +1,12 @@
 package com.group1.library.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ThemeServiceImpl implements AttributeProductService<Theme,Long> {
 
     //Attributes
@@ -13,9 +15,14 @@ public class ThemeServiceImpl implements AttributeProductService<Theme,Long> {
 
     //Methods
     @Override
-    public Theme add(Theme theme) {
+    public Theme add(Theme theme) throws ThemeAlreadyExistsException {
         //Method to add a theme in database
-        this.themeRepository.save(theme);
+        if(themeRepository.getThemeByThemeName(theme.getName())==null){
+            this.themeRepository.save(theme);
+        }else{
+            throw new ThemeAlreadyExistsException();
+        }
+
         return theme;
     }
 
@@ -46,7 +53,7 @@ public class ThemeServiceImpl implements AttributeProductService<Theme,Long> {
 
     @Override
     public Iterable<Theme> getAll() {
-        //
+        //Method to get all themes
         Iterable<Theme>themes=themeRepository.findAll();
         return themes;
     }
