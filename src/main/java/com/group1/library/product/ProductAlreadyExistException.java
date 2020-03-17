@@ -1,9 +1,8 @@
 package com.group1.library.product;
 
-public class ProductAlreadyExistException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-    public ProductAlreadyExistException() {
-        super("This product already exist in the list.");
-    }
-
+@ResponseStatus(value = HttpStatus.CONFLICT, reason = "Product already exist.")
+public class ProductAlreadyExistException extends Throwable {
 }

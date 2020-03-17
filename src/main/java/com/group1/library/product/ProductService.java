@@ -9,7 +9,6 @@ import java.util.List;
 public class ProductService {
 
     // ATTRIBUTE
-
     @Autowired
     private ProductRepository repository;
 
@@ -30,11 +29,10 @@ public class ProductService {
 
     /**
      * Method to edit one product by id
-     *
      * @return An instance of Product, which corresponds to the edited product
      * @throws ProductNotFoundException if the product doesn't exist
      */
-    public Product updateProductById(Product product) {
+    public Product updateProductById(Product product) throws ProductNotFoundException {
         Product productToUpdate = this.repository.getProductById(product.getId());
         if (productToUpdate == null) {
             throw new ProductNotFoundException();
@@ -45,8 +43,9 @@ public class ProductService {
 
     /**
      * Method to delete one product by id
+     *
      */
-    public void removeProductById(Product product) {
+    public void removeProductById(Product product) throws ProductNotFoundException {
         Product productToDelete = this.repository.getProductById(product.getId());
         if (productToDelete == null) {
             throw new ProductNotFoundException();

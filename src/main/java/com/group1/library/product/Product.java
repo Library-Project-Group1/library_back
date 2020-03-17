@@ -1,22 +1,33 @@
 package com.group1.library.product;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 // Classe qui définit les produits
+@Entity
+@Table(name = "products")
 public class Product implements Serializable {
 
-    //Attributs
-
+    // ATTRIBUTES
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private String author;
+    private String creator;
     private Long quantity;
     private Date releaseDate;
     private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "theme_fk")
     private Theme theme;
+
+    @ManyToOne
+    @JoinColumn(name = "category_fk")
     private Category category;
 
+    // CONSTRUCTOR
     public Product() {
     }
 
@@ -37,11 +48,11 @@ public class Product implements Serializable {
     }
 
     public String getAuthor() {
-        return author;
+        return creator;
     }
 
     public void setAuthor(String author) {
-        this.author = author;
+        this.creator = author;
     }
 
     public Long getQuantity() {
