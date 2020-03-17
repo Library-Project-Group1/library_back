@@ -44,7 +44,7 @@ public class CategoryRestController {
     public void updateCatById(@PathVariable("id") Long id, @RequestBody @Valid String newName) {
         try {
             Category catToEdit = catServImpl.getById(id);
-            this.catServImpl.edit(catToEdit, newName);
+            this.catServImpl.edit(catToEdit.getId(), newName);
             ResponseEntity.status(HttpStatus.CREATED).build();
         }
         catch (CategoryNotFoundException e) {

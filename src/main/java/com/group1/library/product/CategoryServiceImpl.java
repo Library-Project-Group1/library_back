@@ -1,5 +1,6 @@
 package com.group1.library.product;
 
+import com.group1.library.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
@@ -39,12 +40,10 @@ public class CategoryServiceImpl implements AttributeProductService<Category,Lon
 
     //Method to update the name of a category using his id in our database
     @Override
-    public void edit(Category category, String newName) {
-        Long idToFind = category.getId();
-        Optional<Category> optionalCatToEdit = this.catRepo.findById(idToFind);
-        Category catToEdit = optionalCatToEdit.get();
-        catToEdit.setName(newName);
-        this.catRepo.save(catToEdit);
+    public void edit(Long id, String newName) {
+        Optional<Category> catToUpdate=catRepo.findById(id);
+        catToUpdate.get().setName(newName);
+        catRepo.save(catToUpdate.get());
     }
 
     //Method to remove a category using his name in our database

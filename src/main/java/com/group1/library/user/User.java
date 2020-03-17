@@ -1,5 +1,6 @@
 package com.group1.library.user;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
