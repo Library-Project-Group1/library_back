@@ -12,7 +12,7 @@ import java.util.Optional;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200") // TODO compléter l'URL plus tard quand on aura plus de visibilité sur le changement de pages
 public class UserRestController {
-    //ATTRIBUTESs
+    //ATTRIBUTES
     @Autowired
     UserService userService;
 
