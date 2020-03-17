@@ -26,8 +26,8 @@ public class ThemeServiceImpl implements AttributeProductService<Theme,Long> {
     }
 
     @Override
-    public void edit(Theme theme) {
-        Theme themeToEdit =
+    public void edit(Long id, String name) {
+        theme.
     }
 
     @Override
