@@ -27,20 +27,27 @@ public class ThemeServiceImpl implements AttributeProductService<Theme,Long> {
     }
 
     @Override
-    public Theme getById(Long id) {
+    public Theme getById(Long id) throws ThemeNotFoundException {
         //Method to find a theme by id
         Optional<Theme>theme = this.themeRepository.findById(id);
-        Theme themeToFind = theme.get();
-        return themeToFind;
+        if(theme.isPresent()){
+            Theme themeToFind = theme.get();
+            return themeToFind;
+        }else{
+            throw new ThemeNotFoundException();
+        }
+
+
     }
 
     @Override
     public void edit(Theme theme, String name) {
         //Method to change the theme name
         Long idToFind= theme.getId();
-        Optional<Theme>themeToEdit = this.themeRepository.findById(idToFind);
-        themeToEdit.get().setName(name);
-        this.themeRepository.save(themeToEdit.get());
+        Optional<Theme>optionalTheme = this.themeRepository.findById(idToFind);
+        Theme themeToEdit = optionalTheme.get();
+        themeToEdit.setName(name);
+        this.themeRepository.save(themeToEdit);
     }
 
     @Override

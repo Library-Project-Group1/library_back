@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.awt.*;
 import java.util.Optional;
 
-//Theme RestController
+/**Theme RestController**/
 @RestController
 public class ThemeRestController {
 
@@ -21,16 +21,27 @@ public class ThemeRestController {
 
 
     @RequestMapping("/themes")
+    //method to get all themes
     public Iterable<Theme> themes(){
         return themeService.getAll();
     }
 
     @GetMapping("/themes/{id}")
-    public Theme findById(@PathVariable Long id){
-        return themeService.getById(id);
+    //method to get theme by id with exception not found
+    public Theme findById(@PathVariable Long id) {
+       try{
+          return themeService.getById(id);
+
+
+       } catch (ThemeNotFoundException e) {
+           e.printStackTrace();
+
+       }
+        return null;
     }
 
     @PostMapping(path = "/themes", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    //
     public ResponseEntity<Object> createTheme(@RequestBody @Valid Theme theme){
         try{
             themeService.add(theme);
@@ -44,6 +55,18 @@ public class ThemeRestController {
     @DeleteMapping("/themes/{id}")
     public void deleteTheme(@PathVariable Long id){
         themeService.remove(id);
+    }
+
+
+    @PostMapping("/themes/{id}")
+    public void editTheme(@PathVariable("id") Long id, @RequestBody String newName){
+        try {
+            Theme themeToEdit = themeService.getById(id);
+
+            themeService.edit(themeToEdit,newName);
+        } catch (ThemeNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 
