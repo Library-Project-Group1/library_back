@@ -25,8 +25,8 @@ public class LibraryApplication {
 
     @Bean
     public CommandLineRunner demo(UserRestController userRestController){
-        User user=new User("bastienPui@email.com","password");
-        System.out.println(userRestController.findAllUsers());
+        User user=new User("bastienPuigr@email.com","password");
+        userRestController.createUser(user);
         return args -> {
 
         };

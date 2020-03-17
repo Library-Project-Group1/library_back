@@ -16,9 +16,9 @@ public class UserService implements com.group1.library.user.Service {
     //METHODS
     public void addUser(User user) throws UserAlreadyExistsException {
         //Method to add a user in our database
-        User newUser=repository.getUserByEmail(user.getEmail());
+        User newUser=this.repository.getUserByEmail(user.getEmail());
         if (newUser==null) {
-            repository.save(user);
+            this.repository.save(user);
         }else{
             throw new UserAlreadyExistsException();
         }
@@ -26,45 +26,45 @@ public class UserService implements com.group1.library.user.Service {
 
     public void removeUserByEmail(String email){
         //Method to remove a user by his email
-        User userToRemove=repository.getUserByEmail(email);
-        repository.deleteById(userToRemove.getId());
+        User userToRemove=this.repository.getUserByEmail(email);
+        this.repository.deleteById(userToRemove.getId());
     }
 
     public void removeUserById(Long id){
         //Method to remove a user by his id
-        repository.deleteById(id);
+        this.repository.deleteById(id);
     }
 
     public User findUserById(Long id){
         //Method to find a user thanks to his id
-        Optional<User> optionalUser= repository.findById(id);
+        Optional<User> optionalUser= this.repository.findById(id);
         User userToFind= optionalUser.get();
         return userToFind;
     }
 
     public User findUserByEmail(String email){
         //Method to find a user thanks to his email
-        User userToFind=repository.getUserByEmail(email);
+        User userToFind=this.repository.getUserByEmail(email);
         return userToFind;
     }
 
     public void updateUserById(Long id,String newPassword){
         //Method to update the password of a user thanks to his id
-        Optional<User> optionalUser=repository.findById(id);
+        Optional<User> optionalUser=this.repository.findById(id);
         User userToUpdate=optionalUser.get();
         userToUpdate.setPassword(newPassword);
-        repository.save(userToUpdate);
+        this.repository.save(userToUpdate);
     }
 
     public void updateUserByEmail(String email,String newPassword){
         //Method to update the password of a user thanks to his email
-        User userToUpdate=repository.getUserByEmail(email);
+        User userToUpdate=this.repository.getUserByEmail(email);
         userToUpdate.setPassword(newPassword);
-        repository.save(userToUpdate);
+        this.repository.save(userToUpdate);
     }
 
     public Iterable<User> getAllUsers(){
         //Method to get all users in our databse
-        return repository.findAll();
+        return this.repository.findAll();
     }
 }

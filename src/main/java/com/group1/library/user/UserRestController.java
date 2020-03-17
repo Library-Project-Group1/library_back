@@ -66,7 +66,7 @@ public class UserRestController {
         this.userService.updateUserByEmail(email,newPassword);
     }
 
-    @GetMapping("/allUsers")
+    //@GetMapping("/allUsers")
     public Iterable<User> findAllUsers(){
         //Method to get all users
         return userService.getAllUsers();
