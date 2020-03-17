@@ -1,10 +1,10 @@
 package com.group1.library.user;
 
-import com.group1.library.user.UserRepository;
-import com.group1.library.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService{
@@ -38,7 +38,8 @@ public class UserService{
 
     public User findUserById(Long id){
         //METHOD TO FIND A USER THANKS TO HIS ID
-        User userToFind=repository.getUserById(id);
+        Optional<User> optionalUser= repository.findById(id);
+        User userToFind= optionalUser.get();
         return userToFind;
     }
 
@@ -50,7 +51,8 @@ public class UserService{
 
     public void updateUserById(Long id,String newPassword){
         //METHOD TO UPDATE THE PASSWORD OF A USER THANKS TO HIS ID
-        User userToUpdate=repository.getUserById(id);
+        Optional<User> optionalUser=repository.findById(id);
+        User userToUpdate=optionalUser.get();
         userToUpdate.setPassword(newPassword);
         repository.save(userToUpdate);
     }
