@@ -1,27 +1,42 @@
 package com.group1.library.product;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
+import java.util.Optional;
 
-public class ThemeServiceImpl  {
+public class ThemeServiceImpl implements AttributeProductService<Theme,Long> {
+
+
+    @Autowired
+    private ThemeRepository themeRepository;
 
 
     @Override
-    public Object getById(Object id) {
-        return null;
+    public Theme add(Theme theme) {
+        themeRepository.save(theme);
+        return theme;
     }
 
     @Override
-    public void edit(Object o) {
+    public Theme getById(Long id) {
+        Optional<Theme>theme = themeRepository.findById(id);
+        Theme themeToFind = theme.get();
+        return themeToFind;
+    }
+
+    @Override
+    public void edit(Theme theme) {
+        Theme themeToEdit =
+    }
+
+    @Override
+    public void remove(Theme theme) {
 
     }
 
     @Override
-    public void remove(Object o) {
-
-    }
-
-    @Override
-    public List getAll() {
+    public List<Theme> getAll() {
         return null;
     }
 }
