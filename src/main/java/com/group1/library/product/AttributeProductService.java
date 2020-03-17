@@ -10,7 +10,7 @@ public interface AttributeProductService<T,Long> {
 
         void edit(T t, String name);
 
-        void remove(T t);
+        void remove(Long id);
 
         Iterable<T> getAll();
 }

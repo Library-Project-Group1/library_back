@@ -26,7 +26,7 @@ public class CategoryRestController {
     public ResponseEntity<Object> createCategory(@RequestBody @Valid Category category)
     {
         try {
-            catServImpl.add(category);
+            this.catServImpl.add(category);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         }
         catch (CategoryAlreadyExistsException e) {
@@ -36,13 +36,20 @@ public class CategoryRestController {
 
     @GetMapping("/categories/{id}")
     public Category findCategoryById (@PathVariable Long id) {
-        return catServImpl.getById(id);
+        return this.catServImpl.getById(id)
+                .orElseThrow(() -> new CategoryNotFoundException(id));
     }
 
     @RequestMapping(path = "/categories")
     public Iterable<Category> findAllCategories(){
-        Iterable<Category> itCat = catServImpl.getAll();
+        Iterable<Category> itCat = this.catServImpl.getAll();
         return itCat;
+    }
+
+    @DeleteMapping("/categories/{id}")
+    public void deleteTheme(@PathVariable Category category){
+        Long idToDelete = this.catServImpl.getById()
+        catServImpl.remove();
     }
 
 //    !! The following code was made for a Controller, not a RestController !!
