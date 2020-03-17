@@ -1,8 +1,8 @@
 package com.group1.library.product;
 
-public class ProductNotFoundException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-    public ProductNotFoundException() {
-        super("This product was not found.");
-    }
+@ResponseStatus(value = HttpStatus.CONFLICT, reason = "Product was not found.")
+public class ProductNotFoundException extends Throwable {
 }
