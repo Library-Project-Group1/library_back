@@ -1,6 +1,5 @@
 package com.group1.library.product;
 
-import java.util.List;
 
 public interface AttributeProductService<T,Long> {
 

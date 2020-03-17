@@ -23,8 +23,7 @@ public class CategoryRestController {
 
     @PostMapping(path = "/addCategory", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<Object> createCategory(@RequestBody @Valid Category category)
-    {
+    public ResponseEntity<Object> createCategory(@RequestBody @Valid Category category) {
         try {
             this.catServImpl.add(category);
             return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -35,9 +34,22 @@ public class CategoryRestController {
     }
 
     @GetMapping("/categories/{id}")
-    public Category findCategoryById (@PathVariable Long id) {
-        return this.catServImpl.getById(id)
-                .orElseThrow(() -> new CategoryNotFoundException(id));
+    public Category findCategoryById (@PathVariable("id") Long id) {
+            Category catToFind=this.catServImpl.getById(id);
+            return catToFind;
+    }
+
+    @PostMapping(value = "categories/{id}/editCategory", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public void updateCatById(@PathVariable("id") Long id, @RequestBody @Valid String newName) {
+        try {
+            Category catToEdit = catServImpl.getById(id);
+            this.catServImpl.edit(catToEdit, newName);
+            ResponseEntity.status(HttpStatus.CREATED).build();
+        }
+        catch (CategoryNotFoundException e) {
+            ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
     }
 
     @RequestMapping(path = "/categories")
@@ -47,9 +59,9 @@ public class CategoryRestController {
     }
 
     @DeleteMapping("/categories/{id}")
-    public void deleteTheme(@PathVariable Category category){
-        Long idToDelete = this.catServImpl.getById()
-        catServImpl.remove();
+    public void deleteCat(@PathVariable("id") Long id){
+        Category catToRemove = this.catServImpl.getById(id);
+        catServImpl.remove(catToRemove.getId());
     }
 
 //    !! The following code was made for a Controller, not a RestController !!
