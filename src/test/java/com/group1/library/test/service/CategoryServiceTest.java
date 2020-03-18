@@ -2,20 +2,30 @@ package com.group1.library.test.service;
 
 import com.group1.library.product.Category;
 import com.group1.library.product.CategoryAlreadyExistsException;
+import com.group1.library.product.CategoryRepository;
 import com.group1.library.product.CategoryServiceImpl;
 import org.junit.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.text.MessageFormat;
 import java.time.Duration;
 import java.time.Instant;
 //import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.AdditionalAnswers.returnsFirstArg;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
-
+@ExtendWith(MockitoExtension.class)
 public class CategoryServiceTest {
+
+    @Mock
+    private CategoryRepository categoryRepository;
 
     private static CategoryServiceImpl categoryService;
     private static Instant startedAt;
@@ -26,7 +36,6 @@ public class CategoryServiceTest {
     @BeforeClass
     public static void setUpBeforeClass() {
         System.out.println("Avant tout");
-        categoryService = new CategoryServiceImpl();
         startedAt = Instant.now();
     }
 
@@ -41,6 +50,7 @@ public class CategoryServiceTest {
     @BeforeEach
     public void setUpBeforeMethod() {
         System.out.println("Avant un test");
+        categoryService = new CategoryServiceImpl(categoryRepository);
 //        Category cat1 = new Category("salut");
 //        Category cat2 = new Category("coucou");
 //        Category cat3 = new Category("a");
@@ -67,86 +77,87 @@ public class CategoryServiceTest {
     @Test
     public void testCRUDCategory() throws CategoryAlreadyExistsException {
         Category catToTest = new Category("akim");
-        categoryService.add(catToTest);
-        assertEquals(catToTest.getName(), "akim");
+        when(categoryRepository.save(any(Category.class))).then(returnsFirstArg());
+        Category catRegistered = categoryService.add(catToTest);
+        Assert.assertEquals(catRegistered.getName(), catToTest.getName());
     }
-//    @Test
-//    public void testAddCategory() throws CategoryAlreadyExistsException {
-//        Category newCatTest= new Category("g");
-//        categoryService.add(newCatTest);
-//        assertEquals(newCatTest, categoryService.add(newCatTest));
-//    }
-//        // Gets two random numbers for these tests
-//        Long randomId = MIN + (long)(Math.random()*((MAX - MIN) + 1L));
-//        Long updateRandom = MIN + (long)(Math.random()*((MAX - MIN) + 1L));
+////    @Test
+////    public void testAddCategory() throws CategoryAlreadyExistsException {
+////        Category newCatTest= new Category("g");
+////        categoryService.add(newCatTest);
+////        assertEquals(newCatTest, categoryService.add(newCatTest));
+////    }
+////        // Gets two random numbers for these tests
+////        Long randomId = MIN + (long)(Math.random()*((MAX - MIN) + 1L));
+////        Long updateRandom = MIN + (long)(Math.random()*((MAX - MIN) + 1L));
+////
+////        // Category is the domain object
+////        Category category = new Category();
+////
+////        // The method findAll brings back all the categories from the DB
+////        Iterable<Category> firstFindAll = categoryService.getAll();
+////
+////        // Category gets mock values and is persisted. Id is returned
+////        category = getMockCategoryValues(category, randomId);
+////        persist(category);
+////        Long id = category.getId();
+////
+////        // Find the created object with the given Id and makes sure it has the right values
+////        item = find(id);
+////        assertNotNull("Object should exist", item);
+////        checkMockItemValues(item, random);
+////
+////        // Updates the object with new random values
+////        item = getMockItemValues(item, updateRandom);
+////        merge(item);
+////
+////        // Find the updated object and makes sure it has the new values
+////        item = em.find(Item.class, id);
+////        assertNotNull("Object should exist", item);
+////        checkMockItemValues(item, updateRandom);
+////
+////        // Gets all the objects from the database...
+////        int secondFindAll = findAll();
+////
+////        // ...and makes sure there is one more object
+////        if (firstFindAll + 1 != secondFindAll) fail("The collection size should have increased by 1");
+////
+////        // The object is now deleted
+////        remove(item);
+////
+////        // Find the object and make sure it has been removed
+////        item = em.find(Item.class, id);
+////        assertNull("Object should not exist", item);
+////
+////        // Gets all the objects from the database...
+////        int thirdFindAll = findAll();
+////
+////        // ...and makes sure we have the original size
+////        if (firstFindAll != thirdFindAll) fail("The collection size should have be the same as original");
 //
-//        // Category is the domain object
-//        Category category = new Category();
-//
-//        // The method findAll brings back all the categories from the DB
-//        Iterable<Category> firstFindAll = categoryService.getAll();
-//
-//        // Category gets mock values and is persisted. Id is returned
-//        category = getMockCategoryValues(category, randomId);
-//        persist(category);
-//        Long id = category.getId();
-//
-//        // Find the created object with the given Id and makes sure it has the right values
-//        item = find(id);
-//        assertNotNull("Object should exist", item);
-//        checkMockItemValues(item, random);
-//
-//        // Updates the object with new random values
-//        item = getMockItemValues(item, updateRandom);
-//        merge(item);
-//
-//        // Find the updated object and makes sure it has the new values
-//        item = em.find(Item.class, id);
-//        assertNotNull("Object should exist", item);
-//        checkMockItemValues(item, updateRandom);
-//
-//        // Gets all the objects from the database...
-//        int secondFindAll = findAll();
-//
-//        // ...and makes sure there is one more object
-//        if (firstFindAll + 1 != secondFindAll) fail("The collection size should have increased by 1");
-//
-//        // The object is now deleted
-//        remove(item);
-//
-//        // Find the object and make sure it has been removed
-//        item = em.find(Item.class, id);
-//        assertNull("Object should not exist", item);
-//
-//        // Gets all the objects from the database...
-//        int thirdFindAll = findAll();
-//
-//        // ...and makes sure we have the original size
-//        if (firstFindAll != thirdFindAll) fail("The collection size should have be the same as original");
-
-//
-//    @Test
-//    public void testAdd() {
-//        fail("Not yet implemented");
-//    }
-//
-//    @Test
-//    public void testGetById() {
-//        fail("Not yet implemented");
-//    }
-//
-//    @Test
-//    public void testEdit() {
-//        fail("Not yet implemented");
-//    }
-//
-//    @Test
-//    public void testRemove() {
-//        fail("Not yet implemented");
-//    }
-//
-//    @Test
-//    public void testGetAll() {
-//        fail("Not yet implemented");
-//    }
+////
+////    @Test
+////    public void testAdd() {
+////        fail("Not yet implemented");
+////    }
+////
+////    @Test
+////    public void testGetById() {
+////        fail("Not yet implemented");
+////    }
+////
+////    @Test
+////    public void testEdit() {
+////        fail("Not yet implemented");
+////    }
+////
+////    @Test
+////    public void testRemove() {
+////        fail("Not yet implemented");
+////    }
+////
+////    @Test
+////    public void testGetAll() {
+////        fail("Not yet implemented");
+////    }
 }

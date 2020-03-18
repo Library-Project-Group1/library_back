@@ -1,15 +1,16 @@
 package com.group1.library.product;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CategoryServiceImpl implements AttributeProductService<Category,Long> {
 
     //ATTRIBUTES
-    @Autowired
-    private CategoryRepository catRepo;
+
+    private final CategoryRepository catRepo;
 
     //METHODS
 
@@ -18,7 +19,7 @@ public class CategoryServiceImpl implements AttributeProductService<Category,Lon
     public Category add(Category category) throws CategoryAlreadyExistsException {
         Category newCat=this.catRepo.getCategoryByName(category.getName());
         if (newCat==null) {
-            return this.catRepo.save(category);
+           return this.catRepo.save(category);
         }else{
             throw new CategoryAlreadyExistsException();
         }

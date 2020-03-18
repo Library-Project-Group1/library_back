@@ -26,7 +26,7 @@ public class LibraryApplication {
 
     @Bean
     public CommandLineRunner demoCat(CategoryServiceImpl catServImpl){
-        Category newCat = new Category("book");
+        Category newCat = new Category("v");
         try {
             catServImpl.add(newCat);
         } catch (CategoryAlreadyExistsException e) {
