@@ -25,28 +25,9 @@ public class LibraryApplication {
     }
 
     @Bean
-    public CommandLineRunner demoCat(CategoryServiceImpl catServImpl){
-        catServImpl.edit(1L, "coucou");
+    public CommandLineRunner demo(ProductRestController productRestController) {
         return args -> {
         };
     }
 
-    @Bean
-    public CommandLineRunner demoTheme(ThemeServiceImpl themeService){
-        try {
-            themeService.getById(2L);
-        } catch (ThemeNotFoundException e) {
-            e.printStackTrace();
-        }
-        return args -> {
-        };
-    }
-   @Bean
-   public CommandLineRunner demoUser(ThemeServiceImpl themeService) throws ThemeAlreadyExistsException, ThemeNotFoundException {
-        Theme theme=new Theme("SF");
-        System.out.println(themeService.getById(1l));
-        return args -> {
-
-       };
-   }
 }

@@ -33,15 +33,31 @@ public class ProductRestController {
     }
 
     /**
-     * Method to edit a product by id
+     * Method to edit the price of a product by id
      *
-     * @param id
+     * @param id,price
      * @throws ProductNotFoundException
      */
     @PostMapping(value = "/product/{id}/editProduct", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void updateProductById(@PathVariable("id") Long id) throws ProductNotFoundException {
-        this.productService.updateProductById(id);
-        // TODO: complete this method
+    public void updateProductById(@PathVariable("id") Long id, float price){
+        try {
+            this.productService.updateProductById(id, price);
+        }catch (ProductNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+    /**
+     * Method to edit the stock of a product by id
+     *
+     * @param id,quantity
+     * @throws ProductNotFoundException
+     */
+    public void updateStockById(Long id,Long quantity){
+        try {
+            this.productService.updateStockById(id,quantity);
+        }catch (ProductNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
     /**

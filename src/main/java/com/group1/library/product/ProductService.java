@@ -29,17 +29,35 @@ public class ProductService {
     }
 
     /**
-     * Method to edit a product by id
+     * Method to edit the price of a product by id
      *
      * @return An instance of Product, which corresponds to the edited product
      * @throws ProductNotFoundException if the product doesn't exist
      */
-    public void updateProductById(Long id) throws ProductNotFoundException {
+    public void updateProductById(Long id,float price) throws ProductNotFoundException {
         Product productToUpdate = this.repository.getProductById(id);
         if (productToUpdate == null) {
             throw new ProductNotFoundException();
+        }else {
+            productToUpdate.setPrice(price);
+            this.repository.save(productToUpdate);
         }
-        // TODO: edit one or more attributes of a product (use .set and .save)
+    }
+
+    /**
+     * Method to edit the stock of a product by id
+     *
+     * @throws ProductNotFoundException if the product doesn't exist
+     */
+    public void updateStockById(Long id,Long quantity) throws ProductNotFoundException {
+        Product productToUpdate = this.repository.getProductById(id);
+        if (productToUpdate == null) {
+            throw new ProductNotFoundException();
+        }else {
+            productToUpdate.setQuantityTotal(quantity);
+            this.repository.save(productToUpdate);
+        }
+
     }
 
     /**
