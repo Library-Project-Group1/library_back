@@ -4,18 +4,21 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-// Classe qui définit les produits
+// Class characterizing the products, transformed into an entity managed by JPA
 @Entity
 @Table(name = "products")
 public class Product implements Serializable {
 
-    // ATTRIBUTES
+    // Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String creator;
-    private Long quantity;
+    private Long quantityTotal;
+    private Long quantityAvailableToRent;
+    private Long quantityIsRenting;
+    private float price;
     private Date releaseDate;
     private String description;
 
@@ -27,10 +30,11 @@ public class Product implements Serializable {
     @JoinColumn(name = "category_fk")
     private Category category;
 
-    // CONSTRUCTOR
+    // Empty Constructor
     public Product() {
     }
 
+    // Getters & Setters
     public Long getId() {
         return id;
     }
@@ -47,20 +51,44 @@ public class Product implements Serializable {
         this.title = title;
     }
 
-    public String getAuthor() {
+    public String getCreator() {
         return creator;
     }
 
-    public void setAuthor(String author) {
-        this.creator = author;
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 
-    public Long getQuantity() {
-        return quantity;
+    public Long getQuantityTotal() {
+        return quantityTotal;
     }
 
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
+    public void setQuantityTotal(Long quantityTotal) {
+        this.quantityTotal = quantityTotal;
+    }
+
+    public Long getQuantityAvailableToRent() {
+        return quantityAvailableToRent;
+    }
+
+    public void setQuantityAvailableToRent(Long quantityAvailableToRent) {
+        this.quantityAvailableToRent = quantityAvailableToRent;
+    }
+
+    public Long getQuantityIsRenting() {
+        return quantityIsRenting;
+    }
+
+    public void setQuantityIsRenting(Long quantityIsRenting) {
+        this.quantityIsRenting = quantityIsRenting;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     public Date getReleaseDate() {

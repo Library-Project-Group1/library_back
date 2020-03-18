@@ -5,15 +5,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// Class containing all methods about the products
 @Service
 public class ProductService {
 
-    // ATTRIBUTE
+    // Attribute
     @Autowired
     private ProductRepository repository;
 
     /**
-     * Method to add a new product
+     * Method to add a new product in database
      * if the product is null, we save the product
      *
      * @throws ProductAlreadyExistException if the product already exist
@@ -28,37 +29,50 @@ public class ProductService {
     }
 
     /**
-     * Method to edit one product by id
+     * Method to edit a product by id
+     *
      * @return An instance of Product, which corresponds to the edited product
      * @throws ProductNotFoundException if the product doesn't exist
      */
-    public Product updateProductById(Product product) throws ProductNotFoundException {
-        Product productToUpdate = this.repository.getProductById(product.getId());
+    public void updateProductById(Long id) throws ProductNotFoundException {
+        Product productToUpdate = this.repository.getProductById(id);
         if (productToUpdate == null) {
             throw new ProductNotFoundException();
         }
-        // TODO: edit one or more attributes of a product
-        return productToUpdate;
+        // TODO: edit one or more attributes of a product (use .set and .save)
     }
 
     /**
-     * Method to delete one product by id
-     *
+     * Method to delete a product by id
      */
-    public void removeProductById(Product product) throws ProductNotFoundException {
-        Product productToDelete = this.repository.getProductById(product.getId());
+    public void removeProductById(Long id) throws ProductNotFoundException {
+        Product productToDelete = this.repository.getProductById(id);
         if (productToDelete == null) {
             throw new ProductNotFoundException();
+        } else {
+            this.repository.deleteById(id);
         }
-        this.repository.deleteById(product.getId());
     }
 
     /**
-     * Method that retrieves the product list to display it
+     * Method to find a product with the id
+     *
+     * @return An instance of Product, which corresponds to the product to find in database
+     */
+    public Product findProductById(Long id) throws ProductNotFoundException {
+        Product productToFind = this.repository.getProductById(id);
+        if (productToFind == null) {
+            throw new ProductNotFoundException();
+        }
+        return productToFind;
+    }
+
+    /**
+     * Method that retrieves all products list in database
      *
      * @return The list of all the products
      */
-    public List<Product> getAllProducts() {
-        return (List<Product>) this.repository.findAll();
+    public Iterable<Product> getAllProducts() {
+        return (Iterable<Product>) this.repository.findAll();
     }
 }

@@ -1,39 +1,44 @@
 package com.group1.library.product;
 
-
-
 import javax.persistence.*;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import java.io.Serializable;
+import java.util.List;
 
+// Class characterizing themes of products, transformed into an entity managed by JPA
 @Entity
 @Table(name = "themes")
 public class Theme implements Serializable {
 
+    // Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
 
+    @OneToMany(mappedBy = "theme")
+    private List<Product> products;
+
+    // Empty Constructor
     public Theme() {
     }
 
-
+    // Constructor
     public Theme(String name) {
-        this.name=name;
+        this.name = name;
     }
+
     @Override
-    public String toString(){
-        return ("Theme :"+this.id+"°) "+this.name);
+    public String toString() {
+        return ("Theme :" + this.id + "°) " + this.name);
 
     }
 
+    // Getters & Setters
     public Long getId() {
         return id;
     }
