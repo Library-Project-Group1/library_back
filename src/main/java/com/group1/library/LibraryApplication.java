@@ -14,7 +14,7 @@ import java.util.List;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.group1.library.product")
-@ComponentScan(basePackages = "com.group1.library.user")
+//@ComponentScan(basePackages = "com.group1.library.user")
 public class LibraryApplication {
 
     public static void main(String[] args) {
@@ -26,27 +26,32 @@ public class LibraryApplication {
 
     @Bean
     public CommandLineRunner demoCat(CategoryServiceImpl catServImpl){
-        catServImpl.edit(1L, "coucou");
-        return args -> {
-        };
-    }
-
-    @Bean
-    public CommandLineRunner demoTheme(ThemeServiceImpl themeService){
+        Category newCat = new Category("book");
         try {
-            themeService.getById(2L);
-        } catch (ThemeNotFoundException e) {
+            catServImpl.add(newCat);
+        } catch (CategoryAlreadyExistsException e) {
             e.printStackTrace();
         }
         return args -> {
         };
     }
-   @Bean
-   public CommandLineRunner demoUser(ThemeServiceImpl themeService) throws ThemeAlreadyExistsException, ThemeNotFoundException {
-        Theme theme=new Theme("SF");
-        System.out.println(themeService.getById(1l));
-        return args -> {
 
-       };
-   }
+//    @Bean
+//    public CommandLineRunner demoTheme(ThemeServiceImpl themeService){
+//        try {
+//            themeService.getById(2L);
+//        } catch (ThemeNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        return args -> {
+//        };
+//    }
+//   @Bean
+//   public CommandLineRunner demoUser(ThemeServiceImpl themeService) throws ThemeAlreadyExistsException, ThemeNotFoundException {
+//        Theme theme=new Theme("SF");
+//        System.out.println(themeService.getById(1l));
+//        return args -> {
+//
+//       };
+//   }
 }

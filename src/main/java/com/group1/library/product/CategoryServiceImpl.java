@@ -18,11 +18,10 @@ public class CategoryServiceImpl implements AttributeProductService<Category,Lon
     public Category add(Category category) throws CategoryAlreadyExistsException {
         Category newCat=this.catRepo.getCategoryByName(category.getName());
         if (newCat==null) {
-            this.catRepo.save(category);
+            return this.catRepo.save(category);
         }else{
             throw new CategoryAlreadyExistsException();
         }
-        return category;
     }
 
     //Method to find a category by id in our database
