@@ -21,6 +21,9 @@ public class User implements Serializable {
         this.email=email;
         this.password=password;
     }
+    public User(String email){
+        this.email=email;
+    }
 
     //METHODS
     @Override

@@ -32,6 +32,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    /**
+     * Method to remove a new product in database
+     * if the product is null, we save the products
+     * @param email
+     */
     public void removeUserByEmail(String email){
         //Method to remove a user by his email
         User userToRemove=this.repository.getUserByEmail(email);
