@@ -15,6 +15,12 @@ public class UserServiceImpl implements UserService {
 
     //METHODS
     @Override
+    /**
+     * Method to add a new product in database
+     * if the product is null, we save the product
+     * @param user
+     * @throws UserAlreadyExistsException if the product already exist
+     */
     public void addUser(User user) throws UserAlreadyExistsException {
         //Method to add a user in our database
         User newUser=this.repository.getUserByEmail(user.getEmail());
