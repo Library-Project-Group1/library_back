@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
     @Override
     /**
      * Method to add a new product in database
-     * if the product is null, we save the product
+     * if the product is null, we save the products
      * @param user
      * @throws UserAlreadyExistsException if the product already exist
      */
