@@ -3,7 +3,7 @@ package com.group1.library;
 import com.group1.library.user.User;
 import com.group1.library.user.UserRepository;
 import com.group1.library.user.UserRestController;
-import com.group1.library.user.UserService;
+//import com.group1.library.user.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
