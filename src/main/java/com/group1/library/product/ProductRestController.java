@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+/**
+ * <code>ProductRestController</code>
+ */
 @RestController
 //@CrossOrigin(origins = "http://localhost:4200")
 public class ProductRestController {
@@ -19,7 +22,7 @@ public class ProductRestController {
     /**
      * Method to create a new product
      *
-     * @param product
+     * @param product the product to add in the stock
      * @return An instance of ResponseEntity
      */
     @PostMapping(value = "/createProduct", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -35,27 +38,28 @@ public class ProductRestController {
     /**
      * Method to edit the price of a product by id
      *
-     * @param id,price
-     * @throws ProductNotFoundException
+     * @param id    the id of the product to edit
+     * @param price the price of the product to edit
      */
     @PostMapping(value = "/product/{id}/editProduct", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void updateProductById(@PathVariable("id") Long id, float price){
+    public void updateProductById(@PathVariable("id") Long id, float price) {
         try {
             this.productService.updateProductById(id, price);
-        }catch (ProductNotFoundException e){
+        } catch (ProductNotFoundException e) {
             e.printStackTrace();
         }
     }
+
     /**
      * Method to edit the stock of a product by id
      *
-     * @param id,quantity
-     * @throws ProductNotFoundException
+     * @param id       the id of the product in order to edit the quantity
+     * @param quantity the quantity of product to update in the stock
      */
-    public void updateStockById(Long id,Long quantity){
+    public void updateStockById(Long id, Long quantity) {
         try {
-            this.productService.updateStockById(id,quantity);
-        }catch (ProductNotFoundException e){
+            this.productService.updateStockById(id, quantity);
+        } catch (ProductNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -63,7 +67,7 @@ public class ProductRestController {
     /**
      * Method to delete a product by id
      *
-     * @param id
+     * @param id the id of the product to delete in the stock
      */
     @GetMapping("/deleteProduct")
     public void deleteProductById(Long id) {
@@ -77,9 +81,9 @@ public class ProductRestController {
     /**
      * Method to find a product by id
      *
-     * @param id
-     * @return An instance of Product
-     * @throws ProductNotFoundException
+     * @param id the id of the product to get in the stock
+     * @return An instance of Product, which corresponds to the product to find
+     * @throws ProductNotFoundException if the product cannot be found
      */
     @GetMapping("/product/{id}")
     public Product findProductById(@PathVariable("id") Long id) throws ProductNotFoundException {
@@ -90,7 +94,7 @@ public class ProductRestController {
     /**
      * Method to get all products
      *
-     * @return
+     * @return A list of all the products
      */
     @GetMapping("/allProducts")
     public Iterable<Product> findAllProducts() {

@@ -50,7 +50,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-<!--Implementation for unitary test with testNG and view testing with selenium-->
+        <!--Implementation for unitary test with testNG and view testing with selenium-->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>

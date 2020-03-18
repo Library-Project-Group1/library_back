@@ -1,8 +1,10 @@
 package com.group1.library.product;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ThemeRepository extends CrudRepository<Theme,Long> {
+@Repository
+public interface ThemeRepository extends CrudRepository<Theme, Long> {
 
     Theme getThemeByName(String name);
 }

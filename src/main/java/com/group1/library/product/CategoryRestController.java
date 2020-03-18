@@ -27,16 +27,15 @@ public class CategoryRestController {
         try {
             this.catServImpl.add(category);
             return ResponseEntity.status(HttpStatus.CREATED).build();
-        }
-        catch (CategoryAlreadyExistsException e) {
+        } catch (CategoryAlreadyExistsException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
     }
 
     @GetMapping("/categories/{id}")
-    public Category findCategoryById (@PathVariable("id") Long id) {
-            Category catToFind=this.catServImpl.getById(id);
-            return catToFind;
+    public Category findCategoryById(@PathVariable("id") Long id) {
+        Category catToFind = this.catServImpl.getById(id);
+        return catToFind;
     }
 
     @PostMapping(value = "categories/{id}/editCategory", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -46,20 +45,19 @@ public class CategoryRestController {
             Category catToEdit = catServImpl.getById(id);
             this.catServImpl.edit(catToEdit.getId(), newName);
             ResponseEntity.status(HttpStatus.CREATED).build();
-        }
-        catch (CategoryNotFoundException e) {
+        } catch (CategoryNotFoundException e) {
             ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
     }
 
     @RequestMapping(path = "/categories")
-    public Iterable<Category> findAllCategories(){
+    public Iterable<Category> findAllCategories() {
         Iterable<Category> itCat = this.catServImpl.getAll();
         return itCat;
     }
 
     @DeleteMapping("/categories/{id}")
-    public void deleteCat(@PathVariable("id") Long id){
+    public void deleteCat(@PathVariable("id") Long id) {
         Category catToRemove = this.catServImpl.getById(id);
         catServImpl.remove(catToRemove.getId());
     }

@@ -34,13 +34,14 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(String title,float price){
-        this.title=title;
-        this.price=price;
+    // Constructor
+    public Product(String title, float price) {
+        this.title = title;
+        this.price = price;
     }
 
-    public String toString(){
-        return (this.id+"°) "+this.title);
+    public String toString() {
+        return (this.id + "°) " + this.title);
     }
 
     // Getters & Setters
