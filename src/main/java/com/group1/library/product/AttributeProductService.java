@@ -7,9 +7,9 @@ public interface AttributeProductService<T,Long> {
 
         public T getById(Long id) throws ThemeNotFoundException, CategoryNotFoundException;
 
-        void edit(Long id, String name);
+        void editById(Long id, String name);
 
-        void remove(Long id);
+        void removeById(Long id);
 
         Iterable<T> getAll();
 }

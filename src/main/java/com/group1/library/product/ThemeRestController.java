@@ -54,7 +54,7 @@ public class ThemeRestController {
 
     @DeleteMapping("/themes/{id}")
     public void deleteTheme(@PathVariable Long id){
-        themeService.remove(id);
+        themeService.removeById(id);
     }
 
 
@@ -63,7 +63,7 @@ public class ThemeRestController {
         try {
             Theme themeToEdit = themeService.getById(id);
 
-            themeService.edit(themeToEdit.getId(),newName);
+            themeService.editById(themeToEdit.getId(),newName);
         } catch (ThemeNotFoundException e) {
             e.printStackTrace();
         }

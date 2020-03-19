@@ -1,16 +1,15 @@
 package com.group1.library.product;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class CategoryServiceImpl implements AttributeProductService<Category,Long> {
 
     //ATTRIBUTES
-
-    private final CategoryRepository catRepo;
+    @Autowired
+    private CategoryRepository catRepo;
 
     //METHODS
 
@@ -39,7 +38,7 @@ public class CategoryServiceImpl implements AttributeProductService<Category,Lon
 
     //Method to update the name of a category using his id in our database
     @Override
-    public void edit(Long id, String newName) {
+    public void editById(Long id, String newName) {
         Optional<Category> catToUpdate=catRepo.findById(id);
         catToUpdate.get().setName(newName);
         catRepo.save(catToUpdate.get());
@@ -47,11 +46,11 @@ public class CategoryServiceImpl implements AttributeProductService<Category,Lon
 
     //Method to remove a category using his id in our database
     @Override
-    public void remove(Long id) {
+    public void removeById(Long id) {
         catRepo.deleteById(id);
     }
 
-    //Method to get the categories list in our database
+    //Method to get the categories list from our database
     @Override
     public Iterable<Category> getAll() {
         return this.catRepo.findAll();
