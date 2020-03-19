@@ -18,23 +18,6 @@ public class ThemeRestController {
     @Autowired
     private ThemeServiceImpl themeService;
 
-    @RequestMapping("/themes")
-    //method to get all themes
-    public Iterable<Theme> themes() {
-        return themeService.getAll();
-    }
-
-    @GetMapping("/themes/{id}")
-    //method to get theme by id with exception not found
-    public Theme findById(@PathVariable Long id) {
-        try {
-            return themeService.getById(id);
-        } catch (ThemeNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     @PostMapping(path = "/themes", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> createTheme(@RequestBody @Valid Theme theme) {
         try {
@@ -46,9 +29,15 @@ public class ThemeRestController {
         }
     }
 
-    @DeleteMapping("/themes/{id}")
-    public void deleteTheme(@PathVariable Long id) {
-        themeService.remove(id);
+    @GetMapping("/themes/{id}")
+    //method to get theme by id with exception not found
+    public Theme findThemeById(@PathVariable Long id) {
+        try {
+            return themeService.getById(id);
+        } catch (ThemeNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @PostMapping("/themes/{id}")
@@ -59,5 +48,16 @@ public class ThemeRestController {
         } catch (ThemeNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    @DeleteMapping("/themes/{id}")
+    public void deleteTheme(@PathVariable Long id) {
+        themeService.remove(id);
+    }
+
+    @RequestMapping("/themes")
+    //method to get all themes
+    public Iterable<Theme> findAllThemes() {
+        return themeService.getAll();
     }
 }
