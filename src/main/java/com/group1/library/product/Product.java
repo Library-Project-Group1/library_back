@@ -5,6 +5,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 // Class characterizing the products, transformed into an entity managed by JPA
+
+/**
+ * <code>Class Product</code>
+ * Class that characterizes a product present in our library
+ */
 @Entity
 @Table(name = "products")
 public class Product implements Serializable {

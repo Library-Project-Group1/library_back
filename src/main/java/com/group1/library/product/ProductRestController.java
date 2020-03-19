@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 /**
- * <code>ProductRestController</code>
+ * <code>Class ProductRestController</code>
+ *
  */
 @RestController
 //@CrossOrigin(origins = "http://localhost:4200")
