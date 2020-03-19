@@ -4,6 +4,8 @@ public interface ProductService {
 
     Product addProduct(Product product) throws ProductAlreadyExistException;
 
+    Product addProduct()
+
     void updateProductById(Long id, float price) throws ProductNotFoundException;
 
     void updateStockById(Long id, Long quantity) throws ProductNotFoundException;
