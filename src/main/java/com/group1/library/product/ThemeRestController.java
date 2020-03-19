@@ -41,18 +41,18 @@ public class ThemeRestController {
     }
 
     @PostMapping("/themes/{id}")
-    public void editTheme(@PathVariable("id") Long id, @RequestBody String newName) {
+    public void editThemeById(@PathVariable("id") Long id, @RequestBody String newName) {
         try {
             Theme themeToEdit = themeService.getById(id);
-            themeService.edit(themeToEdit.getId(), newName);
+            themeService.editById(themeToEdit.getId(), newName);
         } catch (ThemeNotFoundException e) {
             e.printStackTrace();
         }
     }
 
     @DeleteMapping("/themes/{id}")
-    public void deleteTheme(@PathVariable Long id) {
-        themeService.remove(id);
+    public void deleteThemeById(@PathVariable Long id) {
+        themeService.removeById(id);
     }
 
     @RequestMapping("/themes")

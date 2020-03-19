@@ -37,7 +37,7 @@ public class ThemeServiceImpl implements AttributeProductService<Theme, Long> {
     }
 
     @Override
-    public void edit(Long id, String newName) {
+    public void editById(Long id, String newName) {
         //Method to change the theme name
         Optional<Theme> themeToFind = themeRepository.findById(id);
         themeToFind.get().setName(newName);
@@ -45,9 +45,9 @@ public class ThemeServiceImpl implements AttributeProductService<Theme, Long> {
     }
 
     @Override
-    public void remove(Long id) {
-        //Method to remove a theme by name
-        themeRepository.findById(id);
+    public void removeById(Long id) {
+        //Method to remove a theme by id
+        themeRepository.deleteById(id);
     }
 
     @Override

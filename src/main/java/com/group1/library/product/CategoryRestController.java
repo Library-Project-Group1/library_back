@@ -43,7 +43,7 @@ public class CategoryRestController {
     public void updateCatById(@PathVariable("id") Long id, @RequestBody @Valid String newName) {
         try {
             Category catToEdit = catServImpl.getById(id);
-            this.catServImpl.edit(catToEdit.getId(), newName);
+            this.catServImpl.editById(catToEdit.getId(), newName);
             ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (CategoryNotFoundException e) {
             ResponseEntity.status(HttpStatus.CONFLICT).build();
@@ -57,9 +57,9 @@ public class CategoryRestController {
     }
 
     @DeleteMapping("/categories/{id}")
-    public void deleteCat(@PathVariable("id") Long id) {
+    public void deleteCatById(@PathVariable("id") Long id) {
         Category catToRemove = this.catServImpl.getById(id);
-        catServImpl.remove(catToRemove.getId());
+        catServImpl.removeById(catToRemove.getId());
     }
 
 //    !! The following code was made for a Controller, not a RestController !!

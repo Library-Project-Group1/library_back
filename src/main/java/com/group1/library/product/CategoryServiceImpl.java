@@ -40,17 +40,16 @@ public class CategoryServiceImpl implements AttributeProductService<Category, Lo
 
     //Method to update the name of a category using his id in our database
     @Override
-    public void edit(Long id, String newName) {
+    public void editById(Long id, String newName) {
         Optional<Category> catToUpdate = catRepo.findById(id);
         catToUpdate.get().setName(newName);
         catRepo.save(catToUpdate.get());
     }
 
-    //Method to remove a category using his name in our database
+    //Method to remove a category using an id in our database
     @Override
-    public void remove(Long id) {
-        Optional<Category> catToRemove = this.catRepo.findById(id);
-        catRepo.delete(catToRemove.get());
+    public void removeById(Long id) {
+        catRepo.deleteById(id);
     }
 
     //Method to get the categories list in our database
