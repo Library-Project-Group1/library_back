@@ -27,10 +27,10 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-//    public Category(Long id, String name) {
-//        this.id=id;
-//        this.name=name;
-//    }
+    public Category(Long id, String name) {
+        this.id=id;
+        this.name=name;
+    }
 
     @Override
     public String toString() {

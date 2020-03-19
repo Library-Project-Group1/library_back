@@ -1,25 +1,26 @@
 package com.group1.library.test.service;
 
-import com.group1.library.product.Category;
-import com.group1.library.product.CategoryAlreadyExistsException;
-import com.group1.library.product.CategoryRepository;
-import com.group1.library.product.CategoryServiceImpl;
-import org.junit.*;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import com.group1.library.product.*;
+import org.junit.Assert;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.stubbing.Answer;
 
 import java.text.MessageFormat;
 import java.time.Duration;
 import java.time.Instant;
-//import java.util.List;
+import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class CategoryServiceTest {
@@ -27,20 +28,22 @@ public class CategoryServiceTest {
     @Mock
     private CategoryRepository categoryRepository;
 
+    @InjectMocks
     private static CategoryServiceImpl categoryService;
-    private static Instant startedAt;
-//    private static List<Category> testCatList;
-//    private static final Long MIN = 1L;
-//    private static final Long MAX = 10L;
 
-    @BeforeClass
+//    @Captor
+//    private ArgumentCaptor<Category> categoryArgumentCaptor;
+
+    private static Instant startedAt;
+
+    @BeforeAll
     public static void setUpBeforeClass() {
         System.out.println("Avant tout");
         startedAt = Instant.now();
     }
 
-    @AfterClass
-    public static void tearDownAfterClass() {
+    @AfterAll
+    public static void timeCalculAfterClass() {
         System.out.println("Après tout");
         Instant endedAt = Instant.now();
         long duration = Duration.between(startedAt, endedAt).toMillis();
@@ -51,113 +54,70 @@ public class CategoryServiceTest {
     public void setUpBeforeMethod() {
         System.out.println("Avant un test");
         categoryService = new CategoryServiceImpl(categoryRepository);
-//        Category cat1 = new Category("salut");
-//        Category cat2 = new Category("coucou");
-//        Category cat3 = new Category("a");
-//        Category cat4 = new Category("b");
-//        Category cat5 = new Category("c");
-//        Category cat6 = new Category("d");
-//        Category cat7 = new Category("e");
-//        Category cat8 = new Category("f");
-//            testCatList.add(cat1);
-//            testCatList.add(cat2);
-//            testCatList.add(cat3);
-//            testCatList.add(cat4);
-//            testCatList.add(cat5);
-//            testCatList.add(cat6);
-//            testCatList.add(cat7);
-//            testCatList.add(cat8);
     }
 
     @AfterEach
-    public void tearDownAfterMethod() {
+    public void AfterMethod() {
         System.out.println("Après un test");
     }
 
     @Test
-    public void testCRUDCategory() throws CategoryAlreadyExistsException {
-        Category catToTest = new Category("akim");
+    public void testAddCategory() throws CategoryAlreadyExistsException {
+        System.out.println("addCategory()");
+        Category addCatToTest = new Category("akim");
         when(categoryRepository.save(any(Category.class))).then(returnsFirstArg());
-        Category catRegistered = categoryService.add(catToTest);
-        Assert.assertEquals(catRegistered.getName(), catToTest.getName());
+        Category catRegistered = categoryService.add(addCatToTest);
+        Assert.assertEquals(catRegistered.getName(), addCatToTest.getName());
+        if (!catRegistered.getName().equals(addCatToTest.getName())) {
+            fail("The add method doesn't work properly");
+        }
     }
-////    @Test
-////    public void testAddCategory() throws CategoryAlreadyExistsException {
-////        Category newCatTest= new Category("g");
-////        categoryService.add(newCatTest);
-////        assertEquals(newCatTest, categoryService.add(newCatTest));
-////    }
-////        // Gets two random numbers for these tests
-////        Long randomId = MIN + (long)(Math.random()*((MAX - MIN) + 1L));
-////        Long updateRandom = MIN + (long)(Math.random()*((MAX - MIN) + 1L));
-////
-////        // Category is the domain object
-////        Category category = new Category();
-////
-////        // The method findAll brings back all the categories from the DB
-////        Iterable<Category> firstFindAll = categoryService.getAll();
-////
-////        // Category gets mock values and is persisted. Id is returned
-////        category = getMockCategoryValues(category, randomId);
-////        persist(category);
-////        Long id = category.getId();
-////
-////        // Find the created object with the given Id and makes sure it has the right values
-////        item = find(id);
-////        assertNotNull("Object should exist", item);
-////        checkMockItemValues(item, random);
-////
-////        // Updates the object with new random values
-////        item = getMockItemValues(item, updateRandom);
-////        merge(item);
-////
-////        // Find the updated object and makes sure it has the new values
-////        item = em.find(Item.class, id);
-////        assertNotNull("Object should exist", item);
-////        checkMockItemValues(item, updateRandom);
-////
-////        // Gets all the objects from the database...
-////        int secondFindAll = findAll();
-////
-////        // ...and makes sure there is one more object
-////        if (firstFindAll + 1 != secondFindAll) fail("The collection size should have increased by 1");
-////
-////        // The object is now deleted
-////        remove(item);
-////
-////        // Find the object and make sure it has been removed
-////        item = em.find(Item.class, id);
-////        assertNull("Object should not exist", item);
-////
-////        // Gets all the objects from the database...
-////        int thirdFindAll = findAll();
-////
-////        // ...and makes sure we have the original size
-////        if (firstFindAll != thirdFindAll) fail("The collection size should have be the same as original");
+
+    @Test
+    public void testGetCategoryById() throws CategoryNotFoundException {
+        System.out.println("getCategoryById()");
+        Long catToFindId = 1L;
+        Category expResult = new Category(catToFindId, "category name");
+        when(categoryRepository.findById(catToFindId)).thenReturn(Optional.of(expResult));
+        Category result = categoryService.getById(expResult.getId());
+        Assert.assertEquals(result.getId(), expResult.getId());
+        if (!result.getName().equals(expResult.getName())) {
+            fail("The getCategoryById method doesn't work properly");
+        }
+    }
+
+    @Test
+    public void testDeleteCategory() {
+        System.out.println("DeleteCategory()");
+        Long catToFindId = 1L;
+        Category expResult = new Category(catToFindId, "category name");
+        when(categoryRepository.findById(catToFindId)).thenReturn(Optional.of(expResult));
+        Category result = categoryService
+//        Long catId=3L;
 //
-////
-////    @Test
-////    public void testAdd() {
-////        fail("Not yet implemented");
-////    }
-////
-////    @Test
-////    public void testGetById() {
-////        fail("Not yet implemented");
-////    }
-////
-////    @Test
-////    public void testEdit() {
-////        fail("Not yet implemented");
-////    }
-////
-////    @Test
-////    public void testRemove() {
-////        fail("Not yet implemented");
-////    }
-////
-////    @Test
-////    public void testGetAll() {
-////        fail("Not yet implemented");
-////    }
+//        // perform the call
+//        categoryService.remove(catId);
+//
+//        // verify the mocks
+//        verify(categoryRepository, times(1)).deleteById(eq(catId));
+
+//        doAnswer(new Answer<Void>() {
+//            @Override
+//            public Void answer(InvocationOnMock invocationOnMock) throws Throwable {
+//
+//                Object[] arguments = invocationOnMock.getArguments();
+//                if (arguments != null && arguments.length > 1 && arguments[0] != null && arguments[1] != null) {
+//                    Category catToDelete = (Category) arguments[0];
+//                    Long id = (Long) arguments[1];
+//                    catToDelete.setId(id);
+//                }
+//                return null;
+//            }
+//        }).when(categoryRepository).delete(any(Category.class));
+//        // calling the method under test
+//        Category category = categoryService.remove();
+//        //some asserts
+//        assertThat(category, is(notNullValue()));
+//        assertThat(customer.getEmail(), is(equalTo("new@test.com")));
+    }
 }
