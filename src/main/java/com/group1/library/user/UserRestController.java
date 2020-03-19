@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080") // TODO compléter l'URL plus tard quand on aura plus de visibilité sur le changement de pages
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api")
 public class UserRestController {
     //ATTRIBUTES
