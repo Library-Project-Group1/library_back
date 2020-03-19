@@ -2,6 +2,7 @@ package com.group1.library.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -12,9 +13,12 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    // Attribute
+    // Attributes
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    StorageServiceImpl storageService;
 
     /**
      * Method to add a new product in the database
@@ -32,6 +36,22 @@ public class ProductServiceImpl implements ProductService {
         } else {
             throw new ProductAlreadyExistException();
         }
+    }
+
+    /**
+     * Method to add a new product with a picture in the database
+     * stock the picture for the product then add the product
+     *
+     * @param product,file the product with file to add in the database
+     * @return the product to add into the save method
+     * @throws ProductAlreadyExistException if the product already exist in the database
+     */
+    @Override
+    public Product addProduct(Product product, MultipartFile file) throws ProductAlreadyExistException {
+        storageService.savePicture(file);
+        product.setPictureName(file.getOriginalFilename());
+        this.addProduct(product);
+        return product;
     }
 
     /**

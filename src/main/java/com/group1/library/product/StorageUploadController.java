@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("pictures")
 public class StorageUploadController {
 
+    //Attributes
     @Autowired
     private final StorageService storageService;
 
@@ -21,7 +22,10 @@ public class StorageUploadController {
         this.storageService = storageService;
     }
 
-
+    /**
+     * Method to save a file
+     * @param filename the name of the filename to save
+     * */
     @GetMapping("/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {

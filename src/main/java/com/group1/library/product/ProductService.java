@@ -1,10 +1,12 @@
 package com.group1.library.product;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public interface ProductService {
 
     Product addProduct(Product product) throws ProductAlreadyExistException;
 
-    Product addProduct()
+    Product addProduct(Product product, MultipartFile file) throws ProductAlreadyExistException;
 
     void updateProductById(Long id, float price) throws ProductNotFoundException;
 

@@ -18,13 +18,22 @@ import java.nio.file.StandardCopyOption;
 @Service
 public class StorageServiceImpl implements StorageService {
 
+    //Attributes
     private final Path ROOTLOCATION;
 
+    //Constructor
     public StorageServiceImpl() {
         this.ROOTLOCATION = Paths.get("uploads");
     }
 
 
+    /**
+     * Method to save a picture
+     * stock a file into a RootLocation
+     * @param file the file to save into the RootLocation
+     * @return void
+     * @throws RuntimeException if the file failed to go into RootLocation
+     */
     @Override
     public void savePicture(MultipartFile file) {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
@@ -43,7 +52,14 @@ public class StorageServiceImpl implements StorageService {
 
     }
 
-
+    /**
+     * Method to load a file
+     * find the file with the path and then load it
+     * check if the file exist and readable
+     * @param filename the file to find to the path
+     * @return Resource
+     * @throws RuntimeException if the file failed to get stored
+     */
     @Override
     public Resource loadAsResource(String filename) {
         try {
