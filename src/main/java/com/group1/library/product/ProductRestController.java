@@ -10,7 +10,7 @@ import javax.validation.Valid;
 
 /**
  * <code>Class ProductRestController</code>
- *
+ * It returns all methods on products in JSON format
  */
 @RestController
 //@CrossOrigin(origins = "http://localhost:4200")
@@ -18,7 +18,7 @@ public class ProductRestController {
 
     // Attribute
     @Autowired
-    private ProductService productService;
+    private ProductServiceImpl productService;
 
     /**
      * Method to create a new product
@@ -99,6 +99,6 @@ public class ProductRestController {
      */
     @GetMapping("/allProducts")
     public Iterable<Product> findAllProducts() {
-        return this.productService.getAllProducts();
+        return this.productService.findAllProducts();
     }
 }
