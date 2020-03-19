@@ -12,24 +12,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("pictures")
-public class StorageUploadController {
+public class StorageRestController {
 
-    //Attributes
+    //Attribute
     @Autowired
     private final StorageService storageService;
 
-    public StorageUploadController(StorageService storageService) {
+    public StorageRestController(StorageService storageService) {
         this.storageService = storageService;
     }
 
     /**
      * Method to save a file
-     * @param filename the name of the filename to save
-     * */
+     *
+     * @param filename the name of the file to save
+     */
     @GetMapping("/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
-
         Resource file = storageService.loadAsResource(filename);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);

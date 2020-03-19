@@ -18,7 +18,7 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Autowired
-    StorageServiceImpl storageService;
+    private StorageServiceImpl storageService;
 
     /**
      * Method to add a new product in the database
@@ -42,12 +42,13 @@ public class ProductServiceImpl implements ProductService {
      * Method to add a new product with a picture in the database
      * stock the picture for the product then add the product
      *
-     * @param product,file the product with file to add in the database
-     * @return the product to add into the save method
+     * @param product the new product to add in the database
+     * @param file    the file to associate to the new product
+     * @return An instance of Product, the product to add into the save method
      * @throws ProductAlreadyExistException if the product already exist in the database
      */
     @Override
-    public Product addProduct(Product product, MultipartFile file) throws ProductAlreadyExistException {
+    public Product addProductAndFile(Product product, MultipartFile file) throws ProductAlreadyExistException {
         storageService.savePicture(file);
         product.setPictureName(file.getOriginalFilename());
         this.addProduct(product);

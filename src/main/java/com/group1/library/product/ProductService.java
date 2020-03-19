@@ -6,7 +6,7 @@ public interface ProductService {
 
     Product addProduct(Product product) throws ProductAlreadyExistException;
 
-    Product addProduct(Product product, MultipartFile file) throws ProductAlreadyExistException;
+    Product addProductAndFile(Product product, MultipartFile file) throws ProductAlreadyExistException;
 
     void updateProductById(Long id, float price) throws ProductNotFoundException;
 
