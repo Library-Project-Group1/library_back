@@ -21,11 +21,11 @@ public class LibraryApplication {
 
     }
 
-    @Bean
-    public void demo(ProductRestController productRestController) {}
-    public CommandLineRunner demo(UserRestController UserRestController){
-        return args -> {
-        };
-    }
+//    @Bean
+//    public void demo(ProductRestController productRestController) {}
+//    public CommandLineRunner demo(UserRestController UserRestController){
+//        return args -> {
+//        };
+//    }
 
 }
