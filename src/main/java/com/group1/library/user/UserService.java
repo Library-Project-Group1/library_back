@@ -25,7 +25,7 @@ public class UserService{
         }
     }
 
-    public void removeUserByEmail(String email){
+    public void removeUserByIdWithEmail(String email){
         //METHOD TO REMOVE A USER BY HIS EMAIL
         User userToRemove=repository.getUserByEmail(email);
         repository.deleteById(userToRemove.getId());
@@ -48,14 +48,14 @@ public class UserService{
         return userToFind;
     }
 
-    public void updateUserById(Long id,String newPassword){
+    public void updateUserPasswordById(Long id,String newPassword){
         //METHOD TO UPDATE THE PASSWORD OF A USER THANKS TO HIS ID
         User userToUpdate=repository.getUserById(id);
         userToUpdate.setPassword(newPassword);
         repository.save(userToUpdate);
     }
 
-    public void updateUserByEmail(String email,String newPassword){
+    public void updateUserPasswordByEmail(String email,String newPassword){
         //METHOD TO UPDATE THE PASSWORD OF A USER THANKS TO HIS EMAIL
         User userToUpdate=repository.getUserByEmail(email);
         userToUpdate.setPassword(newPassword);

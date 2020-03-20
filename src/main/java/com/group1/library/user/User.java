@@ -25,6 +25,12 @@ public class User implements Serializable {
         this.password=password;
     }
 
+    public User(Long id,String email,String password){
+        this.id=id;
+        this.email=email;
+        this.password=password;
+    }
+
     //METHODS
     @Override
     public String toString(){

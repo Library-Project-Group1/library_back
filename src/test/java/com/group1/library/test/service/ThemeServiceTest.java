@@ -70,7 +70,7 @@ public class ThemeServiceTest {
             Theme result = themeService.add(expResult);
             assertEquals(expResult, result);
             if (!result.getName().equals(expResult.getName())) {
-                fail("The addTheme method doesn't work properly");
+                fail("The addTheme method doesn't return a proper value");
             }
         }
 
@@ -81,7 +81,7 @@ public class ThemeServiceTest {
             Theme result = themeService.getById(1L);
             assertEquals("Lokesh", result.getName());
             if (!result.getName().equals("Lokesh")) {
-                fail("The getThemeById method doesn't work properly");
+                fail("The getThemeById method doesn't return a proper value");
             }
         }
 
@@ -109,6 +109,7 @@ public class ThemeServiceTest {
 
         @Test
         public void testGetAllThemes() {
+            System.out.println("getAllThemes()");
             List<Theme> expList = new ArrayList<Theme>();
             Theme theme1 = new Theme(1L, "a");
             Theme theme2 = new Theme(2L, "b");
@@ -128,6 +129,9 @@ public class ThemeServiceTest {
             Iterable<Theme> testList = themeService.getAll();
 
             assertEquals(expList.size(), StreamSupport.stream(testList.spliterator(), false).count());
+            if (expList.size() != (StreamSupport.stream(testList.spliterator(), false).count())) {
+                fail("The getAllThemes method doesn't return a proper value");
+            }
         }
     }
 

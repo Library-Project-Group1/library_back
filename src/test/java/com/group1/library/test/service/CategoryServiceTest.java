@@ -64,7 +64,7 @@ public class CategoryServiceTest {
         Category result = categoryService.add(expResult);
         assertEquals(expResult, result);
         if (!result.getName().equals(expResult.getName())) {
-            fail("The add method doesn't work properly");
+            fail("The add method doesn't return a proper value");
         }
     }
 
@@ -75,7 +75,7 @@ public class CategoryServiceTest {
         Category result = categoryService.getById(1L);
         assertEquals("Lokesh", result.getName());
         if (!result.getName().equals("Lokesh")) {
-            fail("The getCategoryById method doesn't work properly");
+            fail("The getCategoryById method doesn't a proper value");
         }
     }
 
@@ -103,6 +103,7 @@ public class CategoryServiceTest {
 
     @Test
     public void testGetAllCategories() {
+        System.out.println("getAllCategories()");
         List<Category> expList = new ArrayList<Category>();
         Category category1 = new Category(1L, "a");
         Category category2 = new Category(2L, "b");
@@ -123,7 +124,7 @@ public class CategoryServiceTest {
 
         assertEquals(expList.size(), StreamSupport.stream(testList.spliterator(), false).count());
         if (expList.size() != (StreamSupport.stream(testList.spliterator(), false).count())) {
-            fail("The getAllCategories method doesn't work properly");
+            fail("The getAllCategories method doesn't return a proper value");
         }
     }
     }
