@@ -40,31 +40,27 @@ public class ThemeRestController {
         }
         return null;
     }
-        @DeleteMapping("/themes/{id}")
-        public void deleteTheme (@PathVariable Long id){
-            themeService.removeById(id);
-        }
 
-        @PostMapping("/themes/{id}")
-        public void editThemeById(@PathVariable("id") Long id, @RequestBody String newName){
-            try {
-                Theme themeToEdit = themeService.getById(id);
+    @PostMapping("/themes/{id}")
+    public void editThemeById(@PathVariable("id") Long id, @RequestBody String newName) {
+        try {
+            Theme themeToEdit = themeService.getById(id);
 
-                themeService.editById(themeToEdit.getId(), newName);
+            themeService.editById(themeToEdit.getId(), newName);
 
-            } catch (ThemeNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-
-        @DeleteMapping("/themes/{id}")
-        public void deleteThemeById (@PathVariable Long id){
-            themeService.removeById(id);
-        }
-
-        @RequestMapping("/themes")
-        //method to get all themes
-        public Iterable<Theme> findAllThemes () {
-            return themeService.getAll();
+        } catch (ThemeNotFoundException e) {
+            e.printStackTrace();
         }
     }
+
+    @DeleteMapping("/themes/{id}")
+    public void deleteThemeById(@PathVariable Long id) {
+        themeService.removeById(id);
+    }
+
+    @RequestMapping("/themes")
+    //method to get all themes
+    public Iterable<Theme> findAllThemes() {
+        return themeService.getAll();
+    }
+}
