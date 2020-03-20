@@ -1,6 +1,6 @@
 package com.group1.library.product;
 
-public interface AttributeProductService<T, Long> {
+public interface AttributeProductService<T, Long>    {
 
     T add(T t) throws CategoryAlreadyExistsException, ThemeAlreadyExistsException;
 
@@ -11,10 +11,5 @@ public interface AttributeProductService<T, Long> {
     void removeById(Long id);
 
     Iterable<T> getAll();
-    
-    void editById(Long id, String name);
 
-    void removeById(Long id);
-
-    Iterable<T> getAll();
 }

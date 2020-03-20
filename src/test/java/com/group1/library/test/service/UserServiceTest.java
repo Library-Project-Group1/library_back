@@ -1,8 +1,6 @@
 package com.group1.library.test.service;
 
-import com.group1.library.user.User;
-import com.group1.library.user.UserRepository;
-import com.group1.library.user.UserService;
+import com.group1.library.user.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,6 +12,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -28,7 +27,7 @@ import static org.mockito.Mockito.when;
 public class UserServiceTest {
 
     @InjectMocks
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Mock
     private UserRepository userRepository;
@@ -60,7 +59,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testAddUser() {
+    public void testAddUser() throws UserAlreadyExistsException {
         System.out.println("addUser()");
         User expResult = new User("abc@gmail.com", "******");
         when(userRepository.save(any(User.class))).then(returnsFirstArg());
@@ -69,11 +68,11 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testRemoveUserByIdWithEmail() {
+    public void testRemoveUserByEmail() {
         System.out.println("removeUserByEmail()");
         when(userRepository.getUserByEmail("azerty@hotmail.fr")).thenReturn(new User("azerty@hotmail.fr", "123456"));
         User userToRemove = userService.findUserByEmail("azerty@hotmail.fr");
-        userService.removeUserByIdWithEmail("azerty@hotmail.fr");
+        userService.removeUserByEmail("azerty@hotmail.fr");
         verify(userRepository).deleteById(eq(userToRemove.getId()));
     }
 
@@ -92,7 +91,7 @@ public class UserServiceTest {
     @Test
     public void testFindUserById() {
         System.out.println("findUserById()");
-        when(userRepository.getUserById(1L)).thenReturn(new User(1L,"hello@coucou.com", "salut"));
+        when(userRepository.findById(1L)).thenReturn(Optional.of(new User(1L,"hello@coucou.com", "salut")));
         User userToFind = userService.findUserById(1L);
         assertEquals(1L, userToFind.getId());
         if (userToFind.getId() != (1L)) {
@@ -112,22 +111,22 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testUpdateUserPasswordById() {
+    public void testUpdateUserById() {
         System.out.println("updateUserPasswordById()");
-        when(userRepository.getUserById(2L)).thenReturn(new User(2L, "a@b.com", "newPassword"));
+        when(userRepository.findById(2L)).thenReturn(Optional.of(new User(2L, "a@b.com", "newPassword")));
         User oldUser = userService.findUserById(2L);
         oldUser.setPassword("newPassword");
-        userService.updateUserPasswordById(oldUser.getId(), oldUser.getPassword());
+        userService.updateUserById(oldUser.getId(), oldUser.getPassword());
         verify(userRepository).save(eq(oldUser));
     }
 
     @Test
-    public void testUpdateUserPasswordByEmail() {
+    public void testUpdateUserByEmail() {
         System.out.println("updateUserPasswordByEmail()");
         when(userRepository.getUserByEmail("123@mdr.fr")).thenReturn(new User("123@mdr.fr", "newPassword"));
         User oldUser = userService.findUserByEmail("123@mdr.fr");
         oldUser.setPassword("newPassword");
-        userService.updateUserPasswordByEmail(oldUser.getEmail(), oldUser.getPassword());
+        userService.updateUserByEmail(oldUser.getEmail(), oldUser.getPassword());
         verify(userRepository).save(eq(oldUser));
     }
 

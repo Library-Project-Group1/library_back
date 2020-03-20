@@ -13,8 +13,9 @@ public interface UserService {
 
     public User findUserByEmail(String email);
 
-    public void updateUserById(Long id,String newPassword);
+    public void updateUserById(Long id, String newPassword);
 
-    public void updateUserByEmail(String email,String newPassword);
+    public void updateUserByEmail(String email, String newPassword);
 
     public Iterable<User> getAllUsers();
+}
