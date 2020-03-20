@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "users")
+@Table(name = "userss")
 public class User implements Serializable {
     //ATTRIBUTES
     @Id
@@ -26,7 +26,7 @@ public class User implements Serializable {
         this.password=password;
     }
 
-    public User(Long id,String email,String password){
+   public User(Long id,String email,String password){
         this.id=id;
         this.email=email;
         this.password=password;

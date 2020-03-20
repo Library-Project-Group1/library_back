@@ -24,6 +24,7 @@ public class UserRestController {
             this.userServiceImpl.addUser(user);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (UserAlreadyExistsException e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
     }

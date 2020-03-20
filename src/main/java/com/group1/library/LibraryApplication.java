@@ -4,8 +4,11 @@ import com.group1.library.admin.Admin;
 import com.group1.library.admin.AdminRestController;
 import com.group1.library.admin.AdminServiceImpl;
 import com.group1.library.product.*;
+import com.group1.library.user.User;
+import com.group1.library.user.UserAlreadyExistsException;
 import com.group1.library.user.UserRestController;
 //import com.group1.library.user.UserService;
+import com.group1.library.user.UserServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -34,22 +37,20 @@ public class LibraryApplication {
 //        };
 //    }
 
-/*    @Bean
-    public CommandLineRunner demoCat(CategoryServiceImpl catServImpl){
-        Category newCat = new Category("v");
-        try {
-            catServImpl.add(newCat);
-        } catch (CategoryAlreadyExistsException e) {
-            e.printStackTrace();
-        }
+
 
     @Bean
-    public CommandLineRunner demo(AdminRestController adminRestController) {
-        Admin admin=new Admin("Bastien","password");
-        adminRestController.createAdmin(admin);
+    public CommandLineRunner demo2(UserRestController userRestController){
+        User user1=new User("blabla1","azerty");
+        User user2=new User("blabla2","azerty");
+        User user3=new User("blabla3","azerty");
+        User user4=new User("blabla4","azerty");
+        User user5=new User("blabla5","azerty");
+        userRestController.createUser(user2);
+
         return args -> {
         };
-    }*/
+    }
 
 //    @Bean
 //    public CommandLineRunner demoTheme(ThemeServiceImpl themeService){

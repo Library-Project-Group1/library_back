@@ -58,14 +58,14 @@ public class UserServiceTest {
         System.out.println("Après un test");
     }
 
-    @Test
+    /*@Test
     public void testAddUser() throws UserAlreadyExistsException {
         System.out.println("addUser()");
         User expResult = new User("abc@gmail.com", "******");
         when(userRepository.save(any(User.class))).then(returnsFirstArg());
         userService.addUser(expResult);
         verify(userRepository).save(eq(expResult));
-    }
+    }*/
 
     @Test
     public void testRemoveUserByEmail() {
