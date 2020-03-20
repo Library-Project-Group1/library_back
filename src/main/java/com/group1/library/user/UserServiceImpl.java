@@ -15,6 +15,12 @@ public class UserServiceImpl implements UserService {
 
     //METHODS
     @Override
+    /**
+     * Method to add a new product in database
+     * if the product is null, we save the products
+     * @param user
+     * @throws UserAlreadyExistsException if the product already exist
+     */
     public void addUser(User user) throws UserAlreadyExistsException {
         //Method to add a user in our database
         User newUser=this.repository.getUserByEmail(user.getEmail());
@@ -26,6 +32,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    /**
+     * Method to remove a new product in database
+     * if the product is null, we save the products
+     * @param email
+     */
     public void removeUserByEmail(String email){
         //Method to remove a user by his email
         User userToRemove=this.repository.getUserByEmail(email);
