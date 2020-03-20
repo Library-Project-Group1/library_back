@@ -1,16 +1,12 @@
 package com.group1.library;
 
 import com.group1.library.product.*;
-import com.group1.library.user.User;
-import com.group1.library.user.UserRepository;
-import com.group1.library.user.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
-import java.util.List;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.group1.library.product")
