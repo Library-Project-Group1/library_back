@@ -18,5 +18,3 @@ public interface UserService {
     public void updateUserByEmail(String email,String newPassword);
 
     public Iterable<User> getAllUsers();
-
-}

@@ -29,6 +29,7 @@ public class ThemeRestController {
         }
     }
 
+
     @GetMapping("/themes/{id}")
     //method to get theme by id with exception not found
     public Theme findThemeById(@PathVariable Long id) {
@@ -38,13 +39,19 @@ public class ThemeRestController {
             e.printStackTrace();
         }
         return null;
+
+    @DeleteMapping("/themes/{id}")
+    public void deleteTheme(@PathVariable Long id){
+        themeService.removeById(id);
     }
 
     @PostMapping("/themes/{id}")
     public void editThemeById(@PathVariable("id") Long id, @RequestBody String newName) {
         try {
             Theme themeToEdit = themeService.getById(id);
+
             themeService.editById(themeToEdit.getId(), newName);
+
         } catch (ThemeNotFoundException e) {
             e.printStackTrace();
         }

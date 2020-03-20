@@ -23,7 +23,6 @@ public class CategoryServiceImpl implements AttributeProductService<Category, Lo
         } else {
             throw new CategoryAlreadyExistsException();
         }
-        return category;
     }
 
     //Method to find a category by id in our database
@@ -46,13 +45,14 @@ public class CategoryServiceImpl implements AttributeProductService<Category, Lo
         catRepo.save(catToUpdate.get());
     }
 
+
     //Method to remove a category using an id in our database
     @Override
     public void removeById(Long id) {
         catRepo.deleteById(id);
     }
 
-    //Method to get the categories list in our database
+    //Method to get the categories list from our database
     @Override
     public Iterable<Category> getAll() {
         return this.catRepo.findAll();

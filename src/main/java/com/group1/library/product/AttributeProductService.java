@@ -11,4 +11,10 @@ public interface AttributeProductService<T, Long> {
     void removeById(Long id);
 
     Iterable<T> getAll();
+    
+    void editById(Long id, String name);
+
+    void removeById(Long id);
+
+    Iterable<T> getAll();
 }

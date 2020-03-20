@@ -32,6 +32,12 @@ public class Theme implements Serializable {
         this.name = name;
     }
 
+    // Constructor
+    public Theme(Long id,String name) {
+        this.name = name;
+        this.id=id;
+    }
+
     @Override
     public String toString() {
         return ("Theme :" + this.id + "°) " + this.name);
