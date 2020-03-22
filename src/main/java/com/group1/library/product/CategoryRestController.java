@@ -11,17 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/apiCategories")
 public class CategoryRestController {
 
-    private static List<Category> categoryList = new ArrayList<>();
     @Autowired
     private CategoryServiceImpl catServImpl;
 
     public CategoryRestController() {
     }
 
-    @PostMapping(path = "/addCategory", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/createCategory", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<Object> createCategory(@RequestBody @Valid Category category) {
         try {
@@ -32,15 +32,14 @@ public class CategoryRestController {
         }
     }
 
-    @GetMapping("/categories/{id}")
+    @GetMapping("/category/{id}")
     public Category findCategoryById(@PathVariable("id") Long id) {
         Category catToFind = this.catServImpl.getById(id);
         return catToFind;
     }
 
-    @PostMapping(value = "categories/{id}/editCategory", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public void updateCatById(@PathVariable("id") Long id, @RequestBody @Valid String newName) {
+    @PutMapping(value = "category/{id}/editCategory", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void updateCatById(@PathVariable("id") Long id, String newName) {
         try {
             Category catToEdit = catServImpl.getById(id);
             this.catServImpl.editById(catToEdit.getId(), newName);
@@ -50,13 +49,13 @@ public class CategoryRestController {
         }
     }
 
-    @RequestMapping(path = "/categories")
+    @GetMapping("/allCategories")
     public Iterable<Category> findAllCategories() {
         Iterable<Category> itCat = this.catServImpl.getAll();
         return itCat;
     }
 
-    @DeleteMapping("/categories/{id}")
+    @DeleteMapping("/deleteCategory/{id}")
     public void deleteCatById(@PathVariable("id") Long id) {
         Category catToRemove = this.catServImpl.getById(id);
         catServImpl.removeById(catToRemove.getId());

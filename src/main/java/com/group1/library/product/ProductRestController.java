@@ -13,7 +13,8 @@ import javax.validation.Valid;
  * It returns all methods on products in JSON format
  */
 @RestController
-//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/apiProducts")
 public class ProductRestController {
 
     // Attribute
@@ -42,7 +43,7 @@ public class ProductRestController {
      * @param id    the id of the product to edit
      * @param price the price of the product to edit
      */
-    @PostMapping(value = "/product/{id}/editProduct", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/product/{id}/editProduct", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void updateProductById(@PathVariable("id") Long id, float price) {
         try {
             this.productService.updateProductById(id, price);
@@ -57,7 +58,8 @@ public class ProductRestController {
      * @param id       the id of the product in order to edit the quantity
      * @param quantity the quantity of product to update in the stock
      */
-    public void updateStockById(Long id, Long quantity) {
+    @PutMapping(value = "/product/{id}/editStockProduct", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void updateStockById(@PathVariable("id")Long id, Long quantity) {
         try {
             this.productService.updateStockById(id, quantity);
         } catch (ProductNotFoundException e) {
@@ -70,8 +72,8 @@ public class ProductRestController {
      *
      * @param id the id of the product to delete in the stock
      */
-    @GetMapping("/deleteProduct")
-    public void deleteProductById(Long id) {
+    @DeleteMapping("/deleteProduct/{id}")
+    public void deleteProductById(@PathVariable("id") Long id) {
         try {
             this.productService.removeProductById(id);
         } catch (ProductNotFoundException e) {

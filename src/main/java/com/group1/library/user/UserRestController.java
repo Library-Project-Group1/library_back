@@ -10,7 +10,7 @@ import javax.validation.Valid;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api")
+@RequestMapping("/apiUsers")
 public class UserRestController {
     //ATTRIBUTES
     @Autowired
@@ -29,41 +29,41 @@ public class UserRestController {
         }
     }
 
-    @GetMapping("/deleteUser")
-    public void deleteUserById(Long id){
+    @DeleteMapping("/deleteUser/{id}")
+    public void deleteUserById(@PathVariable("id") Long id) {
         //Method to delete a user by his id
         this.userServiceImpl.removeUserById(id);
     }
 
-    @GetMapping("/deleteUser2")
-    public void deleteUserByEmail(String email){
+    @DeleteMapping("/deleteUser/{email}")
+    public void deleteUserByEmail(@PathVariable("email") String email) {
         //Method to delete a user by his email
         this.userServiceImpl.removeUserByEmail(email);
     }
 
     @GetMapping("/user/{id}")
-    public User findUserById(@PathVariable("id") Long id){
+    public User findUserById(@PathVariable("id") Long id) {
         //Method to find a user by his id
-        User userToFind= this.userServiceImpl.findUserById(id);
+        User userToFind = this.userServiceImpl.findUserById(id);
         return userToFind;
     }
 
-    public User findUserByEmail(String email){
+    @GetMapping("/user/{email}")
+    public User findUserByEmail(@PathVariable("email") String email) {
         //Method to find a user by his email
-        User userToFind=this.userServiceImpl.findUserByEmail(email);
+        User userToFind = this.userServiceImpl.findUserByEmail(email);
         Long idUser = userToFind.getId();
         return this.findUserById(idUser);
     }
 
-    @PostMapping(value = "/user/{id}/editaccount", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    //TODO PutMapping
-    public void updateUserById(@PathVariable("id") Long id,String newPassword){
+    @PutMapping(value = "/user/{id}/editaccount", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void updateUserById(@PathVariable("id") Long id, String newPassword) {
         //Method to update the password of a user thanks to his id
-        this.userServiceImpl.updateUserById(id,newPassword);
+        this.userServiceImpl.updateUserById(id, newPassword);
     }
 
-
-    public void updateUserByEmail(String email,String newPassword){ // TODO On verra pour celle là si on peut pas l'intégrer à updateUserById je verrai plus tard je test angular
+    @PutMapping(value = "/user/{email}/editaccount", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void updateUserByEmail(@PathVariable("email") String email,String newPassword){
         //Method to update the password of a user thanks to his email
         this.userServiceImpl.updateUserByEmail(email,newPassword);
     }
