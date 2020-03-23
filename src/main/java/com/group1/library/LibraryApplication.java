@@ -59,6 +59,7 @@ public class LibraryApplication {
         };
     }
 
+    // COMMENTAIRE POUR TESTS
 //    @Bean
 //    public CommandLineRunner demoTheme(ThemeServiceImpl themeService){
 //        try {
