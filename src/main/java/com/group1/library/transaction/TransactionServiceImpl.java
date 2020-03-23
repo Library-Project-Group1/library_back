@@ -25,7 +25,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void addTransaction(Transaction transaction, User user, Product product) throws TransactionNotSuccesfull {
         transaction.setUser(userRepository.getUserByEmail(user.getEmail()));
-        transaction.setProduct(productRepository.getProductByTitle(product.getTitle()));
+        transaction.setProduct(productRepository.getProductById(product.getId()));
         if(transaction.getUser()==null || transaction.getProduct()==null){
             throw  new TransactionNotSuccesfull();
         }else {
