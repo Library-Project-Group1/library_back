@@ -1,8 +1,11 @@
 package com.group1.library.product;
 
+import com.group1.library.transaction.Transaction;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 // Class characterizing the products, transformed into an entity managed by JPA
 
@@ -35,6 +38,9 @@ public class Product implements Serializable {
     @ManyToOne
     @JoinColumn(name = "category_fk")
     private Category category;
+
+    @OneToMany(mappedBy = "product")
+    private List<Transaction> transactions;
 
     // Empty Constructor
     public Product() {

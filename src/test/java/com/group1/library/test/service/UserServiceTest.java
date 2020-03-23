@@ -68,7 +68,7 @@ public class UserServiceTest {
     }*/
 
     @Test
-    public void testRemoveUserByEmail() {
+    public void testRemoveUserByEmail() throws UserNotFoundException {
         System.out.println("removeUserByEmail()");
         when(userRepository.getUserByEmail("azerty@hotmail.fr")).thenReturn(new User("azerty@hotmail.fr", "123456"));
         User userToRemove = userService.findUserByEmail("azerty@hotmail.fr");
@@ -77,7 +77,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testRemoveUserById() {
+    public void testRemoveUserById() throws UserNotFoundException {
         System.out.println("removeUserById()");
         Long userId = 1L;
 
@@ -89,7 +89,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testFindUserById() {
+    public void testFindUserById() throws UserNotFoundException {
         System.out.println("findUserById()");
         when(userRepository.findById(1L)).thenReturn(Optional.of(new User(1L,"hello@coucou.com", "salut")));
         User userToFind = userService.findUserById(1L);
@@ -100,7 +100,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testFindUserByEmail() {
+    public void testFindUserByEmail() throws UserNotFoundException {
         System.out.println("findUserByEmail()");
         when(userRepository.getUserByEmail("blabla@gmail.com")).thenReturn(new User(1L,"blabla@gmail.com", "abc321"));
         User userToFind = userService.findUserByEmail("blabla@gmail.com");
@@ -111,7 +111,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testUpdateUserById() {
+    public void testUpdateUserById() throws UserNotFoundException {
         System.out.println("updateUserPasswordById()");
         when(userRepository.findById(2L)).thenReturn(Optional.of(new User(2L, "a@b.com", "newPassword")));
         User oldUser = userService.findUserById(2L);
@@ -121,7 +121,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testUpdateUserByEmail() {
+    public void testUpdateUserByEmail() throws UserNotFoundException {
         System.out.println("updateUserPasswordByEmail()");
         when(userRepository.getUserByEmail("123@mdr.fr")).thenReturn(new User("123@mdr.fr", "newPassword"));
         User oldUser = userService.findUserByEmail("123@mdr.fr");
