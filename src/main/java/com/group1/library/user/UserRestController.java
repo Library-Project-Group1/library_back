@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.NoSuchElementException;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -32,40 +33,66 @@ public class UserRestController {
     @DeleteMapping("/deleteUser/{id}")
     public void deleteUserById(@PathVariable("id") Long id) {
         //Method to delete a user by his id
-        this.userServiceImpl.removeUserById(id);
+        try {
+            this.userServiceImpl.removeUserById(id);
+        }catch (UserNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
     @DeleteMapping("/deleteUser/{email}")
     public void deleteUserByEmail(@PathVariable("email") String email) {
         //Method to delete a user by his email
-        this.userServiceImpl.removeUserByEmail(email);
+        try {
+            this.userServiceImpl.removeUserByEmail(email);
+        }catch (UserNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
     @GetMapping("/user/{id}")
     public User findUserById(@PathVariable("id") Long id) {
         //Method to find a user by his id
-        User userToFind = this.userServiceImpl.findUserById(id);
-        return userToFind;
+        try {
+            User userToFind = this.userServiceImpl.findUserById(id);
+            return userToFind;
+        }catch (UserNotFoundException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @GetMapping("/user/{email}")
     public User findUserByEmail(@PathVariable("email") String email) {
         //Method to find a user by his email
-        User userToFind = this.userServiceImpl.findUserByEmail(email);
-        Long idUser = userToFind.getId();
-        return this.findUserById(idUser);
+        try {
+            User userToFind = this.userServiceImpl.findUserByEmail(email);
+            Long idUser = userToFind.getId();
+            return this.findUserById(idUser);
+        }catch (UserNotFoundException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @PutMapping(value = "/user/{id}/editaccount", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void updateUserById(@PathVariable("id") Long id, String newPassword) {
         //Method to update the password of a user thanks to his id
-        this.userServiceImpl.updateUserById(id, newPassword);
+        try {
+            this.userServiceImpl.updateUserById(id, newPassword);
+        }catch (UserNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
     @PutMapping(value = "/user/{email}/editaccount", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void updateUserByEmail(@PathVariable("email") String email,String newPassword){
         //Method to update the password of a user thanks to his email
-        this.userServiceImpl.updateUserByEmail(email,newPassword);
+        try {
+            this.userServiceImpl.updateUserByEmail(email, newPassword);
+        }catch (UserNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
     @GetMapping("/allUsers")
