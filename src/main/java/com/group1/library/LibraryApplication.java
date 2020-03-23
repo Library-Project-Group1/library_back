@@ -38,16 +38,14 @@ public class LibraryApplication {
 //    }
 
 
-
     @Bean
-    public CommandLineRunner demo2(UserRestController userRestController){
-        User user1=new User("blabla1","azerty");
-        User user2=new User("blabla2","azerty");
-        User user3=new User("blabla3","azerty");
-        User user4=new User("blabla4","azerty");
-        User user5=new User("blabla5","azerty");
-        userRestController.createUser(user2);
-
+    public CommandLineRunner demo2(CategoryRestController categoryRestController){
+        Category category1 = new Category("coucou");
+        Category category2 = new Category("salut");
+        Category category3 = new Category("hello");
+        categoryRestController.createCategory(category1);
+        categoryRestController.createCategory(category2);
+        categoryRestController.createCategory(category3);
         return args -> {
         };
     }
