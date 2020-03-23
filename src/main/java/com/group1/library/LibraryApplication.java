@@ -29,11 +29,15 @@ public class LibraryApplication {
     public static void main(String[] args) {
         SpringApplication.run(LibraryApplication.class, args);
         System.out.println("****** INTIATION SUCCESFULL !!!*********");
-
-
     }
 
 
+    @Bean
+    public CommandLineRunner demoProduct(ProductRestController productRestController) {
+        Product product = new Product("Harry Potter", "jk Rowling", 23.6f);
+        productRestController.createProduct(product);
+        return args -> {};
+    }
 //    @Bean
 //    public void demo(ProductRestController productRestController) {}
 //    public CommandLineRunner demo(UserRestController UserRestController){
@@ -42,15 +46,12 @@ public class LibraryApplication {
 //    }
 
 
-
-    @Bean
-    public CommandLineRunner demo2(TransactionServiceImpl transactionService) {
-        System.out.println(transactionService.findTransactionById(4l));
-
-
-        return args -> {
-        };
-    }
+//    @Bean
+//    public CommandLineRunner demo2(TransactionServiceImpl transactionService) {
+//        System.out.println(transactionService.findTransactionById(4l));
+//        return args -> {
+//        };
+//    }
 
 //    @Bean
 //    public CommandLineRunner demoTheme(ThemeServiceImpl themeService){

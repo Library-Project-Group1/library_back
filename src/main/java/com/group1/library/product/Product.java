@@ -63,18 +63,10 @@ public class Product implements Serializable {
     }
 
     // Constructor without id attribute
-    public Product(String title, String creator, Date releaseDate, String description, Long quantityTotal, Long quantityAvailableToRent, Long quantityIsRenting, float price, String pictureName, Theme theme, Category category) {
+    public Product(String title, String creator, float price) {
         this.title = title;
         this.creator = creator;
-        this.releaseDate = releaseDate;
-        this.description = description;
-        this.quantityTotal = quantityTotal;
-        this.quantityAvailableToRent = quantityAvailableToRent;
-        this.quantityIsRenting = quantityIsRenting;
         this.price = price;
-        this.pictureName = pictureName;
-        this.theme = theme;
-        this.category = category;
     }
 
     public String toString() {
