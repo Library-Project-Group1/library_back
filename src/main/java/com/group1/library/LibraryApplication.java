@@ -6,6 +6,7 @@ import com.group1.library.admin.AdminServiceImpl;
 import com.group1.library.product.*;
 import com.group1.library.transaction.Transaction;
 import com.group1.library.transaction.TransactionRepositry;
+import com.group1.library.transaction.TransactionRestController;
 import com.group1.library.transaction.TransactionServiceImpl;
 import com.group1.library.user.User;
 import com.group1.library.user.UserAlreadyExistsException;
@@ -44,8 +45,15 @@ public class LibraryApplication {
 
 
     @Bean
-    public CommandLineRunner demo2(TransactionServiceImpl transactionService) {
-        System.out.println(transactionService.findTransactionById(4l));
+    public CommandLineRunner demo2(TransactionRestController transactionRestController) {
+        Transaction transaction=new Transaction();
+        User user1=new User("BaptisteManmbrinie","azerty");
+        User user=new User("PaulineHumbert","azerty");
+        Product product1=new Product();
+        product1.setId(1l);
+        System.out.println(transactionRestController.getAll());
+
+
 
 
         return args -> {

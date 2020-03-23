@@ -1,17 +1,19 @@
 package com.group1.library.transaction;
 
 import com.group1.library.product.Product;
+import com.group1.library.product.ProductNotFoundException;
 import com.group1.library.user.User;
+import com.group1.library.user.UserNotFoundException;
 
 public interface TransactionService {
 
-    public void addTransaction(Transaction transaction, User user, Product product);
+    public void addTransaction(Transaction transaction, User user, Product product) throws TransactionNotSuccesfull;
 
-    public void removeTransaction(Transaction transaction);
+    public Transaction findTransactionById(Long id) throws TransactionNotFound;
 
-    public Transaction findTransactionById(Long id);
+    public Iterable<Transaction> getTransactionByUser(User user) throws UserNotFoundException;
 
-    public void updateTransaction(Transaction transaction);
+    public Iterable<Transaction> getTransactionByProduct(Product product) throws ProductNotFoundException;
 
     public Iterable<Transaction> getAll();
 }

@@ -1,8 +1,10 @@
 package com.group1.library.transaction;
 
 import com.group1.library.product.Product;
+import com.group1.library.product.ProductNotFoundException;
 import com.group1.library.product.ProductRepository;
 import com.group1.library.user.User;
+import com.group1.library.user.UserNotFoundException;
 import com.group1.library.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,33 +23,51 @@ public class TransactionServiceImpl implements TransactionService {
 
     //METHODS
     @Override
-    public void addTransaction(Transaction transaction, User user, Product product) {
+    public void addTransaction(Transaction transaction, User user, Product product) throws TransactionNotSuccesfull {
         transaction.setUser(userRepository.getUserByEmail(user.getEmail()));
         transaction.setProduct(productRepository.getProductByTitle(product.getTitle()));
-        transactionRepositry.save(transaction);
+        if(transaction.getUser()==null || transaction.getProduct()==null){
+            throw  new TransactionNotSuccesfull();
+        }else {
+            transactionRepositry.save(transaction);
+        }
 
     }
 
     @Override
-    public void removeTransaction(Transaction transaction) {
-
-    }
-
-    @Override
-    public Transaction findTransactionById(Long id) {
+    public Transaction findTransactionById(Long id) throws TransactionNotFound {
         Optional<Transaction> optionalTransaction=this.transactionRepositry.findById(id);
-        Transaction transactionToFind=optionalTransaction.get();
-        return transactionToFind;
+        if(optionalTransaction.isPresent()) {
+            Transaction transactionToFind = optionalTransaction.get();
+            return transactionToFind;
+        }else {
+            throw  new TransactionNotFound();
+        }
     }
 
     @Override
-    public void updateTransaction(Transaction transaction) {
+    public Iterable<Transaction> getTransactionByUser(User user) throws UserNotFoundException {
+        User userToFound=userRepository.getUserByEmail(user.getEmail());
+        if (userToFound==null){
+            throw new UserNotFoundException();
+        }else {
+            return this.transactionRepositry.findTransactionByUser(userToFound);
+        }
+    }
 
+    @Override
+    public Iterable<Transaction> getTransactionByProduct(Product product) throws ProductNotFoundException {
+        Product productToFound=productRepository.getProductById(product.getId());
+        if(productToFound==null){
+            throw new ProductNotFoundException();
+        }else {
+            return this.transactionRepositry.findTransactionByProduct(product);
+        }
     }
 
     @Override
     public Iterable<Transaction> getAll() {
-        return null;
+        return transactionRepositry.findAll();
     }
 
 
