@@ -28,7 +28,7 @@ public class LibraryApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(LibraryApplication.class, args);
-        System.out.println("****** INTIATION SUCCESFULL !!!*********");
+        System.out.println("****** INTIATION SUCCESFULL !!!*********");//
 
 
     }
