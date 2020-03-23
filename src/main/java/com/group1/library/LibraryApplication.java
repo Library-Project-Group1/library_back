@@ -44,6 +44,7 @@ public class LibraryApplication {
 
 
 
+    /*
     @Bean
     public CommandLineRunner demo2(TransactionRestController transactionRestController) {
         User user=new User("BastienPuigrodon", "azerty");
@@ -57,7 +58,7 @@ public class LibraryApplication {
 
         return args -> {
         };
-    }
+    }*/
 
 //    @Bean
 //    public CommandLineRunner demoTheme(ThemeServiceImpl themeService){
