@@ -8,18 +8,23 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+/**
+ * <code>Class ProductRestController</code>
+ * It returns all methods on products in JSON format
+ */
 @RestController
-//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/apiProducts")
 public class ProductRestController {
 
     // Attribute
     @Autowired
-    private ProductService productService;
+    private ProductServiceImpl productService;
 
     /**
      * Method to create a new product
      *
-     * @param product
+     * @param product the product to add in the stock
      * @return An instance of ResponseEntity
      */
     @PostMapping(value = "/createProduct", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -33,24 +38,42 @@ public class ProductRestController {
     }
 
     /**
-     * Method to edit a product by id
+     * Method to edit the price of a product by id
      *
-     * @param id
-     * @throws ProductNotFoundException
+     * @param id    the id of the product to edit
+     * @param price the price of the product to edit
      */
-    @PostMapping(value = "/product/{id}/editProduct", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void updateProductById(@PathVariable("id") Long id) throws ProductNotFoundException {
-        this.productService.updateProductById(id);
-        // TODO: complete this method
+    @PutMapping(value = "/product/{id}/editProduct", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void updateProductById(@PathVariable("id") Long id, float price) {
+        try {
+            this.productService.updateProductById(id, price);
+        } catch (ProductNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Method to edit the stock of a product by id
+     *
+     * @param id       the id of the product in order to edit the quantity
+     * @param quantity the quantity of product to update in the stock
+     */
+    @PutMapping(value = "/product/{id}/editStockProduct", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void updateStockById(@PathVariable("id")Long id, Long quantity) {
+        try {
+            this.productService.updateStockById(id, quantity);
+        } catch (ProductNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Method to delete a product by id
      *
-     * @param id
+     * @param id the id of the product to delete in the stock
      */
-    @GetMapping("/deleteProduct")
-    public void deleteProductById(Long id) {
+    @DeleteMapping("/deleteProduct/{id}")
+    public void deleteProductById(@PathVariable("id") Long id) {
         try {
             this.productService.removeProductById(id);
         } catch (ProductNotFoundException e) {
@@ -61,9 +84,9 @@ public class ProductRestController {
     /**
      * Method to find a product by id
      *
-     * @param id
-     * @return An instance of Product
-     * @throws ProductNotFoundException
+     * @param id the id of the product to get in the stock
+     * @return An instance of Product, which corresponds to the product to find
+     * @throws ProductNotFoundException if the product cannot be found
      */
     @GetMapping("/product/{id}")
     public Product findProductById(@PathVariable("id") Long id) throws ProductNotFoundException {
@@ -74,10 +97,10 @@ public class ProductRestController {
     /**
      * Method to get all products
      *
-     * @return
+     * @return A list of all the products
      */
     @GetMapping("/allProducts")
     public Iterable<Product> findAllProducts() {
-        return this.productService.getAllProducts();
+        return this.productService.findAllProducts();
     }
 }

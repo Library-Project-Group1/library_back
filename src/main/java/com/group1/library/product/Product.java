@@ -1,10 +1,18 @@
 package com.group1.library.product;
 
+import com.group1.library.transaction.Transaction;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 // Class characterizing the products, transformed into an entity managed by JPA
+
+/**
+ * <code>Class Product</code>
+ * Class that characterizes a product present in our library
+ */
 @Entity
 @Table(name = "products")
 public class Product implements Serializable {
@@ -15,12 +23,13 @@ public class Product implements Serializable {
     private Long id;
     private String title;
     private String creator;
+    private Date releaseDate;
+    private String description;
     private Long quantityTotal;
     private Long quantityAvailableToRent;
     private Long quantityIsRenting;
     private float price;
-    private Date releaseDate;
-    private String description;
+    private String pictureName;
 
     @ManyToOne
     @JoinColumn(name = "theme_fk")
@@ -30,8 +39,46 @@ public class Product implements Serializable {
     @JoinColumn(name = "category_fk")
     private Category category;
 
+    @OneToMany(mappedBy = "product")
+    private List<Transaction> transactions;
+
     // Empty Constructor
     public Product() {
+    }
+
+    // Constructor with all attributes
+    public Product(Long id, String title, String creator, Date releaseDate, String description, Long quantityTotal, Long quantityAvailableToRent, Long quantityIsRenting, float price, String pictureName, Theme theme, Category category) {
+        this.id = id;
+        this.title = title;
+        this.creator = creator;
+        this.releaseDate = releaseDate;
+        this.description = description;
+        this.quantityTotal = quantityTotal;
+        this.quantityAvailableToRent = quantityAvailableToRent;
+        this.quantityIsRenting = quantityIsRenting;
+        this.price = price;
+        this.pictureName = pictureName;
+        this.theme = theme;
+        this.category = category;
+    }
+
+    // Constructor without id attribute
+    public Product(String title, String creator, Date releaseDate, String description, Long quantityTotal, Long quantityAvailableToRent, Long quantityIsRenting, float price, String pictureName, Theme theme, Category category) {
+        this.title = title;
+        this.creator = creator;
+        this.releaseDate = releaseDate;
+        this.description = description;
+        this.quantityTotal = quantityTotal;
+        this.quantityAvailableToRent = quantityAvailableToRent;
+        this.quantityIsRenting = quantityIsRenting;
+        this.price = price;
+        this.pictureName = pictureName;
+        this.theme = theme;
+        this.category = category;
+    }
+
+    public String toString() {
+        return (this.id + "°) " + this.title);
     }
 
     // Getters & Setters
@@ -57,6 +104,22 @@ public class Product implements Serializable {
 
     public void setCreator(String creator) {
         this.creator = creator;
+    }
+
+    public Date getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Long getQuantityTotal() {
@@ -91,20 +154,12 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public Date getReleaseDate() {
-        return releaseDate;
+    public String getPictureName() {
+        return pictureName;
     }
 
-    public void setReleaseDate(Date releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setPictureName(String pictureName) {
+        this.pictureName = pictureName;
     }
 
     public Theme getTheme() {

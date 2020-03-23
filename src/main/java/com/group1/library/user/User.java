@@ -1,20 +1,28 @@
 package com.group1.library.user;
 
+import com.group1.library.transaction.Transaction;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
+@Table(name = "users")
 public class User implements Serializable {
     //ATTRIBUTES
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String email;
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<Transaction> transactions;
+
 
     //CONSTRUCTOR
     public User(){
@@ -25,7 +33,7 @@ public class User implements Serializable {
         this.password=password;
     }
 
-    public User(Long id,String email,String password){
+   public User(Long id,String email,String password){
         this.id=id;
         this.email=email;
         this.password=password;
@@ -60,5 +68,13 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 }

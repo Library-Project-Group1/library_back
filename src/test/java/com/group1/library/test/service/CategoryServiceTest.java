@@ -127,4 +127,4 @@ public class CategoryServiceTest {
             fail("The getAllCategories method doesn't return a proper value");
         }
     }
-    }
+}
