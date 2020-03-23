@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "demo_users")
+@Table(name = "users")
 public class User implements Serializable {
     //ATTRIBUTES
     @Id

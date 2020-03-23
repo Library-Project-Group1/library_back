@@ -45,13 +45,9 @@ public class LibraryApplication {
 
 
     @Bean
-    public CommandLineRunner demo2(TransactionRestController transactionRestController) {
-        Transaction transaction=new Transaction();
-        User user1=new User("BaptisteManmbrinie","azerty");
-        User user=new User("PaulineHumbert","azerty");
-        Product product1=new Product();
-        product1.setId(1l);
-        System.out.println(transactionRestController.getAll());
+    public CommandLineRunner demo2(UserRestController userRestController) {
+        User user1=new User("BastienPuigrodzon","azerty");
+        userRestController.createUser(user1);
 
 
 
