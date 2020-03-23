@@ -4,6 +4,9 @@ import com.group1.library.admin.Admin;
 import com.group1.library.admin.AdminRestController;
 import com.group1.library.admin.AdminServiceImpl;
 import com.group1.library.product.*;
+import com.group1.library.transaction.Transaction;
+import com.group1.library.transaction.TransactionRepositry;
+import com.group1.library.transaction.TransactionServiceImpl;
 import com.group1.library.user.User;
 import com.group1.library.user.UserAlreadyExistsException;
 import com.group1.library.user.UserRestController;
@@ -20,6 +23,7 @@ import org.springframework.context.annotation.ComponentScan;
 //@ComponentScan(basePackages = "com.group1.library.user")
 @ComponentScan(basePackages = "com.group1.library.user")
 @ComponentScan(basePackages = "com.group1.library.admin")
+@ComponentScan(basePackages = "com.group1.library.transaction")
 public class LibraryApplication {
 
     public static void main(String[] args) {
@@ -40,13 +44,9 @@ public class LibraryApplication {
 
 
     @Bean
-    public CommandLineRunner demo2(UserRestController userRestController){
-        User user1=new User("blabla1","azerty");
-        User user2=new User("blabla2","azerty");
-        User user3=new User("blabla3","azerty");
-        User user4=new User("blabla4","azerty");
-        User user5=new User("blabla5","azerty");
-        userRestController.createUser(user2);
+    public CommandLineRunner demo2(TransactionServiceImpl transactionService) {
+        System.out.println(transactionService.findTransactionById(4l));
+
 
         return args -> {
         };

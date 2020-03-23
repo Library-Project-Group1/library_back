@@ -2,8 +2,10 @@ package com.group1.library.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -37,48 +39,72 @@ public class UserServiceImpl implements UserService {
      * if the product is null, we save the products
      * @param email
      */
-    public void removeUserByEmail(String email){
+    public void removeUserByEmail(String email) throws UserNotFoundException {
         //Method to remove a user by his email
         User userToRemove=this.repository.getUserByEmail(email);
-        this.repository.deleteById(userToRemove.getId());
+        if(userToRemove==null){
+            throw new UserNotFoundException();
+        }else {
+            this.repository.deleteById(userToRemove.getId());
+        }
     }
 
     @Override
-    public void removeUserById(Long id){
+    public void removeUserById(Long id) throws UserNotFoundException {
         //Method to remove a user by his id
-        this.repository.deleteById(id);
+        if(this.repository.findById(id).isPresent()){
+            this.repository.deleteById(id);
+        }else {
+            throw new UserNotFoundException();
+        }
     }
 
     @Override
-    public User findUserById(Long id){
+    public User findUserById(Long id) throws UserNotFoundException {
         //Method to find a user thanks to his id
         Optional<User> optionalUser= this.repository.findById(id);
-        User userToFind= optionalUser.get();
-        return userToFind;
+        if(!optionalUser.isPresent()){
+            throw new UserNotFoundException();
+        }else {
+            User userToFind = optionalUser.get();
+            return userToFind;
+        }
     }
 
     @Override
-    public User findUserByEmail(String email){
+    public User findUserByEmail(String email) throws UserNotFoundException {
         //Method to find a user thanks to his email
         User userToFind=this.repository.getUserByEmail(email);
-        return userToFind;
+        if(userToFind==null){
+            throw  new UserNotFoundException();
+        }else {
+            return userToFind;
+        }
     }
 
     @Override
-    public void updateUserById(Long id,String newPassword){
+    public void updateUserById(Long id,String newPassword) throws UserNotFoundException {
         //Method to update the password of a user thanks to his id
-        Optional<User> optionalUser=this.repository.findById(id);
-        User userToUpdate=optionalUser.get();
-        userToUpdate.setPassword(newPassword);
-        this.repository.save(userToUpdate);
+        Optional<User> optionalUser = this.repository.findById(id);
+        if(!optionalUser.isPresent()){
+            throw new UserNotFoundException();
+        }else {
+            User userToUpdate = optionalUser.get();
+            userToUpdate.setPassword(newPassword);
+            this.repository.save(userToUpdate);
+        }
     }
 
     @Override
-    public void updateUserByEmail(String email,String newPassword){
+    public void updateUserByEmail(String email,String newPassword) throws UserNotFoundException {
         //Method to update the password of a user thanks to his email
         User userToUpdate=this.repository.getUserByEmail(email);
-        userToUpdate.setPassword(newPassword);
-        this.repository.save(userToUpdate);
+        if(userToUpdate==null){
+            throw new UserNotFoundException();
+        }else {
+            userToUpdate.setPassword(newPassword);
+            this.repository.save(userToUpdate);
+        }
     }
 
     @Override
