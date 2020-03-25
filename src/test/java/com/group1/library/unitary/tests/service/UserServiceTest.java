@@ -1,4 +1,4 @@
-package com.group1.library.test.service;
+package com.group1.library.unitary.tests.service;
 
 import com.group1.library.entity.User;
 import com.group1.library.exception.notfound.UserNotFoundException;

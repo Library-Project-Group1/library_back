@@ -1,4 +1,4 @@
-package com.group1.library.test.service;
+package com.group1.library.unitary.tests.service;
 
 import com.group1.library.entity.Theme;
 import com.group1.library.exception.alreadyexists.ThemeAlreadyExistsException;

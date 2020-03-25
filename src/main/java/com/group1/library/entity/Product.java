@@ -47,8 +47,7 @@ public class Product implements Serializable {
     }
 
     // Constructor with all attributes
-    public Product(Long id, String title, String creator, Date releaseDate, String description, Long quantityTotal, Long quantityAvailableToRent, Long quantityIsRenting, float price, String pictureName, Theme theme, Category category) {
-        this.id = id;
+    public Product(String title, String creator, Date releaseDate, String description, Long quantityTotal, Long quantityAvailableToRent, Long quantityIsRenting, float price, String pictureName, Theme theme, Category category) {
         this.title = title;
         this.creator = creator;
         this.releaseDate = releaseDate;

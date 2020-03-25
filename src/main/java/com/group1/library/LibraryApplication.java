@@ -17,6 +17,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
+
 @SpringBootApplication
 @ComponentScan(basePackages = "com.group1.library.entity")
 @ComponentScan(basePackages = "com.group1.library.service.impl")
