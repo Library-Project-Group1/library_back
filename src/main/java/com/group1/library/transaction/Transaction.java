@@ -1,5 +1,6 @@
 package com.group1.library.transaction;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.group1.library.product.Product;
 import com.group1.library.user.User;
 
@@ -16,6 +17,7 @@ public class Transaction implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="user_fk")
+
     private User user;
 
     @ManyToOne

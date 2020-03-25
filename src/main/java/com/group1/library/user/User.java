@@ -1,5 +1,6 @@
 package com.group1.library.user;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.group1.library.transaction.Transaction;
 
 import javax.persistence.Entity;
@@ -70,11 +71,6 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public List<Transaction> getTransactions() {
-        return transactions;
-    }
 
-    public void setTransactions(List<Transaction> transactions) {
-        this.transactions = transactions;
-    }
+
 }

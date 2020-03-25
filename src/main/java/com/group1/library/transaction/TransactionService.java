@@ -15,5 +15,5 @@ public interface TransactionService {
 
     public Iterable<Transaction> getTransactionByProduct(Product product) throws ProductNotFoundException;
 
-    public Iterable<Transaction> getAll();
+    public Iterable<Transaction> findAllTransactions();
 }

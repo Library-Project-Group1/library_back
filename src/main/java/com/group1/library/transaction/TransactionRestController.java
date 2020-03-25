@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/apiTransaction")
+@RequestMapping("/apiTransactions")
 public class TransactionRestController {
 
     //ATTRIBUTES
@@ -60,8 +60,8 @@ public class TransactionRestController {
         }
     }
 
-    @GetMapping("/allTransaction")
-    public Iterable<Transaction> getAll() {
-        return this.transactionService.getAll();
+    @GetMapping("/allTransactions")
+    public Iterable<Transaction> findAllransactions() {
+        return this.transactionService.findAllTransactions();
     }
 }

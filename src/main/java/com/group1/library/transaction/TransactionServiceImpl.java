@@ -66,10 +66,9 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Iterable<Transaction> getAll() {
-        return transactionRepositry.findAll();
+    public Iterable<Transaction> findAllTransactions() {
+        return (Iterable<Transaction>) this.transactionRepositry.findAll();
     }
-
 
 
 }

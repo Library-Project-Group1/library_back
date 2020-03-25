@@ -44,21 +44,14 @@ public class LibraryApplication {
 
 
 
-    /*
+
     @Bean
     public CommandLineRunner demo2(TransactionRestController transactionRestController) {
-        User user=new User("BastienPuigrodon", "azerty");
-        Product product=new Product();
-        product.setId(2l);
-        Transaction transaction=new Transaction();
-        System.out.println(transactionRestController.getAll());
-
-
 
 
         return args -> {
         };
-    }*/
+    }
 
     // COMMENTAIRE POUR TESTS
 //    @Bean

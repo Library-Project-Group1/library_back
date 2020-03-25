@@ -1,5 +1,6 @@
 package com.group1.library.product;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.group1.library.transaction.Transaction;
 
 import javax.persistence.*;
@@ -40,6 +41,7 @@ public class Product implements Serializable {
     private Category category;
 
     @OneToMany(mappedBy = "product")
+
     private List<Transaction> transactions;
 
     // Empty Constructor
