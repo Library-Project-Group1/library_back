@@ -12,10 +12,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.group1.library.product")
-@ComponentScan(basePackages = "com.group1.library.user")
-@ComponentScan(basePackages = "com.group1.library.admin")
-@ComponentScan(basePackages = "com.group1.library.transaction")
+
+@ComponentScan(basePackages = "com.group1.library.restcontroller")
 public class LibraryApplication {
 
     public static void main(String[] args) {
@@ -28,8 +26,10 @@ public class LibraryApplication {
     public CommandLineRunner demoProduct(ProductRestController productRestController) {
         Product product = new Product("Harry Potter", "jk Rowling", 23.6f);
         productRestController.createProduct(product);
-        return args -> {};
+        return args -> {
+        };
     }
+}
 //    @Bean
 //    public void demo(ProductRestController productRestController) {}
 //    public CommandLineRunner demo(UserRestController UserRestController){

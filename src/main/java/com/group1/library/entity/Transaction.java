@@ -1,7 +1,4 @@
 package com.group1.library.entity;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.group1.library.product.Product;
-import com.group1.library.user.User;
 import javax.persistence.*;
 import java.io.Serializable;
 
