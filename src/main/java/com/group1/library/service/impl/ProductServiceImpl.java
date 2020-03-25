@@ -135,7 +135,10 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public Iterable<Product> findAllProducts() {
+<<<<<<< Updated upstream:src/main/java/com/group1/library/service/impl/ProductServiceImpl.java
         System.out.println("je suis dans la méthode");
+=======
+>>>>>>> Stashed changes:src/main/java/com/group1/library/product/ProductServiceImpl.java
         return this.productRepository.findAll();
     }
 }
