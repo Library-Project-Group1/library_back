@@ -41,13 +41,11 @@ public class CategoryRestController {
     }
 
     @PutMapping(value = "category/{id}/editCategory", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void updateCatById(@PathVariable("id") Long id, String newName) {
+    public void updateCatById(@PathVariable("id") Long id, @RequestBody @Valid Category newCategory) {
         try {
-            Category catToEdit = catServImpl.getById(id);
-            this.catServImpl.editById(catToEdit.getId(), newName);
-            ResponseEntity.status(HttpStatus.CREATED).build();
+            this.catServImpl.editById(id, newCategory);
         } catch (CategoryNotFoundException e) {
-            ResponseEntity.status(HttpStatus.CONFLICT).build();
+            e.printStackTrace();
         }
     }
 

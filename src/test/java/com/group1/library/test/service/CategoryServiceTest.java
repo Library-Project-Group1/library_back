@@ -89,7 +89,7 @@ public class CategoryServiceTest {
         when(categoryRepository.findById(1L)).thenReturn(Optional.of(new Category(1L, "Audrey")));
         Category oldCat = categoryService.getById(1L);
         oldCat.setName("Audrey");
-        categoryService.editById(oldCat.getId(), oldCat.getName());
+        categoryService.editById(oldCat.getId(), oldCat);
         verify(categoryRepository).save(eq(oldCat));
     }
 

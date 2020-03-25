@@ -11,7 +11,7 @@ public interface AttributeProductService<T, Long>    {
 
     T getById(Long id) throws ThemeNotFoundException, CategoryNotFoundException;
 
-    void editById(Long id, String name);
+    void editById(Long id, T t) throws ThemeNotFoundException, CategoryNotFoundException;
 
     void removeById(Long id);
 

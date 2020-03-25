@@ -1,18 +1,23 @@
 package com.group1.library.service.inter;
 
 import com.group1.library.entity.Product;
+import com.group1.library.exception.notfound.ProductNotFoundException;
 import com.group1.library.entity.Transaction;
 import com.group1.library.entity.User;
+import com.group1.library.exception.notfound.TransactionNotFound;
+import com.group1.library.exception.notfound.UserNotFoundException;
+import com.group1.library.exception.notsuccesfull.TransactionNotSuccesfull;
+
 
 public interface TransactionService {
 
-    public void addTransaction(Transaction transaction, User user, Product product);
+    public void addTransaction(Transaction transaction, User user, Product product) throws TransactionNotSuccesfull, TransactionNotSuccesfull;
 
-    public void removeTransaction(Transaction transaction);
+    public Transaction findTransactionById(Long id) throws TransactionNotFound, TransactionNotFound;
 
-    public Transaction findTransactionById(Long id);
+    public Iterable<Transaction> getTransactionByUser(User user) throws UserNotFoundException;
 
-    public void updateTransaction(Transaction transaction);
+    public Iterable<Transaction> getTransactionByProduct(Product product) throws ProductNotFoundException;
 
-    public Iterable<Transaction> getAll();
+    public Iterable<Transaction> findAllTransactions();
 }
