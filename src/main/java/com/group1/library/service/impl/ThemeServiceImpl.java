@@ -1,5 +1,6 @@
 package com.group1.library.service.impl;
 
+import com.group1.library.entity.Product;
 import com.group1.library.entity.Theme;
 import com.group1.library.exception.alreadyexists.ThemeAlreadyExistsException;
 import com.group1.library.exception.notfound.ThemeNotFoundException;
@@ -21,12 +22,15 @@ public class ThemeServiceImpl implements AttributeProductService<Theme, Long> {
     @Override
     public Theme add(Theme theme) throws ThemeAlreadyExistsException {
         //Method to add a theme in database
-        if (themeRepository.getThemeByName(theme.getName()) == null) {
+        Theme themeToAdd = themeRepository.getThemeById(theme.getId());
+        if (themeToAdd == null) {
+
             this.themeRepository.save(theme);
+            return theme;
         } else {
             throw new ThemeAlreadyExistsException();
         }
-        return theme;
+
     }
 
     @Override

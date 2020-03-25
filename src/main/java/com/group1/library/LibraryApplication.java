@@ -1,9 +1,11 @@
 package com.group1.library;
 
 
+import com.group1.library.entity.Theme;
 import com.group1.library.exception.alreadyexists.ThemeAlreadyExistsException;
 import com.group1.library.exception.notfound.ThemeNotFoundException;
 
+import com.group1.library.restcontroller.ThemeRestController;
 import com.group1.library.service.impl.ThemeServiceImpl;
 import com.group1.library.entity.Category;
 import com.group1.library.entity.Product;
@@ -70,10 +72,11 @@ public class LibraryApplication {
 //        };
 //    }
     @Bean
-    public CommandLineRunner demoTheme(ThemeServiceImpl themeService) throws ThemeAlreadyExistsException, ThemeNotFoundException {
+    public CommandLineRunner demoTheme(ThemeRestController themeRestController) throws ThemeAlreadyExistsException, ThemeNotFoundException {
 
+        Theme theme1 = new Theme("Cool");
 
-        themeService.editById(21L,"thriller");
+        themeRestController.createTheme(theme1);
 
         return args -> {
 

@@ -28,7 +28,7 @@ public class ThemeRestController {
     @ResponseBody
     public ResponseEntity<Object> createTheme(@RequestBody @Valid Theme theme) {
         try {
-            themeService.add(theme);
+            this.themeService.add(theme);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (ThemeAlreadyExistsException e) {
             e.printStackTrace();
@@ -52,7 +52,7 @@ public class ThemeRestController {
     public void updateThemeById(@PathVariable("id") Long id, String newName) {
         //Method to update the name of a theme thanks to his id
         try {
-           themeService.editById(id, newName);
+            themeService.editById(id, newName);
 
         } catch (ThemeNotFoundException e) {
             e.printStackTrace();
