@@ -30,12 +30,12 @@ public class LibraryApplication {
     }
 
 
-    @Bean
-    public CommandLineRunner demoProduct(ProductRestController productRestController) {
-        Product product = new Product("Harry Potter", "jk Rowling", 23.6f);
-        productRestController.createProduct(product);
-        return args -> {};
-    }
+//    @Bean
+//    public CommandLineRunner demoProduct(ProductRestController productRestController) {
+//        Product product = new Product("Harry Potter", "jk Rowling", 23.6f);
+//        productRestController.createProduct(product);
+//        return args -> {};
+//    }
 //    @Bean
 //    public void demo(ProductRestController productRestController) {}
 //    public CommandLineRunner demo(UserRestController UserRestController){
