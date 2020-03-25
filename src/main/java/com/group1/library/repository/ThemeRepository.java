@@ -7,7 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ThemeRepository extends CrudRepository<Theme, Long> {
 
-    Theme getThemeByName(String name);
-
     Theme getThemeById(Long id);
 }

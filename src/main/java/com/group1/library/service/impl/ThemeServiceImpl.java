@@ -46,15 +46,14 @@ public class ThemeServiceImpl implements AttributeProductService<Theme, Long> {
     }
 
     @Override
-    public void editById(Long id, String newName) throws ThemeNotFoundException {
+    public void editById(Long id, Theme newTheme) throws ThemeNotFoundException {
         //Method to change the theme name
-        Optional<Theme> optionalTheme = this.themeRepository.findById(id);
-        if(!optionalTheme.isPresent()){
+        Optional<Theme> themeToEdit = this.themeRepository.findById(id);
+        if(!themeToEdit.isPresent()){
             throw new ThemeNotFoundException();
         } else{
-            Theme themeToEdit = optionalTheme.get();
-            themeToEdit.setName(newName);
-            this.themeRepository.save(themeToEdit);
+            themeToEdit.get().setName(newTheme.getName());
+            this.themeRepository.save(themeToEdit.get());
         }
 
     }

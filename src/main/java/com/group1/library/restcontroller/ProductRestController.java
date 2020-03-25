@@ -45,30 +45,16 @@ public class ProductRestController {
      * Method to edit the price of a product by id
      *
      * @param id    the id of the product to edit
-     * @param price the price of the product to edit
+     * @param newproduct the product with the parameters to edit
      */
     @PutMapping(value = "/product/{id}/editProduct", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void updateProductById(@PathVariable("id") Long id, float price) {
+    public void updateProductById(@PathVariable("id") Long id, @RequestBody @Valid Product newproduct) {
         try {
-            this.productService.updateProductById(id, price);
+            this.productService.updateProductById(id, newproduct);
         } catch (ProductNotFoundException e) {
             e.printStackTrace();
         }
-    }
 
-    /**
-     * Method to edit the stock of a product by id
-     *
-     * @param id       the id of the product in order to edit the quantity
-     * @param quantity the quantity of product to update in the stock
-     */
-    @PutMapping(value = "/product/{id}/editStockProduct", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void updateStockById(@PathVariable("id")Long id, Long quantity) {
-        try {
-            this.productService.updateStockById(id, quantity);
-        } catch (ProductNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     /**

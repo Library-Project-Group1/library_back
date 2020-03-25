@@ -95,7 +95,7 @@ public class ThemeServiceTest {
         when(themeRepository.findById(1L)).thenReturn(Optional.of(new Theme(1L, "Audrey")));
         Theme oldTheme = themeService.getById(1L);
         oldTheme.setName("Audrey");
-        themeService.editById(oldTheme.getId(), oldTheme.getName());
+        themeService.editById(oldTheme.getId(), oldTheme);
         verify(themeRepository).save(eq(oldTheme));
     }
 

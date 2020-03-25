@@ -3,6 +3,7 @@ package com.group1.library.service.impl;
 import com.group1.library.entity.Category;
 import com.group1.library.exception.alreadyexists.CategoryAlreadyExistsException;
 import com.group1.library.exception.notfound.CategoryNotFoundException;
+import com.group1.library.exception.notfound.ThemeNotFoundException;
 import com.group1.library.repository.CategoryRepository;
 import com.group1.library.service.inter.AttributeProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +45,15 @@ public class CategoryServiceImpl implements AttributeProductService<Category, Lo
 
     //Method to update the name of a category using his id in our database
     @Override
-    public void editById(Long id, String newName) {
-        Optional<Category> catToUpdate = catRepo.findById(id);
-        catToUpdate.get().setName(newName);
-        catRepo.save(catToUpdate.get());
+    public void editById(Long id, Category newCategory) throws CategoryNotFoundException {
+        Optional<Category> catToUpdate = this.catRepo.findById(id);
+        if(!catToUpdate.isPresent()){
+            throw new CategoryNotFoundException(id);
+        } else {
+            Category categoryToUpdate = catToUpdate.get();
+            categoryToUpdate.setName(newCategory.getName());
+            this.catRepo.save(categoryToUpdate);
+        }
     }
 
 

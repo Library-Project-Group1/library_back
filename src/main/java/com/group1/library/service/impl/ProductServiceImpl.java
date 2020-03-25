@@ -78,34 +78,6 @@ public class ProductServiceImpl implements ProductService {
             this.productRepository.save(productToUpdate);
         }
     }
-//    public void updateProductById(Long id, float price) throws ProductNotFoundException {
-//        Product productToUpdate = this.productRepository.getProductById(id);
-//        if (productToUpdate == null) {
-//            throw new ProductNotFoundException();
-//        } else {
-//            productToUpdate.setPrice(price);
-//            this.productRepository.save(productToUpdate);
-//        }
-//    }
-
-    /**
-     * Method to edit the stock of a product by id
-     * if the product exist, the total quantity of the product is modified and this new quantity is saved in the database
-     *
-     * @param id       the id of the product to edit in the database
-     * @param quantity the quantity of the product to edit
-     * @throws ProductNotFoundException if the product cannot be found in the database
-     */
-//    @Override
-//    public void updateStockById(Long id, Long quantity) throws ProductNotFoundException {
-//        Product productToUpdate = this.productRepository.getProductById(id);
-//        if (productToUpdate == null) {
-//            throw new ProductNotFoundException();
-//        } else {
-//            productToUpdate.setQuantityTotal(quantity);
-//            this.productRepository.save(productToUpdate);
-//        }
-//    }
 
     /**
      * Method to delete a product by id in the database

@@ -12,9 +12,6 @@ public interface ProductService {
     Product addProductAndFile(Product product, MultipartFile file) throws ProductAlreadyExistException;
 
     void updateProductById(Long id, Product newProduct) throws ProductNotFoundException;
-//    void updateProductById(Long id, float price) throws ProductNotFoundException;
-
-//    void updateStockById(Long id, Long quantity) throws ProductNotFoundException;
 
     void removeProductById(Long id) throws ProductNotFoundException;
 
