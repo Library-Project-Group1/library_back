@@ -46,10 +46,9 @@ public class ThemeRestController {
 
     @PutMapping("/theme/{id}/editTheme")
     public void updateThemeById(@PathVariable("id") Long id, String newName) {
+        //Method to update the name of a theme thanks to his id
         try {
-            Theme themeToEdit = themeService.getById(id);
-
-            themeService.editById(themeToEdit.getId(), newName);
+           themeService.editById(id, newName);
 
         } catch (ThemeNotFoundException e) {
             e.printStackTrace();

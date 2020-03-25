@@ -42,17 +42,7 @@ public class LibraryApplication {
 //    }
 
 
-
-    @Bean
-    public CommandLineRunner demo2(TransactionServiceImpl transactionService) {
-        System.out.println(transactionService.findTransactionById(4l));
-
-
-        return args -> {
-        };
-    }
-
-//    @Bean
+    //    @Bean
 //    public CommandLineRunner demoTheme(ThemeServiceImpl themeService){
 //        try {
 //            themeService.getById(2L);
@@ -62,13 +52,16 @@ public class LibraryApplication {
 //        return args -> {
 //        };
 //    }
-//   @Bean
-//   public CommandLineRunner demoUser(ThemeServiceImpl themeService) throws ThemeAlreadyExistsException, ThemeNotFoundException {
-//        Theme theme=new Theme("SF");
-//        System.out.println(themeService.getById(1l));
-//        return args -> {
-//
-//       };
-//   }
+    @Bean
+    public CommandLineRunner demoTheme(ThemeServiceImpl themeService) throws ThemeAlreadyExistsException, ThemeNotFoundException {
 
+
+        themeService.editById(14L,"patate");
+
+        return args -> {
+
+        };
+////   }
+//
+    }
 }
