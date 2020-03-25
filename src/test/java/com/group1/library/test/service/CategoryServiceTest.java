@@ -1,6 +1,10 @@
 package com.group1.library.test.service;
 
-import com.group1.library.product.*;
+import com.group1.library.entity.Category;
+import com.group1.library.exception.alreadyexists.CategoryAlreadyExistsException;
+import com.group1.library.exception.notfound.CategoryNotFoundException;
+import com.group1.library.repository.CategoryRepository;
+import com.group1.library.service.impl.CategoryServiceImpl;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

@@ -1,6 +1,9 @@
 package com.group1.library.test.service;
 
-import com.group1.library.user.*;
+import com.group1.library.entity.User;
+import com.group1.library.exception.notfound.UserNotFoundException;
+import com.group1.library.repository.UserRepository;
+import com.group1.library.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,7 +20,6 @@ import java.util.stream.StreamSupport;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
