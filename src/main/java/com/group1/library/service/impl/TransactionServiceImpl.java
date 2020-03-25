@@ -1,12 +1,15 @@
 
-package com.group1.library.entity.transaction;
 package com.group1.library.service.impl;
 
 import com.group1.library.entity.Product;
 import com.group1.library.entity.Transaction;
+import com.group1.library.entity.User;
+import com.group1.library.exception.notfound.ProductNotFoundException;
+import com.group1.library.exception.notfound.TransactionNotFound;
+import com.group1.library.exception.notfound.UserNotFoundException;
+import com.group1.library.exception.notsuccesfull.TransactionNotSuccesfull;
 import com.group1.library.repository.ProductRepository;
 import com.group1.library.repository.TransactionRepositry;
-import com.group1.library.entity.User;
 import com.group1.library.repository.UserRepository;
 import com.group1.library.service.inter.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,10 +72,9 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Iterable<Transaction> getAll() {
-        return transactionRepositry.findAll();
+    public Iterable<Transaction> findAllTransactions() {
+        return (Iterable<Transaction>) this.transactionRepositry.findAll();
     }
-
 
 
 }
