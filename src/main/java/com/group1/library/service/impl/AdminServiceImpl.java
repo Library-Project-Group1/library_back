@@ -1,7 +1,7 @@
 package com.group1.library.service.impl;
 
 import com.group1.library.entity.Admin;
-import com.group1.library.exception.AdminAlreadyExists;
+import com.group1.library.exception.alreadyexists.AdminAlreadyExistsException;
 import com.group1.library.repository.AdminRepository;
 import com.group1.library.service.inter.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +17,12 @@ public class AdminServiceImpl implements AdminService {
 
     //METHODS
     @Override
-    public void addAdmin(Admin admin) throws AdminAlreadyExists {
+    public void addAdmin(Admin admin) throws AdminAlreadyExistsException {
         Admin adminTest=this.adminRepository.getAdminByUsername(admin.getUsername());
         if(adminTest==null) {
             this.adminRepository.save(admin);
         }else{
-            throw new AdminAlreadyExists();
+            throw new AdminAlreadyExistsException();
         }
     }
 
