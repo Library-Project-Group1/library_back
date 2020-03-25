@@ -63,19 +63,30 @@ public class ProductServiceImpl implements ProductService {
      * if the product exist, the price of the product is modified and this new price is saved in database
      *
      * @param id    the id of the product to edit in the database
-     * @param price the price of the product to edit
+     * @param newProduct the product with the parameters to edit
      * @throws ProductNotFoundException if the product cannot be found in the database
      */
     @Override
-    public void updateProductById(Long id, float price) throws ProductNotFoundException {
+    public void updateProductById(Long id, Product newProduct) throws ProductNotFoundException {
         Product productToUpdate = this.productRepository.getProductById(id);
         if (productToUpdate == null) {
             throw new ProductNotFoundException();
         } else {
-            productToUpdate.setPrice(price);
+            productToUpdate.setPrice(newProduct.getPrice());
+            productToUpdate.setQuantityTotal(newProduct.getQuantityTotal());
+            productToUpdate.setQuantityAvailableToRent(productToUpdate.getQuantityTotal()-productToUpdate.getQuantityIsRenting());
             this.productRepository.save(productToUpdate);
         }
     }
+//    public void updateProductById(Long id, float price) throws ProductNotFoundException {
+//        Product productToUpdate = this.productRepository.getProductById(id);
+//        if (productToUpdate == null) {
+//            throw new ProductNotFoundException();
+//        } else {
+//            productToUpdate.setPrice(price);
+//            this.productRepository.save(productToUpdate);
+//        }
+//    }
 
     /**
      * Method to edit the stock of a product by id
@@ -85,16 +96,16 @@ public class ProductServiceImpl implements ProductService {
      * @param quantity the quantity of the product to edit
      * @throws ProductNotFoundException if the product cannot be found in the database
      */
-    @Override
-    public void updateStockById(Long id, Long quantity) throws ProductNotFoundException {
-        Product productToUpdate = this.productRepository.getProductById(id);
-        if (productToUpdate == null) {
-            throw new ProductNotFoundException();
-        } else {
-            productToUpdate.setQuantityTotal(quantity);
-            this.productRepository.save(productToUpdate);
-        }
-    }
+//    @Override
+//    public void updateStockById(Long id, Long quantity) throws ProductNotFoundException {
+//        Product productToUpdate = this.productRepository.getProductById(id);
+//        if (productToUpdate == null) {
+//            throw new ProductNotFoundException();
+//        } else {
+//            productToUpdate.setQuantityTotal(quantity);
+//            this.productRepository.save(productToUpdate);
+//        }
+//    }
 
     /**
      * Method to delete a product by id in the database
@@ -135,9 +146,6 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public Iterable<Product> findAllProducts() {
-
-        System.out.println("je suis dans la méthode");
-
         return this.productRepository.findAll();
     }
 }
