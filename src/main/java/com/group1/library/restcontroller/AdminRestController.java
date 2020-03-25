@@ -1,8 +1,8 @@
 package com.group1.library.restcontroller;
 
+import com.group1.library.exception.alreadyexists.AdminAlreadyExistsException;
 import com.group1.library.service.impl.AdminServiceImpl;
 import com.group1.library.entity.Admin;
-import com.group1.library.exception.AdminAlreadyExists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ public class AdminRestController {
     public void createAdmin(@Valid @RequestBody Admin admin){
         try {
             this.adminService.addAdmin(admin);
-        }catch (AdminAlreadyExists e){
+        }catch (AdminAlreadyExistsException e){
             e.printStackTrace();
         }
     }
