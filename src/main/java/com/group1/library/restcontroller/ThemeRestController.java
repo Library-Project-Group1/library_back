@@ -48,7 +48,7 @@ public class ThemeRestController {
         return null;
     }
 
-    @PutMapping("/theme/{id}/editTheme")
+    @PutMapping(value = "/theme/{id}/editTheme", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void updateThemeById(@PathVariable("id") Long id, String newName) {
         //Method to update the name of a theme thanks to his id
         try {

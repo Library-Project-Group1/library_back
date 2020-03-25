@@ -64,16 +64,16 @@ public class LibraryApplication {
 //        return args -> {
 //        };
 //    }
-//    @Bean
-//    public CommandLineRunner demoTheme(ThemeServiceImpl themeService) throws ThemeAlreadyExistsException, ThemeNotFoundException {
-//
-//
-//        themeService.editById(14L,"patate");
-//
-//        return args -> {
-//
-//        };
-////   }
-//
-//    }
+    @Bean
+    public CommandLineRunner demoTheme(ThemeServiceImpl themeService) throws ThemeAlreadyExistsException, ThemeNotFoundException {
+
+
+        themeService.editById(21L,"thriller");
+
+        return args -> {
+
+        };
+
+
+    }
 }
