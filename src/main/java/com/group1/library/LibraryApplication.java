@@ -43,14 +43,14 @@ public class LibraryApplication {
 
 
 
-    @Bean
-    public CommandLineRunner demo2(TransactionServiceImpl transactionService) {
-        System.out.println(transactionService.findTransactionById(4l));
-
-
-        return args -> {
-        };
-    }
+//    @Bean
+//    public CommandLineRunner demo2(TransactionServiceImpl transactionService) {
+//        System.out.println(transactionService.findTransactionById(4l));
+//
+//
+//        return args -> {
+//        };
+//    }
 
 //    @Bean
 //    public CommandLineRunner demoTheme(ThemeServiceImpl themeService){
