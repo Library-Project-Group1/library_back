@@ -5,6 +5,10 @@ import com.group1.library.exception.alreadyexists.ThemeAlreadyExistsException;
 import com.group1.library.exception.notfound.ThemeNotFoundException;
 
 import com.group1.library.service.impl.ThemeServiceImpl;
+import com.group1.library.entity.Category;
+import com.group1.library.entity.Product;
+import com.group1.library.restcontroller.CategoryRestController;
+import com.group1.library.restcontroller.ProductRestController;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +18,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = "com.group1.library.entity")
 @ComponentScan(basePackages = "com.group1.library.service.impl")
+@ComponentScan(basePackages = "com.group1.library.restcontroller")
 public class LibraryApplication {
 
     public static void main(String[] args) {

@@ -5,7 +5,7 @@ import com.group1.library.exception.alreadyexists.AdminAlreadyExistsException;
 
 public interface AdminService {
 
-    public void addAdmin(Admin admin) throws AdminAlreadyExistsException;
+    public void addAdmin(Admin admin) throws AdminAlreadyExistsException, AdminAlreadyExistsException;
 
     public void removeAdminById(Long id);
 
