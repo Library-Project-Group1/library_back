@@ -1,16 +1,9 @@
 package com.group1.library;
 
-import com.group1.library.admin.Admin;
-import com.group1.library.admin.AdminRestController;
-import com.group1.library.admin.AdminServiceImpl;
-import com.group1.library.product.*;
-import com.group1.library.transaction.Transaction;
-import com.group1.library.transaction.TransactionRepositry;
-import com.group1.library.transaction.TransactionServiceImpl;
-import com.group1.library.user.User;
-import com.group1.library.user.UserAlreadyExistsException;
-import com.group1.library.user.UserRestController;
-import com.group1.library.user.UserServiceImpl;
+import com.group1.library.entity.Category;
+import com.group1.library.entity.Product;
+import com.group1.library.restcontroller.CategoryRestController;
+import com.group1.library.restcontroller.ProductRestController;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

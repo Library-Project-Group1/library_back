@@ -1,6 +1,10 @@
 package com.group1.library.test.service;
 
-import com.group1.library.product.*;
+import com.group1.library.entity.Theme;
+import com.group1.library.exception.alreadyexists.ThemeAlreadyExistsException;
+import com.group1.library.exception.notfound.ThemeNotFoundException;
+import com.group1.library.repository.ThemeRepository;
+import com.group1.library.service.impl.ThemeServiceImpl;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
