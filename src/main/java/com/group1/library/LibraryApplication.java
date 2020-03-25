@@ -14,6 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 
 @ComponentScan(basePackages = "com.group1.library.restcontroller")
+
 public class LibraryApplication {
 
     public static void main(String[] args) {
@@ -30,10 +31,4 @@ public class LibraryApplication {
         };
     }
 }
-//    @Bean
-//    public void demo(ProductRestController productRestController) {}
-//    public CommandLineRunner demo(UserRestController UserRestController){
-//        return args -> {
-//        };
-//    }
 
