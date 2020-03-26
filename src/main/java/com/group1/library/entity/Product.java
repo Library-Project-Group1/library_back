@@ -1,22 +1,21 @@
 package com.group1.library.entity;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.group1.library.entity.Transaction;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-// Class characterizing the products, transformed into an entity managed by JPA
-
 /**
- * <code>Class Product</code>
- * Class that characterizes a product present in our library
+ * The {@code Product} class characterizes one product.
+ * This class is an entity managed by JPA.
+ * The Product class contains a non-exhaustive list of attributes that describe the products available in the online library.
+ * This class is also composed of a constructor and getters / setters.
  */
 @Entity
 @Table(name = "products")
 public class Product implements Serializable {
 
-    // Attributes
+    // ATTRIBUTES
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,14 +38,29 @@ public class Product implements Serializable {
     private Category category;
 
     @OneToMany(mappedBy = "product")
-
     private List<Transaction> transactions;
 
-    // Empty Constructor
+    /**
+     * Constructs a new product with {@code null} as its details.
+     */
     public Product() {
     }
 
-    // Constructor with all attributes
+    /**
+     * Constructs a new product with all the attributes as its details.
+     *
+     * @param title                   the title of the product.
+     * @param creator                 the creator's name of the product.
+     * @param releaseDate             the publication date of the product.
+     * @param description             the description of the product.
+     * @param quantityTotal           the total quantity of the product.
+     * @param quantityAvailableToRent the quantity available to rent of the product.
+     * @param quantityIsRenting       the quantity rented of the product.
+     * @param price                   the price of the product.
+     * @param pictureName             the picture's name associated to the product.
+     * @param theme                   the theme of the product.
+     * @param category                the category of the product.
+     */
     public Product(String title, String creator, Date releaseDate, String description, Long quantityTotal, Long quantityAvailableToRent, Long quantityIsRenting, float price, String pictureName, Theme theme, Category category) {
         this.title = title;
         this.creator = creator;
@@ -61,30 +75,67 @@ public class Product implements Serializable {
         this.category = category;
     }
 
-    // Constructor without id attribute
+    /**
+     * Constructs a new product with the specified detail title, creator and price.
+     *
+     * @param title   the title of the product.
+     * @param creator the creator's name of the product.
+     * @param price   the price of the product.
+     */
     public Product(String title, String creator, float price) {
         this.title = title;
         this.creator = creator;
         this.price = price;
     }
 
+    /**
+     * Returns a short description of the {@code Product} instance.
+     * The result is the concatenation of:
+     * <ul>
+     *     <li>the id of the {@code Product} instance</li>
+     *     <li>the title of the {@code Product} instance</li>
+     * </ul>
+     *
+     * @return a string representation of this product.
+     */
     public String toString() {
         return (this.id + "°) " + this.title);
     }
 
-    // Getters & Setters
+    // GETTERS & SETTERS
+
+    /**
+     * Returns the detail id of the product.
+     *
+     * @return the id of this {@code Product} instance (which may be {@code null}).
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Sets the id element that will be returned by {@link #getId()} method.
+     *
+     * @param id the id element to be associated with this {@code Product}.
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * Returns the detail title of the product.
+     *
+     * @return the title of this product or {@code null} if the title is nonexistent or unknown.
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Sets the title element that will be returned by {@link #getTitle()} method.
+     *
+     * @param title the id element to be associated with this {@code Product}.
+     */
     public void setTitle(String title) {
         this.title = title;
     }

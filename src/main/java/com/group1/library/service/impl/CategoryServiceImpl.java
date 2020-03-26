@@ -11,14 +11,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * <code>Class CategoryServiceImpl</code> defines...
+ */
 @Service
 public class CategoryServiceImpl implements AttributeProductService<Category, Long> {
 
     // Attribute
     @Autowired
     private CategoryRepository catRepo;
-
-    // METHODS
 
     //Method to add a new category in our database
     @Override
@@ -47,7 +48,7 @@ public class CategoryServiceImpl implements AttributeProductService<Category, Lo
     @Override
     public void editById(Long id, Category newCategory) throws CategoryNotFoundException {
         Optional<Category> catToUpdate = this.catRepo.findById(id);
-        if(!catToUpdate.isPresent()){
+        if (!catToUpdate.isPresent()) {
             throw new CategoryNotFoundException(id);
         } else {
             Category categoryToUpdate = catToUpdate.get();
@@ -55,7 +56,6 @@ public class CategoryServiceImpl implements AttributeProductService<Category, Lo
             this.catRepo.save(categoryToUpdate);
         }
     }
-
 
     //Method to remove a category using an id in our database
     @Override

@@ -7,13 +7,15 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
- * <code>Class Admin</code>
- * Class that characterizes an admin
+ * The {@code Admin} class characterizes a library administrator.
+ * This class is transformed into an entity managed by JPA.
+ * The Admin class contains many attributes that define one administrator.
+ * This class it also composed of constructors and getters / setters.
  */
 @Entity
 public class Admin implements Serializable {
 
-    //ATTRIBUTES
+    // ATTRIBUTES
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -21,24 +23,53 @@ public class Admin implements Serializable {
     String email;
     String password;
 
-    //CONSTRUCTOR
-    public Admin(){
+    /**
+     * Constructs a new admin with {@code null} as its details.
+     */
+    public Admin() {
     }
 
-    public Admin(String username,String password){
-        this.username=username;
-        this.password=password;
+    /**
+     * Constructs a new admin with the specified detail username and password.
+     *
+     * @param username the username of the admin.
+     * @param password the password of the admin.
+     */
+    public Admin(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
-    public String toString(){
-        return (this.id+"°) "+this.username);
+    /**
+     * Returns a short description of the {@code Admin} instance.
+     * The result is the concatenation of:
+     * <ul>
+     *     <li>the id of the {@code Admin} instance</li>
+     *     <li>the username of the {@code Admin} instance</li>
+     * </ul>
+     *
+     * @return a string representation of this instance.
+     */
+    public String toString() {
+        return (this.id + "°) " + this.username);
     }
 
-    //GETTER & SETTER
+    // GETTERS & SETTERS
+
+    /**
+     * Returns the detail id of the admin.
+     *
+     * @return the id of this {@code Admin} instance (which may be {@code null}).
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Sets the id element that will be returned by {@link #getId()} method.
+     *
+     * @param id the id element to be associated with this {@code Admin}.
+     */
     public void setId(Long id) {
         this.id = id;
     }
