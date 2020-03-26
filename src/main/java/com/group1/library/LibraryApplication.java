@@ -71,17 +71,17 @@ public class LibraryApplication {
 //        return args -> {
 //        };
 //    }
-    @Bean
-    public CommandLineRunner demoTheme(ThemeRestController themeRestController) throws ThemeAlreadyExistsException, ThemeNotFoundException {
-
-        Theme theme1 = new Theme("Cool");
-
-        themeRestController.createTheme(theme1);
-
-        return args -> {
-
-        };
-
-
-    }
+//    @Bean
+//    public CommandLineRunner demoTheme(ThemeRestController themeRestController) throws ThemeAlreadyExistsException, ThemeNotFoundException {
+//
+//        Theme theme1 = new Theme("Cool");
+//
+//        themeRestController.createTheme(theme1);
+//
+//        return args -> {
+//
+//        };
+//
+//
+//    }
 }
