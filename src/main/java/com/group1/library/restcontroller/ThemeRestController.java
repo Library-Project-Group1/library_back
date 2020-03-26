@@ -24,6 +24,12 @@ public class ThemeRestController {
     @Autowired
     private ThemeServiceImpl themeService;
 
+    /**
+     * Method to create a theme in our library
+     *
+     * @param theme new theme
+     * @return an instance of ResponseEntity
+     */
     @PostMapping(path = "/createTheme", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<Object> createTheme(@RequestBody @Valid Theme theme) {
