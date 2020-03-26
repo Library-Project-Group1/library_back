@@ -1,11 +1,11 @@
 package com.group1.library.service.inter;
 
 import com.group1.library.entity.Admin;
-import com.group1.library.exception.AdminAlreadyExists;
+import com.group1.library.exception.alreadyexists.AdminAlreadyExistsException;
 
 public interface AdminService {
 
-    public void addAdmin(Admin admin) throws AdminAlreadyExists;
+    public void addAdmin(Admin admin) throws AdminAlreadyExistsException, AdminAlreadyExistsException;
 
     public void removeAdminById(Long id);
 

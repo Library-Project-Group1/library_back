@@ -1,4 +1,4 @@
-package com.group1.library.test.service;
+package com.group1.library.unitary.tests.service;
 
 import com.group1.library.entity.Category;
 import com.group1.library.exception.alreadyexists.CategoryAlreadyExistsException;
@@ -89,7 +89,7 @@ public class CategoryServiceTest {
         when(categoryRepository.findById(1L)).thenReturn(Optional.of(new Category(1L, "Audrey")));
         Category oldCat = categoryService.getById(1L);
         oldCat.setName("Audrey");
-        categoryService.editById(oldCat.getId(), oldCat.getName());
+        categoryService.editById(oldCat.getId(), oldCat);
         verify(categoryRepository).save(eq(oldCat));
     }
 

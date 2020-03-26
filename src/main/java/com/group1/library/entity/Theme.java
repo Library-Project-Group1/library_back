@@ -1,7 +1,5 @@
 package com.group1.library.entity;
 
-import com.group1.library.entity.Product;
-
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

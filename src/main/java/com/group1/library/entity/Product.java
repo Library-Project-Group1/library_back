@@ -1,5 +1,6 @@
 package com.group1.library.entity;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.group1.library.entity.Transaction;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -38,6 +39,7 @@ public class Product implements Serializable {
     private Category category;
 
     @OneToMany(mappedBy = "product")
+
     private List<Transaction> transactions;
 
     // Empty Constructor
@@ -45,8 +47,7 @@ public class Product implements Serializable {
     }
 
     // Constructor with all attributes
-    public Product(Long id, String title, String creator, Date releaseDate, String description, Long quantityTotal, Long quantityAvailableToRent, Long quantityIsRenting, float price, String pictureName, Theme theme, Category category) {
-        this.id = id;
+    public Product(String title, String creator, Date releaseDate, String description, Long quantityTotal, Long quantityAvailableToRent, Long quantityIsRenting, float price, String pictureName, Theme theme, Category category) {
         this.title = title;
         this.creator = creator;
         this.releaseDate = releaseDate;

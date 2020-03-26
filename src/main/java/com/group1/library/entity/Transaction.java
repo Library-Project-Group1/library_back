@@ -1,5 +1,4 @@
 package com.group1.library.entity;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -13,6 +12,7 @@ public class Transaction implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="user_fk")
+
     private User user;
 
     @ManyToOne

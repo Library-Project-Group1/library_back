@@ -1,5 +1,12 @@
 package com.group1.library;
 
+
+import com.group1.library.entity.Theme;
+import com.group1.library.exception.alreadyexists.ThemeAlreadyExistsException;
+import com.group1.library.exception.notfound.ThemeNotFoundException;
+
+import com.group1.library.restcontroller.ThemeRestController;
+import com.group1.library.service.impl.ThemeServiceImpl;
 import com.group1.library.entity.Category;
 import com.group1.library.entity.Product;
 import com.group1.library.restcontroller.CategoryRestController;
@@ -10,11 +17,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
+
 @SpringBootApplication
-@ComponentScan(basePackages = "com.group1.library.product")
-@ComponentScan(basePackages = "com.group1.library.user")
-@ComponentScan(basePackages = "com.group1.library.admin")
-@ComponentScan(basePackages = "com.group1.library.transaction")
+@ComponentScan(basePackages = "com.group1.library.entity")
+@ComponentScan(basePackages = "com.group1.library.service.impl")
+@ComponentScan(basePackages = "com.group1.library.restcontroller")
 public class LibraryApplication {
 
     public static void main(String[] args) {
@@ -37,17 +44,15 @@ public class LibraryApplication {
 //    }
 
 
-    @Bean
-    public CommandLineRunner demo2(CategoryRestController categoryRestController){
-        Category category1 = new Category("coucou");
-        Category category2 = new Category("salut");
-        Category category3 = new Category("hello");
-        categoryRestController.createCategory(category1);
-        categoryRestController.createCategory(category2);
-        categoryRestController.createCategory(category3);
-        return args -> {
-        };
-    }
+
+//    @Bean
+//    public CommandLineRunner demo2(TransactionServiceImpl transactionService) {
+//        System.out.println(transactionService.findTransactionById(4l));
+//
+//
+//        return args -> {
+//        };
+//    }
 
 //    @Bean
 //    public CommandLineRunner demo2(TransactionServiceImpl transactionService) {
@@ -57,6 +62,7 @@ public class LibraryApplication {
 //    }
 
 //    @Bean
+
 //    public CommandLineRunner demoTheme(ThemeServiceImpl themeService){
 //        try {
 //            themeService.getById(2L);
@@ -66,13 +72,17 @@ public class LibraryApplication {
 //        return args -> {
 //        };
 //    }
-//   @Bean
-//   public CommandLineRunner demoUser(ThemeServiceImpl themeService) throws ThemeAlreadyExistsException, ThemeNotFoundException {
-//        Theme theme=new Theme("SF");
-//        System.out.println(themeService.getById(1l));
-//        return args -> {
-//
-//       };
-//   }
+    @Bean
+    public CommandLineRunner demoTheme(ThemeRestController themeRestController) throws ThemeAlreadyExistsException, ThemeNotFoundException {
 
+        Theme theme1 = new Theme("Cool");
+
+        themeRestController.createTheme(theme1);
+
+        return args -> {
+
+        };
+
+
+    }
 }

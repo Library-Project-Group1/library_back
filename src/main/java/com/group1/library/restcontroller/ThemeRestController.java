@@ -28,7 +28,7 @@ public class ThemeRestController {
     @ResponseBody
     public ResponseEntity<Object> createTheme(@RequestBody @Valid Theme theme) {
         try {
-            themeService.add(theme);
+            this.themeService.add(theme);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (ThemeAlreadyExistsException e) {
             e.printStackTrace();
@@ -48,13 +48,11 @@ public class ThemeRestController {
         return null;
     }
 
-    @PutMapping("/theme/{id}/editTheme")
-    public void updateThemeById(@PathVariable("id") Long id, String newName) {
+    @PutMapping(value = "/theme/{id}/editTheme", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void updateThemeById(@PathVariable("id") Long id, @RequestBody @Valid Theme newTheme) {
+        //Method to update the name of a theme thanks to his id
         try {
-            Theme themeToEdit = themeService.getById(id);
-
-            themeService.editById(themeToEdit.getId(), newName);
-
+            themeService.editById(id, newTheme);
         } catch (ThemeNotFoundException e) {
             e.printStackTrace();
         }
