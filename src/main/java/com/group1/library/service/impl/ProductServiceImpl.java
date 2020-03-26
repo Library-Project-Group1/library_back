@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * Method to add a new product in the database
-     * if the product is <code>null</code>, the product is created
+     * if the product is {@code null}, the product is created
      *
      * @param product the product to add in the database
      * @return the product to add into the save method
