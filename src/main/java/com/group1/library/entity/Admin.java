@@ -6,6 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 
+/**
+ * <code>Class Admin</code>
+ * Class that characterizes an admin
+ */
 @Entity
 public class Admin implements Serializable {
 
