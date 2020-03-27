@@ -9,19 +9,22 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * <code>Class AdminServiceImpl</code> defines...
+ */
 @Service
 public class AdminServiceImpl implements AdminService {
-    //AtTTRIBUTES
+
+    // ATTRIBUTE
     @Autowired
     private AdminRepository adminRepository;
 
-    //METHODS
     @Override
     public void addAdmin(Admin admin) throws AdminAlreadyExistsException {
-        Admin adminTest=this.adminRepository.getAdminByUsername(admin.getUsername());
-        if(adminTest==null) {
+        Admin adminTest = this.adminRepository.getAdminByUsername(admin.getUsername());
+        if (adminTest == null) {
             this.adminRepository.save(admin);
-        }else{
+        } else {
             throw new AdminAlreadyExistsException();
         }
     }
@@ -33,34 +36,34 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void removeAdminByUsername(String username) {
-        Admin adminToRemove=this.findAdminByUsername(username);
+        Admin adminToRemove = this.findAdminByUsername(username);
         this.adminRepository.delete(adminToRemove);
     }
 
     @Override
     public Admin findAdminById(Long id) {
-        Optional<Admin> optionalAdmin=this.adminRepository.findById(id);
-        Admin adminToFound= optionalAdmin.get();
+        Optional<Admin> optionalAdmin = this.adminRepository.findById(id);
+        Admin adminToFound = optionalAdmin.get();
         return adminToFound;
     }
 
     @Override
     public Admin findAdminByUsername(String username) {
-        Admin adminToFound=this.adminRepository.getAdminByUsername(username);
+        Admin adminToFound = this.adminRepository.getAdminByUsername(username);
         return adminToFound;
     }
 
     @Override
-    public void updateAdminById(Long id,String password) {
-        Optional<Admin> optionalAdmin=this.adminRepository.findById(id);
-        Admin adminToUpdate=optionalAdmin.get();
+    public void updateAdminById(Long id, String password) {
+        Optional<Admin> optionalAdmin = this.adminRepository.findById(id);
+        Admin adminToUpdate = optionalAdmin.get();
         adminToUpdate.setPassword(password);
         this.adminRepository.save(adminToUpdate);
     }
 
     @Override
-    public void updateAdminByUsername(String username,String password) {
-        Admin adminToUpdate=this.findAdminByUsername(username);
+    public void updateAdminByUsername(String username, String password) {
+        Admin adminToUpdate = this.findAdminByUsername(username);
         adminToUpdate.setPassword(password);
         this.adminRepository.save(adminToUpdate);
     }

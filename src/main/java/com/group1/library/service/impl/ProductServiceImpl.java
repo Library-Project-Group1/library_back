@@ -10,13 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * <code>Class ProductServiceImpl</code>
- * It contains all methods on products
+ * <code>Class ProductServiceImpl</code> defines all possible operations on the products of the library.
  */
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    // Attributes
+    // ATTRIBUTES
     @Autowired
     private ProductRepository productRepository;
 
@@ -24,12 +23,12 @@ public class ProductServiceImpl implements ProductService {
     private StorageServiceImpl storageService;
 
     /**
-     * Method to add a new product in the database
-     * if the product is null, the product is created
+     * Method to add a new product in the database.
+     * if the product is null, the product is created and save in the database.
      *
-     * @param product the product to add in the database
-     * @return the product to add into the save method
-     * @throws ProductAlreadyExistException if the product already exist in the database
+     * @param product the product to add in the database.
+     * @return the product to add into the save method.
+     * @throws ProductAlreadyExistException if the product already exist in the database.
      */
     @Override
     public Product addProduct(Product product) throws ProductAlreadyExistException {
@@ -42,13 +41,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /**
-     * Method to add a new product with a picture in the database
-     * stock the picture for the product then add the product
+     * Method to add a new product with a picture in the database.
+     * First, the picture file is saved in the database.
+     * Then this file is stocked in the product, before to be created and saved.
      *
-     * @param product the new product to add in the database
-     * @param file    the file to associate to the new product
-     * @return An instance of Product, the product to add into the save method
-     * @throws ProductAlreadyExistException if the product already exist in the database
+     * @param product the new product to add in the database.
+     * @param file    the file to associate to the new product.
+     * @return An instance of Product, the product to add into the save method.
+     * @throws ProductAlreadyExistException if the product already exist in the database.
      */
     @Override
     public Product addProductAndFile(Product product, MultipartFile file) throws ProductAlreadyExistException {
@@ -59,12 +59,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /**
-     * Method to edit the price of a product by id
-     * if the product exist, the price of the product is modified and this new price is saved in database
+     * Method to edit a product by its id element in the database.
+     * if the product exist, the price of the product is modified and this new price is saved in database.
      *
-     * @param id    the id of the product to edit in the database
-     * @param newProduct the product with the parameters to edit
-     * @throws ProductNotFoundException if the product cannot be found in the database
+     * @param id         the id of the product to edit in the database.
+     * @param newProduct the product with the parameters to edit.
+     * @throws ProductNotFoundException if the product cannot be found in the database.
      */
     @Override
     public void updateProductById(Long id, Product newProduct) throws ProductNotFoundException {
@@ -74,16 +74,16 @@ public class ProductServiceImpl implements ProductService {
         } else {
             productToUpdate.setPrice(newProduct.getPrice());
             productToUpdate.setQuantityTotal(newProduct.getQuantityTotal());
-            productToUpdate.setQuantityAvailableToRent(productToUpdate.getQuantityTotal()-productToUpdate.getQuantityIsRenting());
+            productToUpdate.setQuantityAvailableToRent(productToUpdate.getQuantityTotal() - productToUpdate.getQuantityIsRenting());
             this.productRepository.save(productToUpdate);
         }
     }
 
     /**
-     * Method to delete a product by id in the database
+     * Method to delete a product by its id element in the database.
      *
-     * @param id the id of the product to delete in the database
-     * @throws ProductNotFoundException if the product cannot be found in the database
+     * @param id the id of the product to delete in the database.
+     * @throws ProductNotFoundException if the product cannot be found in the database.
      */
     @Override
     public void removeProductById(Long id) throws ProductNotFoundException {
@@ -96,11 +96,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /**
-     * Method to find a product with the id in database
+     * Method to find a product with the id in database.
      *
-     * @param id the id of the product to get in the database
-     * @return An instance of Product, which corresponds to the product to find in database
-     * @throws ProductNotFoundException if the product cannot be found in the database
+     * @param id the id of the product to get in the database.
+     * @return An instance of Product, which corresponds to the product to find in database.
+     * @throws ProductNotFoundException if the product cannot be found in the database.
      */
     @Override
     public Product findProductById(Long id) throws ProductNotFoundException {
@@ -112,9 +112,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /**
-     * Method that retrieves all products list in database
+     * Method that retrieves all products list in database.
      *
-     * @return The list of all the products
+     * @return The list of all the products.
      */
     @Override
     public Iterable<Product> findAllProducts() {

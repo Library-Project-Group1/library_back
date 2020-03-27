@@ -1,6 +1,5 @@
 package com.group1.library.service.impl;
 
-import com.group1.library.entity.Product;
 import com.group1.library.entity.Theme;
 import com.group1.library.exception.alreadyexists.ThemeAlreadyExistsException;
 import com.group1.library.exception.notfound.ThemeNotFoundException;
@@ -11,14 +10,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * <code>Class ThemeServiceImpl</code> defines...
+ */
 @Service
 public class ThemeServiceImpl implements AttributeProductService<Theme, Long> {
 
-    //Attribute
+    // ATTRIBUTE
     @Autowired
     private ThemeRepository themeRepository;
 
-    //Methods
     @Override
     public Theme add(Theme theme) throws ThemeAlreadyExistsException {
         //Method to add a theme in database
@@ -30,7 +31,6 @@ public class ThemeServiceImpl implements AttributeProductService<Theme, Long> {
         } else {
             throw new ThemeAlreadyExistsException();
         }
-
     }
 
     @Override
@@ -49,13 +49,12 @@ public class ThemeServiceImpl implements AttributeProductService<Theme, Long> {
     public void editById(Long id, Theme newTheme) throws ThemeNotFoundException {
         //Method to change the theme name
         Optional<Theme> themeToEdit = this.themeRepository.findById(id);
-        if(!themeToEdit.isPresent()){
+        if (!themeToEdit.isPresent()) {
             throw new ThemeNotFoundException();
-        } else{
+        } else {
             themeToEdit.get().setName(newTheme.getName());
             this.themeRepository.save(themeToEdit.get());
         }
-
     }
 
     @Override
