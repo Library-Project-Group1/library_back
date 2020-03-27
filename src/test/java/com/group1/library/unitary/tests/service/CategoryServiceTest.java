@@ -84,7 +84,7 @@ public class CategoryServiceTest {
     }
 
     @Test
-    public void testEditCategory() {
+    public void testEditCategory() throws CategoryNotFoundException {
         System.out.println("editCategory()");
         when(categoryRepository.findById(1L)).thenReturn(Optional.of(new Category(1L, "Audrey")));
         Category oldCat = categoryService.getById(1L);

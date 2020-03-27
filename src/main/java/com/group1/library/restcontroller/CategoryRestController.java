@@ -35,7 +35,7 @@ public class CategoryRestController {
     }
 
     @GetMapping("/category/{id}")
-    public Category findCategoryById(@PathVariable("id") Long id) {
+    public Category findCategoryById(@PathVariable("id") Long id) throws CategoryNotFoundException {
         Category catToFind = this.catServImpl.getById(id);
         return catToFind;
     }
@@ -56,7 +56,7 @@ public class CategoryRestController {
     }
 
     @DeleteMapping("/deleteCategory/{id}")
-    public void deleteCatById(@PathVariable("id") Long id) {
+    public void deleteCatById(@PathVariable("id") Long id) throws CategoryNotFoundException {
         Category catToRemove = this.catServImpl.getById(id);
         catServImpl.removeById(catToRemove.getId());
     }

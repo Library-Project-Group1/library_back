@@ -40,7 +40,7 @@ public class CategoryServiceImpl implements AttributeProductService<Category, Lo
             Category catToFind = optionalCatToFind.get();
             return catToFind;
         } else {
-            throw new CategoryNotFoundException(id);
+            throw new CategoryNotFoundException();
         }
     }
 
@@ -49,7 +49,7 @@ public class CategoryServiceImpl implements AttributeProductService<Category, Lo
     public void editById(Long id, Category newCategory) throws CategoryNotFoundException {
         Optional<Category> catToUpdate = this.catRepo.findById(id);
         if (!catToUpdate.isPresent()) {
-            throw new CategoryNotFoundException(id);
+            throw new CategoryNotFoundException();
         } else {
             Category categoryToUpdate = catToUpdate.get();
             categoryToUpdate.setName(newCategory.getName());
