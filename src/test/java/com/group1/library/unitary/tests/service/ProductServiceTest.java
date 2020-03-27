@@ -65,7 +65,7 @@ public class ProductServiceTest {
     @Test
     public void testAddProduct() throws ProductAlreadyExistException {
         System.out.println("addProduct()");
-        Product expResult = new Product("p_title", "p_creator", "E yyyy.MM.dd", "p_description", 12L, 7L, 5L, 4, 3.99f,  );
+        Product expResult = new Product();
         when(productRepository.save(any(Product.class))).then(returnsFirstArg());
         Product result = productService.addProduct(expResult);
         assertEquals(expResult.getTitle(), result.getTitle());
@@ -109,7 +109,7 @@ public class ProductServiceTest {
     @Test
     public void testFindProductById() throws ProductNotFoundException {
         System.out.println("findProductById()");
-        Product expResult = new Product("p_title", "p_creator", 12L, 7L, 5L, 4, 3.99f, "E yyyy.MM.dd", "p_description");
+        Product expResult = new Product();
         when(productRepository.findById(1L)).thenReturn(Optional.of(expResult));
         Product result = productService.findProductById(1L);
         assertEquals(expResult, result);
@@ -134,9 +134,9 @@ public class ProductServiceTest {
     public void testGetAllProducts() {
         System.out.println("getAllProducts()");
         List<Product> expList = new ArrayList<Product>();
-        Product p1 = new Product("p_title1", "p_creator", 12L, 7L, 5L, 4, 3.99f, "E yyyy.MM.dd", "p_description");
-        Product p2 = new Product("p_title2", "p_creator", 12L, 7L, 5L, 4, 3.99f, "E yyyy.MM.dd", "p_description");
-        Product p3 = new Product("p_title3", "p_creator", 12L, 7L, 5L, 4, 3.99f, "E yyyy.MM.dd", "p_description");
+        Product p1 = new Product();
+        Product p2 = new Product();
+        Product p3 = new Product();
         expList.add(p1);
         expList.add(p2);
         expList.add(p3);
