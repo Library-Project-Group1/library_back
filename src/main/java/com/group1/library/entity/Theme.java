@@ -5,13 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import java.io.Serializable;
 import java.util.List;
 
 /**
  * The {@code Theme} class characterizes themes of products.
- * This class is transformed into an entity managed by JPA.
+ * This class is transformed into an entity (a Java Bean) managed by JPA.
  * The Theme class contains a list of products as attribute, because one theme can defines many products.
  * This class is also composed of constructors and getters / setters.
  */
@@ -28,6 +27,7 @@ public class Theme implements Serializable {
     @OneToMany(mappedBy = "theme")
     private List<Product> products;
 
+    // CONSTRUCTORS
     /**
      * Constructs a new theme with {@code null} as its details.
      */
@@ -54,6 +54,7 @@ public class Theme implements Serializable {
         this.id = id;
     }
 
+    // METHODS
     /**
      * Returns a short description of the {@code Theme} instance.
      * The result is the concatenation of:
@@ -71,7 +72,6 @@ public class Theme implements Serializable {
     }
 
     // GETTERS & SETTERS
-
     /**
      * Returns the detail id of the theme.
      *

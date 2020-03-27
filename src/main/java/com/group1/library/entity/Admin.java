@@ -23,6 +23,7 @@ public class Admin implements Serializable {
     String email;
     String password;
 
+    //CONSTRUCTORS
     /**
      * Constructs a new {@code Admin} with {@code null} as its details.
      */
@@ -40,6 +41,7 @@ public class Admin implements Serializable {
         this.password = password;
     }
 
+    // METHODS
     /**
      * Returns a short description of the {@code Admin} instance.
      * The result is the concatenation of:
@@ -55,7 +57,6 @@ public class Admin implements Serializable {
     }
 
     // GETTERS & SETTERS
-
     /**
      * Returns the detail id of the {@code admin}.
      *

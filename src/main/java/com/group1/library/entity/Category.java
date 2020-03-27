@@ -23,6 +23,7 @@ public class Category implements Serializable {
     @OneToMany(mappedBy = "category")
     private List<Product> products;
 
+    // CONSTRUCTORS
     /**
      * Constructs a new {@code Category} with {@code null} as its details.
      */
@@ -49,6 +50,7 @@ public class Category implements Serializable {
         this.name = name;
     }
 
+    // METHODS
     /**
      * Returns a short description of the {@code Category} instance.
      * The result is the concatenation of:
@@ -68,7 +70,6 @@ public class Category implements Serializable {
     }
 
     // GETTERS & SETTERS
-
     /**
      * Returns the detail id of the {@code category}.
      *
