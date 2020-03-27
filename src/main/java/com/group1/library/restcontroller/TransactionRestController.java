@@ -4,16 +4,15 @@ import com.group1.library.entity.Product;
 import com.group1.library.entity.Transaction;
 import com.group1.library.entity.User;
 import com.group1.library.exception.notfound.ProductNotFoundException;
-import com.group1.library.exception.notfound.TransactionNotFound;
+import com.group1.library.exception.notfound.TransactionNotFoundException;
 import com.group1.library.exception.notfound.UserNotFoundException;
-import com.group1.library.exception.notsuccesfull.TransactionNotSuccesfull;
+import com.group1.library.exception.notsuccesfull.TransactionNotSuccesfullException;
 import com.group1.library.service.impl.TransactionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -29,7 +28,7 @@ public class TransactionRestController {
     public void createTransaction(@RequestBody @Valid Transaction transaction, @RequestBody @Valid User user, @RequestBody @Valid Product product){
         try {
             this.transactionService.addTransaction(transaction, user, product);
-        }catch (TransactionNotSuccesfull e){
+        }catch (TransactionNotSuccesfullException e){
             e.printStackTrace();
         }
     }
@@ -38,7 +37,7 @@ public class TransactionRestController {
     public Transaction findTransactionById(@PathVariable("id") Long id) {
         try{
             return this.transactionService.findTransactionById(id);
-        }catch (TransactionNotFound e){
+        }catch (TransactionNotFoundException e){
             e.printStackTrace();
             return null;
         }

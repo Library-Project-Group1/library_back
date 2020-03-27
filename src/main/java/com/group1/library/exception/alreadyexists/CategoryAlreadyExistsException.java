@@ -1,8 +1,8 @@
 package com.group1.library.exception.alreadyexists;
 
-public class CategoryAlreadyExistsException extends Exception {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-    public CategoryAlreadyExistsException() {
-        super("This category already exists in the database");
-    }
+@ResponseStatus(value = HttpStatus.CONFLICT, reason = "This category already exists.")
+public class CategoryAlreadyExistsException extends Throwable {
 }

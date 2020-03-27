@@ -4,9 +4,9 @@ import com.group1.library.entity.Product;
 import com.group1.library.entity.Transaction;
 import com.group1.library.entity.User;
 import com.group1.library.exception.notfound.ProductNotFoundException;
-import com.group1.library.exception.notfound.TransactionNotFound;
+import com.group1.library.exception.notfound.TransactionNotFoundException;
 import com.group1.library.exception.notfound.UserNotFoundException;
-import com.group1.library.exception.notsuccesfull.TransactionNotSuccesfull;
+import com.group1.library.exception.notsuccesfull.TransactionNotSuccesfullException;
 import com.group1.library.repository.ProductRepository;
 import com.group1.library.repository.TransactionRepositry;
 import com.group1.library.repository.UserRepository;
@@ -32,24 +32,24 @@ public class TransactionServiceImpl implements TransactionService {
     private ProductRepository productRepository;
 
     @Override
-    public void addTransaction(Transaction transaction, User user, Product product) throws TransactionNotSuccesfull {
+    public void addTransaction(Transaction transaction, User user, Product product) throws TransactionNotSuccesfullException {
         transaction.setUser(userRepository.getUserByEmail(user.getEmail()));
         transaction.setProduct(productRepository.getProductById(product.getId()));
         if (transaction.getUser() == null || transaction.getProduct() == null) {
-            throw new TransactionNotSuccesfull();
+            throw new TransactionNotSuccesfullException();
         } else {
             transactionRepositry.save(transaction);
         }
     }
 
     @Override
-    public Transaction findTransactionById(Long id) throws TransactionNotFound {
+    public Transaction findTransactionById(Long id) throws TransactionNotFoundException {
         Optional<Transaction> optionalTransaction = this.transactionRepositry.findById(id);
         if (optionalTransaction.isPresent()) {
             Transaction transactionToFind = optionalTransaction.get();
             return transactionToFind;
         } else {
-            throw new TransactionNotFound();
+            throw new TransactionNotFoundException();
         }
     }
 
