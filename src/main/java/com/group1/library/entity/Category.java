@@ -6,8 +6,8 @@ import java.util.List;
 
 /**
  * The {@code Category} class characterizes categories of products.
- * This class is transformed into an entity managed by JPA.
- * The Category class contains a list of products as attribute, because one category can defines many products.
+ * This class is transformed into an entity (a Java Bean) managed by JPA.
+ * The {@code Category} class contains a list of products as attribute, because one category can defines many products.
  * This class is also composed of constructors and getters / setters.
  */
 @Entity
@@ -24,25 +24,25 @@ public class Category implements Serializable {
     private List<Product> products;
 
     /**
-     * Constructs a new category with {@code null} as its details.
+     * Constructs a new {@code Category} with {@code null} as its details.
      */
     public Category() {
     }
 
     /**
-     * Constructs a new category with the specified detail name.
+     * Constructs a new {@code Category} with the specified detail name.
      *
-     * @param name the name of the category.
+     * @param name the name of the {@code category}.
      */
     public Category(String name) {
         this.name = name;
     }
 
     /**
-     * Constructs a new category with the specified detail id and name.
+     * Constructs a new {@code Category} with the specified detail id and name.
      *
-     * @param id   the id of the category.
-     * @param name the name of the category.
+     * @param id   the id of the {@code category}.
+     * @param name the name of the {@code category}.
      */
     public Category(Long id, String name) {
         this.id = id;
@@ -70,7 +70,7 @@ public class Category implements Serializable {
     // GETTERS & SETTERS
 
     /**
-     * Returns the detail id of the category.
+     * Returns the detail id of the {@code category}.
      *
      * @return the id of this {@code Category} instance (which may be {@code null}).
      */
@@ -88,7 +88,7 @@ public class Category implements Serializable {
     }
 
     /**
-     * Returns the detail name of the category.
+     * Returns the detail name of the {@code category}.
      *
      * @return the name element of this {@code Category} instance (which may be {@code null}).
      */

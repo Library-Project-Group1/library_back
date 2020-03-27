@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * The {@code Admin} class characterizes a library administrator.
- * This class is transformed into an entity (a java bean) managed by JPA.
+ * This class is transformed into an entity (a Java Bean) managed by JPA.
  * The {@code Admin} class contains many attributes that define one administrator.
  * This class it also composed of constructors and getters / setters.
  */
@@ -24,7 +24,7 @@ public class Admin implements Serializable {
     String password;
 
     /**
-     * Constructs a new admin with {@code null} as its details.
+     * Constructs a new {@code Admin} with {@code null} as its details.
      */
     public Admin() {
     }
@@ -32,8 +32,8 @@ public class Admin implements Serializable {
     /**
      * Constructs a new {@code Admin} with the specified detail username and password.
      *
-     * @param username the username of the admin.
-     * @param password the password of the admin.
+     * @param username the username of the {@code admin}.
+     * @param password the password of the {@code admin}.
      */
     public Admin(String username, String password) {
         this.username = username;
@@ -57,7 +57,7 @@ public class Admin implements Serializable {
     // GETTERS & SETTERS
 
     /**
-     * Returns the detail id of the {@code Admin}.
+     * Returns the detail id of the {@code admin}.
      *
      * @return the id of this {@code Admin} instance (which may be {@code null}).
      */
@@ -75,7 +75,7 @@ public class Admin implements Serializable {
     }
 
     /**
-     * Returns the detail user name of the {@code Admin}.
+     * Returns the detail user name of the {@code admin}.
      *
      * @return the user name of this {@code Admin} instance (which may be {@code null}).
      */
@@ -86,14 +86,14 @@ public class Admin implements Serializable {
     /**
      * Sets the user name element that will be returned by {@link #getUsername()} method.
      *
-     * @param username the user name element to be associated with this {@code Admin} as his pseudonym.
+     * @param username the user name element to be associated with this {@code Admin} as his pseudonym to login himself.
      */
     public void setUsername(String username) {
         this.username = username;
     }
 
     /**
-     * Returns the detail email of the {@code Admin}.
+     * Returns the detail email of the {@code admin}.
      *
      * @return the email of this {@code Admin} instance (which may be {@code null}).
      */
@@ -104,14 +104,14 @@ public class Admin implements Serializable {
     /**
      * Sets the email element that will be returned by {@link #getEmail()} method.
      *
-     * @param email the email element which {@code Admin} will use to create his account and login himself.
+     * @param email the email element which {@code Admin} will use to create his account.
      */
     public void setEmail(String email) {
         this.email = email;
     }
 
     /**
-     * Returns the detail password of the {@code Admin}.
+     * Returns the detail password of the {@code admin}.
      *
      * @return the password of this {@code Admin} instance (which may be {@code null}).
      */

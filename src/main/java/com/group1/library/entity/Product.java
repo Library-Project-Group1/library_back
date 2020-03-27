@@ -7,8 +7,8 @@ import java.util.List;
 
 /**
  * The {@code Product} class characterizes one product.
- * This class is an entity managed by JPA.
- * The Product class contains a non-exhaustive list of attributes that describe the products available in the online library.
+ * This class is an entity (a Java Bean) managed by JPA.
+ * The {@code Product} class contains a non-exhaustive list of attributes that describe the products available in the online library.
  * This class is also composed of a constructor and getters / setters.
  */
 @Entity
@@ -140,10 +140,20 @@ public class Product implements Serializable {
         this.title = title;
     }
 
+    /**
+     * Returns the detail creator's name of the product.
+     *
+     * @return the creator's name of this product or {@code null} if the creator's name is nonexistent or unknown.
+     */
     public String getCreator() {
         return creator;
     }
 
+    /**
+     * Sets the creator's name element that will be returned by {@link #getCreator()} method.
+     *
+     * @param creator
+     */
     public void setCreator(String creator) {
         this.creator = creator;
     }
