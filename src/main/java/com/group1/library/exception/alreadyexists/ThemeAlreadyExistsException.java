@@ -1,8 +1,8 @@
 package com.group1.library.exception.alreadyexists;
 
-public class ThemeAlreadyExistsException extends Throwable {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-    public ThemeAlreadyExistsException() {
-        super("This theme already exists.");
+@ResponseStatus(value = HttpStatus.CONFLICT, reason ="This theme already exists." )
+public class ThemeAlreadyExistsException extends Throwable {
     }
-}

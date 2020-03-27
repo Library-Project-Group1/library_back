@@ -11,18 +11,25 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 /**
- * <code>Class ThemeServiceImpl</code> defines...
+ * <code>Class ThemeServiceImpl</code> defines all possible operations on themes of the library.
  */
 @Service
 public class ThemeServiceImpl implements AttributeProductService<Theme, Long> {
 
-    // ATTRIBUTE
+    // ATTRIBUTES
     @Autowired
     private ThemeRepository themeRepository;
 
+    /**
+     * Method to add a new theme in the database.
+     * If the the theme doesn't already exist, the theme is created and save in database otherwise an exception is thrown.
+     *
+     * @param theme the theme to add in the database.
+     * @return the theme to add into the save method
+     * @throws ThemeAlreadyExistsException if the theme already exist in the database.
+     */
     @Override
     public Theme add(Theme theme) throws ThemeAlreadyExistsException {
-        //Method to add a theme in database
         Theme themeToAdd = themeRepository.getThemeById(theme.getId());
         if (themeToAdd == null) {
 
@@ -33,9 +40,15 @@ public class ThemeServiceImpl implements AttributeProductService<Theme, Long> {
         }
     }
 
+    /**
+     * Method to find a theme with the id in the database.
+     *
+     * @param id the id of the theme to get in the database
+     * @return An instance of theme, which corresponds to the theme to find in database.
+     * @throws ThemeNotFoundException if the theme cannot be found in the database.
+     */
     @Override
     public Theme getById(Long id) throws ThemeNotFoundException {
-        //Method to find a theme by id
         Optional<Theme> theme = this.themeRepository.findById(id);
         if (theme.isPresent()) {
             Theme themeToFind = theme.get();
@@ -45,9 +58,15 @@ public class ThemeServiceImpl implements AttributeProductService<Theme, Long> {
         }
     }
 
+    /**
+     * Method to edit a theme by its id element in the database.
+     * If the theme already exist, his parameters is changed by the newTheme
+     * @param id       the id of the theme to edit in the database.
+     * @param newTheme the theme with the new parameters to edit.
+     * @throws ThemeNotFoundException if the theme cannot be found in database.
+     */
     @Override
     public void editById(Long id, Theme newTheme) throws ThemeNotFoundException {
-        //Method to change the theme name
         Optional<Theme> themeToEdit = this.themeRepository.findById(id);
         if (!themeToEdit.isPresent()) {
             throw new ThemeNotFoundException();
@@ -57,16 +76,27 @@ public class ThemeServiceImpl implements AttributeProductService<Theme, Long> {
         }
     }
 
+    /**
+     * Method to delete a theme by its id element in the database.
+     *
+     * @param id the id of the theme to delete in the database.
+     * @throws ThemeNotFoundException if the theme cannot be found in database.
+     */
     @Override
-    public void removeById(Long id) {
-        //Method to remove a theme by id
+    public void removeById(Long id) throws ThemeNotFoundException {
+        Theme themeToDelete = this.themeRepository.getThemeById(id);
+        if(themeToDelete == null){
+            throw new ThemeNotFoundException();
+        }
         themeRepository.deleteById(id);
     }
 
+    /**
+     * Method that retrieves all themes list in database.
+     * @return the list of all themes.
+     */
     @Override
     public Iterable<Theme> getAll() {
-        //Method to get all themes
-        Iterable<Theme> themes = themeRepository.findAll();
-        return themes;
+        return this.themeRepository.findAll();
     }
 }

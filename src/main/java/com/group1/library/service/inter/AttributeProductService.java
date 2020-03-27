@@ -13,7 +13,7 @@ public interface AttributeProductService<T, Long>    {
 
     void editById(Long id, T t) throws ThemeNotFoundException, CategoryNotFoundException;
 
-    void removeById(Long id);
+    void removeById(Long id) throws ThemeNotFoundException;
 
     Iterable<T> getAll();
 

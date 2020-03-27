@@ -27,7 +27,7 @@ public class StorageRestController {
      * Method to save a file
      *
      * @param filename the name of the file to save
-     * @return hellooo
+     * @return An instance of ResponseEntity
      */
     @GetMapping("/{filename:.+}")
     @ResponseBody
