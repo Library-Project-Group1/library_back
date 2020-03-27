@@ -23,8 +23,8 @@ public class ProductServiceImpl implements ProductService {
     private StorageServiceImpl storageService;
 
     /**
-     * Method to add a new product in the database.
-     * if the product is null, the product is created and save in the database.
+     * Method to add a new product in the database
+     * if the product is {@code null}, the product is created
      *
      * @param product the product to add in the database.
      * @return the product to add into the save method.
