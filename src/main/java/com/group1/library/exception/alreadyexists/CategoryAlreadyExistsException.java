@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * Typically, these instances are freshly created in the context of the exceptional situation
  * so as to include relevant information (such as stack trace data).
  *
- * <p>The reason that a {@code AdminAlreadyExistsException} may have a cause
+ * <p>The reason that a {@code CategoryAlreadyExistsException} may have a cause
  * is that the class that throws it is built atop a lower layered abstraction,
  * and an operation on the upper layer fails due to a failure in the lower layer.
- * It would be bad design to let the {@code AdminAlreadyExistsException} thrown
+ * It would be bad design to let the {@code CategoryAlreadyExistsException} thrown
  * by the lower layer propagate outward, as it is generally unrelated to the abstraction
  * provided by the upper layer.
  */
