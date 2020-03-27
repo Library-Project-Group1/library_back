@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * <p>The reason that a {@code ThemeAlreadyExistsException} may have a cause
  * is that the class that throws it is built atop a lower layered abstraction,
  * and an operation on the upper layer fails due to a failure in the lower layer.
- * It would be bad design to let the {@code CategoryAlreadyExistsException} thrown
+ * It would be bad design to let the {@code ThemeAlreadyExistsException} thrown
  * by the lower layer propagate outward, as it is generally unrelated to the abstraction
  * provided by the upper layer.
  */
