@@ -100,7 +100,7 @@ public class ThemeServiceTest {
     }
 
     @Test
-    public void testDeleteTheme() {
+    public void testDeleteTheme() throws ThemeNotFoundException {
         System.out.println("deleteTheme()");
         Long themeId = 1L;
 
